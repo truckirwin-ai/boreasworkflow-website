@@ -441,6 +441,27 @@ code {
   margin: 36px auto 0;
 }
 
+.download-resource {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  margin: 0 0 34px;
+  padding: 24px;
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--accent);
+  border-radius: 8px;
+  background: var(--surface);
+}
+.download-resource h3 {
+  margin: 6px 0 8px;
+  font-size: 1.25rem;
+}
+.download-resource p {
+  margin: 0;
+  max-width: 680px;
+}
+
 /* ---------- Pipeline visual ---------- */
 .pipeline {
   display: grid;
@@ -2177,6 +2198,11 @@ code {
   .screenshot .body.two-col { grid-template-columns: 1fr; }
   .form-grid, .form-checklist { grid-template-columns: 1fr; }
   .form-card { padding: 24px; }
+
+  .download-resource {
+    align-items: flex-start;
+    flex-direction: column;
+  }
   .form-footer { flex-direction: column; align-items: stretch; }
   .form-footer .form-footnote { max-width: 100%; }
   .policy .kv { grid-template-columns: 1fr; gap: 4px; }
