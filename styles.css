@@ -853,7 +853,7 @@ code {
 .feature-pair-card .mini-mock .row .v { color: var(--text); font-weight: 500; text-align: right; }
 .feature-pair-card .mini-mock .row .v.accent { color: var(--accent); }
 
-/* Anchor rail under site header on features page */
+/* Anchor rail on features page */
 .anchor-rail {
   position: sticky;
   top: 64px;
