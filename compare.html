@@ -1,11 +1,11 @@
 <!doctype html>
-<!-- build: 2026-05-08T14:10:00Z -->
+<!-- build: 2026-05-11T00:00:00Z -->
 <html lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Compare | Psygil</title>
-  <meta name="description" content="Compare Psygil with other psychological report writing tools. Psygil competes on forensic defensibility, local control, diagnostic gates, and audit proof.">
+  <meta name="description" content="Compare Psygil with other psychological report writing tools by workflow fit, forensic architecture, local control, clinical authority, and professional record quality.">
   <meta name="robots" content="index, follow">
   <link rel="icon" href="assets/icons/favicon.png" type="image/png">
   <link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png">
@@ -13,6 +13,164 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css?v=202604271200">
+  <style>
+    main .section { padding: 40px 0; }
+    main .section-title { margin-bottom: 24px; }
+    main .cta-strip { padding: 44px 0; }
+    main .radar-wrap,
+    main .category-grid,
+    main .price-math { margin-top: 22px; }
+    main .scenario,
+    main .tradeoffs,
+    main .battle-card { margin-top: 24px; }
+    main .differentiator-grid + .tradeoffs { margin-top: 22px; }
+
+    .radar-wrap {
+      display: grid;
+      grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
+      gap: 48px;
+      align-items: center;
+      margin-top: 32px;
+    }
+    @media (max-width: 900px) {
+      .radar-wrap { grid-template-columns: 1fr; gap: 28px; }
+    }
+    .radar-svg { width: 100%; max-width: 640px; height: auto; display: block; }
+    .radar-svg .grid-poly { fill: none; stroke: #d0d7de; stroke-width: 1; }
+    .radar-svg .axis-line { stroke: #d0d7de; stroke-width: 1; }
+    .radar-svg .axis-label {
+      font-family: 'Inter', sans-serif;
+      font-size: 13px; fill: #1f2328; font-weight: 600;
+    }
+    .radar-svg .scale-tick {
+      font-family: 'Inter', sans-serif;
+      font-size: 10px; fill: #8c959f;
+    }
+    .radar-svg .psygil-poly { fill: rgba(232, 101, 10, 0.18); stroke: #E8650A; stroke-width: 2.5; }
+    .radar-svg .psygil-point { fill: #E8650A; }
+    .radar-svg .drafter-poly { fill: rgba(9, 105, 218, 0.10); stroke: #0969da; stroke-width: 2; stroke-dasharray: 5 4; }
+    .radar-svg .drafter-point { fill: #0969da; }
+    .radar-legend {
+      display: flex; gap: 24px; margin-top: 16px; font-size: 14px; flex-wrap: wrap;
+    }
+    .radar-legend-item { display: flex; align-items: center; gap: 8px; color: var(--text); }
+    .radar-legend-chip { width: 14px; height: 14px; border-radius: 2px; display: inline-block; }
+    .radar-legend-chip.psygil { background: #E8650A; }
+    .radar-legend-chip.drafter { background: rgba(9, 105, 218, 0.25); border: 1.5px dashed #0969da; }
+    .radar-caption {
+      font-size: 14px; color: var(--text-secondary); margin-top: 16px; max-width: 640px;
+    }
+    .radar-takeaways { list-style: none; padding: 0; margin: 0; }
+    .radar-takeaways li {
+      padding: 14px 0; border-top: 1px solid var(--border); color: var(--text);
+    }
+    .radar-takeaways li:first-child { border-top: 0; padding-top: 0; }
+    .radar-takeaways strong { display: block; margin-bottom: 4px; font-size: 15px; }
+    .radar-takeaways span { color: var(--text-secondary); font-size: 14px; }
+
+    .category-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 32px;
+    }
+    @media (max-width: 900px) { .category-grid { grid-template-columns: 1fr; } }
+    .category-card {
+      background: #ffffff; border: 1px solid var(--border); border-radius: var(--radius-lg);
+      padding: 28px; display: flex; flex-direction: column; gap: 14px;
+    }
+    .category-card.featured {
+      border: 2px solid #E8650A; background: #fff4ec; box-shadow: var(--shadow-md);
+    }
+    .category-card h3 { margin: 0; font-size: 1.05rem; }
+    .category-card .cat-best,
+    .category-card .cat-strength,
+    .category-card .cat-limit { font-size: 14px; color: var(--text-secondary); }
+    .category-card .cat-best strong,
+    .category-card .cat-strength strong,
+    .category-card .cat-limit strong {
+      display: block; font-size: 11px; text-transform: uppercase; letter-spacing: 0.06em;
+      margin-bottom: 6px; color: var(--text-secondary); font-weight: 700;
+    }
+    .category-card .cat-strength strong { color: #1a7f37; }
+    .category-card .cat-limit strong { color: #cf222e; }
+    .category-card .cat-best em {
+      display: block; font-style: normal; color: var(--text); font-size: 15px; font-weight: 500;
+    }
+    .category-card .cat-price {
+      margin-top: auto; padding-top: 12px; border-top: 1px solid var(--border);
+      font-size: 13px; color: var(--text-secondary);
+    }
+    .category-card .cat-price strong {
+      color: var(--text); display: block; font-size: 15px; font-weight: 600;
+    }
+
+    .scenario {
+      background: #1f2328; color: #ffffff; border-radius: var(--radius-lg);
+      padding: 40px; margin-top: 32px;
+    }
+    .scenario h3 { color: #ffffff; font-size: 1.4rem; margin: 0 0 12px; line-height: 1.3; }
+    .scenario p { color: rgba(255, 255, 255, 0.78); }
+    .scenario-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 24px;
+    }
+    @media (max-width: 700px) { .scenario-grid { grid-template-columns: 1fr; } }
+    .scenario-col {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: var(--radius); padding: 20px;
+    }
+    .scenario-col h4 {
+      color: rgba(255, 255, 255, 0.7); font-size: 12px; text-transform: uppercase;
+      letter-spacing: 0.08em; margin: 0 0 10px;
+    }
+    .scenario-col.psygil-col { border-color: rgba(232, 101, 10, 0.5); }
+    .scenario-col.psygil-col h4 { color: #E8650A; }
+    .scenario-col p { margin: 0; color: rgba(255, 255, 255, 0.85); font-size: 14px; }
+
+    .tradeoffs {
+      background: var(--bg-soft); border-radius: var(--radius-lg); padding: 32px; margin-top: 32px;
+    }
+    .tradeoffs h3 { margin: 0 0 8px; font-size: 1.15rem; }
+    .tradeoffs p { margin: 0 0 8px; color: var(--text-secondary); font-size: 14px; }
+    .tradeoffs ul {
+      list-style: none; padding: 0; margin: 16px 0 0;
+      display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px;
+    }
+    @media (max-width: 700px) { .tradeoffs ul { grid-template-columns: 1fr; } }
+    .tradeoffs li {
+      background: #ffffff; border: 1px solid var(--border); border-radius: var(--radius);
+      padding: 14px 16px; font-size: 14px; color: var(--text);
+    }
+    .tradeoffs li strong { display: block; margin-bottom: 4px; color: var(--text); }
+    .tradeoffs li span { color: var(--text-secondary); font-size: 13px; }
+
+    .price-math {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 28px;
+    }
+    @media (max-width: 700px) { .price-math { grid-template-columns: 1fr; } }
+    .price-card {
+      background: #ffffff; border: 1px solid var(--border); border-radius: var(--radius-lg);
+      padding: 22px;
+    }
+    .price-card .label {
+      font-size: 11px; text-transform: uppercase; letter-spacing: 0.06em;
+      color: var(--text-secondary); font-weight: 700; margin-bottom: 8px;
+    }
+    .price-card .number {
+      font-family: var(--font-mono); font-size: 1.6rem; font-weight: 600; color: var(--text);
+      margin-bottom: 6px;
+    }
+    .price-card .desc { font-size: 13px; color: var(--text-secondary); margin: 0; }
+    .price-card.psygil .number { color: #E8650A; }
+
+    .battle-card {
+      border: 1px dashed var(--border-strong); border-radius: var(--radius-lg);
+      padding: 28px; display: flex; align-items: center; gap: 24px; margin-top: 32px;
+      background: #ffffff;
+    }
+    @media (max-width: 700px) { .battle-card { flex-direction: column; align-items: flex-start; } }
+    .battle-card .battle-text { flex: 1; }
+    .battle-card h3 { margin: 0 0 6px; font-size: 1.1rem; }
+    .battle-card p { margin: 0; color: var(--text-secondary); font-size: 14px; }
+  </style>
 </head>
 <body>
 
@@ -36,11 +194,11 @@
 
 <main>
 
-<section class="hero" style="padding: 80px 0 48px;">
+<section class="hero" style="padding: 52px 0 32px;">
   <div class="container">
     <span class="hero-eyebrow">Comparison</span>
-    <h1>Built for different stakes.</h1>
-    <p class="hero-lede">Psygil competes on forensic defensibility, not on assessment-count parity. Here is where each tool leads, and where Psygil leads.</p>
+    <h1>When the report is challenged, what stands behind it?</h1>
+    <p class="hero-lede">Most tools draft. Psygil enforces a clinical workflow you can defend in court. Compare what stands behind your final report when opposing counsel asks how it was made.</p>
     <div class="hero-cta">
       <a href="download.html" class="btn btn-primary btn-lg">Start a 10 day trial</a>
       <a href="features.html" class="btn btn-secondary btn-lg">Browse features</a>
@@ -48,42 +206,75 @@
   </div>
 </section>
 
-<section class="section" style="padding-top:16px;">
+<section class="section" style="padding-top: 8px;">
   <div class="container">
     <div class="section-title">
-      <span class="kicker">Head to head</span>
-      <h2>The practical comparison.</h2>
-      <p>Public claims change. This grid uses the current competitive matrix and keeps unknowns honest.</p>
+      <span class="kicker">Shape of fit</span>
+      <h2>Two shapes. Pick the one your work needs.</h2>
+      <p>Each axis is a priority for forensic and high-stakes clinical work. Psygil leads on the axes where the record has to hold up. Cloud-first competitors lead on cloud and portal breadth. Read the shape, not the area.</p>
     </div>
 
-    <div class="compare-wrap">
-      <table class="compare-grid" aria-label="Competitive comparison">
-        <thead>
-          <tr>
-            <th>Feature</th>
-            <th>Psygil</th>
-            <th>PsychAssist</th>
-            <th>Psynth</th>
-            <th>PAR</th>
-            <th>PsychReport.ai</th>
-            <th>ParchmentAI</th>
-            <th>ReportQuill</th>
-            <th>FT Nexus</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr class="psygil-unique"><td>Forensic case workflow</td><td class="yes">Yes</td><td>Marketing claim</td><td>Partial</td><td class="no">No</td><td class="no">No</td><td class="no">No</td><td class="no">No</td><td>Legacy</td></tr>
-          <tr class="psygil-unique"><td>Clinician-signed diagnostic gate</td><td class="yes">Yes</td><td>Unknown</td><td class="no">No</td><td class="no">No</td><td class="no">No</td><td class="no">No</td><td class="no">No</td><td class="no">No</td></tr>
-          <tr class="psygil-unique"><td>Writing blocked until signed decisions</td><td class="yes">Yes</td><td>Unknown</td><td class="no">No</td><td class="no">No</td><td class="no">No</td><td class="no">No</td><td class="no">No</td><td class="no">No</td></tr>
-          <tr><td>Report drafting</td><td class="yes">Yes</td><td class="yes">Yes</td><td class="yes">Yes</td><td class="yes">Yes</td><td class="yes">Yes</td><td class="yes">Yes</td><td class="yes">Yes</td><td>Partial</td></tr>
-          <tr><td>Clinical voice profile</td><td class="yes">Yes</td><td class="yes">Yes</td><td class="yes">Yes</td><td>Tone controls</td><td class="yes">Yes</td><td class="yes">Yes</td><td>Template voice</td><td class="no">No</td></tr>
-          <tr class="psygil-unique"><td>Local case workspace</td><td class="yes">Yes</td><td class="no">No</td><td class="no">No</td><td class="no">No</td><td class="no">No</td><td class="no">No</td><td class="no">No</td><td class="yes">Yes</td></tr>
-          <tr><td>HIPAA or BAA posture</td><td>Local architecture</td><td>HIPAA claim</td><td>HIPAA plus BAA</td><td>HIPAA plus tokenization</td><td>HIPAA plus BAA</td><td>HIPAA plus BAA</td><td>BAA</td><td>Unknown</td></tr>
-          <tr class="psygil-unique"><td>Hash-chained audit trail</td><td class="yes">Yes</td><td>Unknown</td><td>Audit logs</td><td>Unknown</td><td>Audit logs</td><td>Unknown</td><td>Immutable logs</td><td>Unknown</td></tr>
-          <tr class="psygil-unique"><td>Final report integrity hash</td><td class="yes">Yes</td><td class="no">No public claim</td><td class="no">No public claim</td><td class="no">No public claim</td><td class="no">No public claim</td><td class="no">No public claim</td><td class="no">No public claim</td><td class="no">No public claim</td></tr>
-          <tr><td>Transparent pricing</td><td>Planned</td><td class="yes">$1,499/mo+</td><td>Demo</td><td class="yes">$30/report</td><td class="yes">$35/mo+</td><td class="yes">$60/user/mo</td><td class="yes">$39/user/mo+</td><td>Not public</td></tr>
-        </tbody>
-      </table>
+    <div class="radar-wrap">
+      <div>
+        <svg class="radar-svg" viewBox="0 0 700 500" role="img" aria-labelledby="radar-title radar-desc">
+          <title id="radar-title">Comparison radar: Psygil vs typical cloud drafter</title>
+          <desc id="radar-desc">Six-axis comparison on a 0 to 10 buyer-priority scale. Psygil leads on forensic defensibility, audit traceability, clinical workflow integrity, and local data control. The typical cloud drafter leads on integrations and portal breadth.</desc>
+
+          <polygon class="grid-poly" points="350,80 497,165 497,335 350,420 203,335 203,165" />
+          <polygon class="grid-poly" points="350,114 468,182 468,318 350,386 232,318 232,182" />
+          <polygon class="grid-poly" points="350,148 438,199 438,301 350,352 262,301 262,199" />
+          <polygon class="grid-poly" points="350,182 409,216 409,284 350,318 291,284 291,216" />
+          <polygon class="grid-poly" points="350,216 379,233 379,267 350,284 321,267 321,233" />
+
+          <line class="axis-line" x1="350" y1="250" x2="350" y2="80" />
+          <line class="axis-line" x1="350" y1="250" x2="497" y2="165" />
+          <line class="axis-line" x1="350" y1="250" x2="497" y2="335" />
+          <line class="axis-line" x1="350" y1="250" x2="350" y2="420" />
+          <line class="axis-line" x1="350" y1="250" x2="203" y2="335" />
+          <line class="axis-line" x1="350" y1="250" x2="203" y2="165" />
+
+          <text x="358" y="84" class="scale-tick">10</text>
+          <text x="358" y="252" class="scale-tick">0</text>
+
+          <polygon class="drafter-poly" points="350,216 394,225 409,284 350,267 262,301 232,182" />
+          <circle class="drafter-point" cx="350" cy="216" r="3.5" />
+          <circle class="drafter-point" cx="394" cy="225" r="3.5" />
+          <circle class="drafter-point" cx="409" cy="284" r="3.5" />
+          <circle class="drafter-point" cx="350" cy="267" r="3.5" />
+          <circle class="drafter-point" cx="262" cy="301" r="3.5" />
+          <circle class="drafter-point" cx="232" cy="182" r="3.5" />
+
+          <polygon class="psygil-poly" points="350,97 483,174 483,326 350,420 247,310 306,225" />
+          <circle class="psygil-point" cx="350" cy="97" r="4" />
+          <circle class="psygil-point" cx="483" cy="174" r="4" />
+          <circle class="psygil-point" cx="483" cy="326" r="4" />
+          <circle class="psygil-point" cx="350" cy="420" r="4" />
+          <circle class="psygil-point" cx="247" cy="310" r="4" />
+          <circle class="psygil-point" cx="306" cy="225" r="4" />
+
+          <text x="350" y="50" class="axis-label" text-anchor="middle">Forensic defensibility</text>
+          <text x="523" y="150" class="axis-label" text-anchor="start">Audit traceability</text>
+          <text x="523" y="350" class="axis-label" text-anchor="start">Clinical workflow</text>
+          <text x="350" y="450" class="axis-label" text-anchor="middle">Local data control</text>
+          <text x="177" y="350" class="axis-label" text-anchor="end">Assessment breadth</text>
+          <text x="177" y="150" class="axis-label" text-anchor="end">Integrations / portal</text>
+        </svg>
+
+        <div class="radar-legend">
+          <span class="radar-legend-item"><span class="radar-legend-chip psygil"></span>Psygil</span>
+          <span class="radar-legend-item"><span class="radar-legend-chip drafter"></span>Typical cloud drafter</span>
+        </div>
+        <p class="radar-caption">Psygil trades cloud and portal breadth for clinical control. The question is whether the shape lines up with what your work demands.</p>
+      </div>
+
+      <ul class="radar-takeaways">
+        <li><strong>Forensic defensibility</strong><span>Signed diagnostic gates and an integrity hash on the final report. Cloud drafters do not enforce either.</span></li>
+        <li><strong>Audit traceability</strong><span>Hash-chained log of every material decision, exportable for testimony. Drafters keep cloud-side activity logs.</span></li>
+        <li><strong>Clinical workflow integrity</strong><span>The writer is blocked until the clinician signs the diagnosis. Drafters draft on demand.</span></li>
+        <li><strong>Local data control</strong><span>The case workspace lives on your machine. PHI is redacted before any model call.</span></li>
+        <li><strong>Assessment breadth</strong><span>Comparable. Psygil ships 43 instruments and imports more.</span></li>
+        <li><strong>Integrations / portal</strong><span>The deliberate concession. Cloud SaaS leads on EHR connectors and patient portals.</span></li>
+      </ul>
     </div>
   </div>
 </section>
@@ -91,17 +282,61 @@
 <section class="section alt">
   <div class="container">
     <div class="section-title">
-      <span class="kicker">Where others lead</span>
-      <h2>Honest tradeoffs build trust.</h2>
+      <span class="kicker">The market</span>
+      <h2>Three approaches to AI-assisted reports.</h2>
+      <p>Each category serves a different job.</p>
     </div>
-    <ul class="mini-list">
-      <li><strong>Psynth leads on assessment breadth.</strong> If you need instrument-count parity above forensic depth, Psynth is a reasonable choice.</li>
-      <li><strong>PsychAssist leads on broad forensic marketing.</strong> Their claims are broad; Psygil's answer is architectural proof.</li>
-      <li><strong>PsychReport.ai leads on entry-tier pricing.</strong> If cost alone wins, they win. If defensibility matters, Psygil wins.</li>
-      <li><strong>FT Nexus leads on offender normative databases.</strong> Psygil's future roadmap addresses this, pending licensing.</li>
-      <li><strong>PAR leads on proprietary assessment data integration.</strong> PARiConnect is its own assessment ecosystem.</li>
-      <li><strong>ReportQuill leads on deterministic-template messaging.</strong> Psygil adds signed diagnostic gates, attestation, and audit proof.</li>
-    </ul>
+
+    <div class="category-grid">
+      <article class="category-card">
+        <h3>Cloud AI drafters</h3>
+        <div class="cat-best"><strong>Best for</strong><em>Volume drafting in low-stakes clinical settings.</em></div>
+        <div class="cat-strength"><strong>Strengths</strong>Fast onboarding. Cheap monthly. Good speech-to-text. EHR add-ons.</div>
+        <div class="cat-limit"><strong>Limits</strong>No diagnostic gate. Cloud-only PHI. No clinician-signed audit chain. Drafts run unconstrained.</div>
+        <div class="cat-price">Typical cost<strong>$30 - $60 / user / month</strong></div>
+      </article>
+
+      <article class="category-card">
+        <h3>Practice-management + AI add-ons</h3>
+        <div class="cat-best"><strong>Best for</strong><em>Practices that want AI scribing inside their existing EHR or PM stack.</em></div>
+        <div class="cat-strength"><strong>Strengths</strong>Single vendor. Patient portal. Integrated billing. Established trust.</div>
+        <div class="cat-limit"><strong>Limits</strong>Assistive tools are a feature, not a workflow. Forensic capability and audit transparency vary widely by vendor.</div>
+        <div class="cat-price">Typical cost<strong>From $1,000 / seat / month + enterprise platform fees</strong></div>
+      </article>
+
+      <article class="category-card featured">
+        <h3>Psygil for clinical and forensic work</h3>
+        <div class="cat-best"><strong>Best for</strong><em>Clinical and forensic workflows where the record has to withstand scrutiny.</em></div>
+        <div class="cat-strength"><strong>Strengths</strong>Signed diagnostic gates. Hash-chained audit. Local case control. Report integrity hash. Style-trained writer.</div>
+        <div class="cat-limit"><strong>Limits</strong>Not a patient portal. Not an EHR. Cloud breadth is a deliberate tradeoff against local control.</div>
+        <div class="cat-price">Psygil Pro<strong>$599 / month</strong></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="section-title">
+      <span class="kicker">Decision pressure</span>
+      <h2>The deposition test.</h2>
+      <p>Imagine opposing counsel has your report and is asking how it was generated. Here is what each category produces under that pressure.</p>
+    </div>
+
+    <div class="scenario">
+      <h3>"Doctor, walk me through how this report was created."</h3>
+      <p>This is the moment that decides whether your engagement holds up. Your defense rests on the evidence behind your decisions.</p>
+      <div class="scenario-grid">
+        <div class="scenario-col">
+          <h4>Cloud AI drafter</h4>
+          <p>A cloud activity log, transcript fragments, the prompts you typed, and the final draft. Diagnoses can be generated by the model on demand. There is no signed clinical decision separate from the prose.</p>
+        </div>
+        <div class="scenario-col psygil-col">
+          <h4>Psygil</h4>
+          <p>Clinician-signed diagnostic decisions with timestamps. Hash-chained audit trail across every material event. Local PHI handling, with redaction before any model call. Report integrity hash on the final document. Exportable testimony folder.</p>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -117,7 +352,30 @@
       <article class="differentiator-card"><h4><a href="features.html#discovery">Hash audit</a></h4><p>Every material event is written to an append-only chain.</p></article>
       <article class="differentiator-card"><h4><a href="features.html#editor">Review assistant</a></h4><p>Flags source gaps, overstatement, and forensic vulnerabilities.</p></article>
       <article class="differentiator-card"><h4><a href="features.html#writer">Style profile</a></h4><p>Drafts in your vocabulary from your signed decisions.</p></article>
-      <article class="differentiator-card"><h4><a href="features.html#peer-review">Peer review</a></h4><p>Structured signed review exchange is planned for v1.1 beta.</p></article>
+      <article class="differentiator-card"><h4><a href="features.html#peer-review">Peer review</a></h4><p>Structured signed review exchange is planned for v1.1.</p></article>
+    </div>
+
+    <div class="tradeoffs">
+      <h3>What Psygil isn't.</h3>
+      <p>Psygil makes these tradeoffs deliberately.</p>
+      <ul>
+        <li><strong>Not a patient portal.</strong><span>Patient-facing scheduling, intake, and messaging belong elsewhere in your stack.</span></li>
+        <li><strong>Not an EHR.</strong><span>Use your EHR for chart of record. Export the Psygil report into it.</span></li>
+        <li><strong>Not the cheapest drafter.</strong><span>For volume drafting in low-stakes settings, cloud SaaS is the right buy.</span></li>
+        <li><strong>Image and handwritten input is limited.</strong><span>Roadmap item. Today, intake forms work better as typed text or supported imports.</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="section alt">
+  <div class="container">
+    <div class="battle-card">
+      <div class="battle-text">
+        <h3>Need a vendor-by-vendor comparison?</h3>
+        <p>The full 14-product matrix with citations is available as a sales document. We send the latest version directly so it stays accurate to current public claims.</p>
+      </div>
+      <a href="sales.html" class="btn btn-primary">Request the comparison</a>
     </div>
   </div>
 </section>
