@@ -1,0 +1,236 @@
+<!doctype html>
+<!-- build: 2026-06-04T00:00:00Z -->
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Feedback | Psygil</title>
+  <meta name="description" content="Share product feedback, request features, and help shape Psygil. Submit anonymously or leave contact information if you want updates.">
+  <meta name="robots" content="index, follow">
+  <link rel="icon" href="assets/icons/favicon.png" type="image/png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css?v=202606040000">
+</head>
+<body>
+<header class="site-header">
+  <div class="container site-header-inner">
+    <a class="brand" href="/">
+      <img class="header-fox" src="assets/icons/CoolFox_circle_512x512.png" alt="" width="36" height="36">
+      <span>PSYGIL</span>
+    </a>
+    <nav class="nav" aria-label="Primary">
+      <a href="features.html">Features</a>
+      <a href="compare.html">Compare</a>
+      <a href="demo.html">Demo</a>
+      <a href="forensic.html">Forensic</a>
+      <a href="clinical.html">Clinical</a>
+      <a href="enterprise.html">Enterprise</a>
+      <a href="download.html">Download</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+<section class="hero" style="padding: 80px 0 32px;">
+  <div class="container">
+    <h1>Help shape what Psygil builds next.</h1>
+  </div>
+</section>
+
+<section class="section" style="padding: 16px 0 80px;">
+  <div class="container">
+    <div class="form-card">
+      <form id="feedback-form" novalidate>
+        <div class="form-grid">
+          <div class="form-field">
+            <label for="ff-area">What are you trying to improve?<span class="req" aria-hidden="true">*</span></label>
+            <select id="ff-area" name="area" required>
+              <option value="">Select one</option>
+              <option value="workflow">Workflow speed</option>
+              <option value="records">Records review</option>
+              <option value="intake">Intake and case setup</option>
+              <option value="reports">Drafting and editing reports</option>
+              <option value="organization">Case organization</option>
+              <option value="collaboration">Team collaboration</option>
+              <option value="billing">Pricing or packaging</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+          <div class="form-field">
+            <label for="ff-urgency">How important is this?<span class="req" aria-hidden="true">*</span></label>
+            <select id="ff-urgency" name="urgency" required>
+              <option value="">Select one</option>
+              <option value="critical">Critical, this blocks work</option>
+              <option value="high">High, I want it soon</option>
+              <option value="medium">Medium, useful but not urgent</option>
+              <option value="low">Low, nice to have</option>
+            </select>
+          </div>
+          <div class="form-field">
+            <label for="ff-role">Your role</label>
+            <input id="ff-role" name="role" type="text" maxlength="120" placeholder="Clinician, practice manager, expert witness">
+          </div>
+          <div class="form-field">
+            <label for="ff-context">Practice context</label>
+            <input id="ff-context" name="context" type="text" maxlength="160" placeholder="Solo, group practice, forensic firm, academic">
+          </div>
+          <div class="form-field full">
+            <label for="ff-problem">What is the problem or opportunity?<span class="req" aria-hidden="true">*</span></label>
+            <textarea id="ff-problem" name="problem" required maxlength="5000" placeholder="Describe the workflow, pain point, or idea. What slows you down? What would make Psygil more useful?"></textarea>
+            <p class="hint">Focus on process, priority, and impact. No PHI.</p>
+          </div>
+          <div class="form-field full">
+            <label for="ff-success">What would success look like?</label>
+            <textarea id="ff-success" name="success" maxlength="3000" placeholder="What would be faster, clearer, safer, or easier if we solved this well?"></textarea>
+          </div>
+          <div class="form-field full">
+            <label for="ff-feedback">Anything else we should know?</label>
+            <textarea id="ff-feedback" name="feedback" maxlength="4000" placeholder="Extra context, examples, or a rough sketch of the feature you want."></textarea>
+          </div>
+          <div class="form-field">
+            <label for="ff-name">Name</label>
+            <input id="ff-name" name="name" type="text" autocomplete="name" maxlength="120" placeholder="Optional">
+          </div>
+          <div class="form-field">
+            <label for="ff-email">Email</label>
+            <input id="ff-email" name="email" type="email" autocomplete="email" maxlength="200" placeholder="Optional">
+          </div>
+          <div class="form-field full">
+            <label for="ff-updates">Stay in the loop</label>
+            <div class="form-checklist single">
+              <label><input id="ff-updates" name="updates" type="checkbox" value="yes">Send me product updates, release notes, and early access news.</label>
+            </div>
+          </div>
+          <div class="form-field honeypot" aria-hidden="true">
+            <label for="ff-company">Company (leave blank)</label>
+            <input id="ff-company" name="company" type="text" tabindex="-1" autocomplete="off">
+          </div>
+        </div>
+
+        <div class="form-footer">
+          <p class="form-footnote">Anonymous submissions are fine. If you include an email, we may use it to follow up on your feedback and, only if you opt in, send updates.</p>
+          <button type="submit" class="btn btn-primary btn-lg" id="ff-submit">Send feedback</button>
+        </div>
+
+        <div class="form-status" id="ff-status" role="status" aria-live="polite" hidden></div>
+      </form>
+    </div>
+
+    <p class="center dim" style="margin-top: 20px; font-size: 0.9rem;">Or email <a href="mailto:feedback@psygil.com">feedback@psygil.com</a>.</p>
+  </div>
+</section>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <a class="brand" href="/">
+          <img class="footer-fox" src="assets/icons/CoolFox_circle_512x512.png" alt="" width="56" height="56">
+          <span>PSYGIL</span>
+        </a>
+        <p style="margin-top:14px;max-width:320px;">The psychology IDE for clinical and forensic work. Built by Foundry SMB in Colorado, United States.</p>
+      </div>
+      <div>
+        <h5>Product</h5>
+        <ul>
+          <li><a href="features.html">Features</a></li>
+          <li><a href="compare.html">Compare</a></li>
+          <li><a href="demo.html">Demo</a></li>
+          <li><a href="forensic.html">Forensic</a></li>
+          <li><a href="clinical.html">Clinical</a></li>
+          <li><a href="enterprise.html">Enterprise</a></li>
+          <li><a href="download.html">Download</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Company</h5>
+        <ul>
+          <li><a href="support.html">Support</a></li>
+          <li><a href="feedback.html">Feedback</a></li>
+          <li><a href="sales.html">Sales</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Legal</h5>
+        <ul>
+          <li><a href="policies.html#privacy">Privacy</a></li>
+          <li><a href="policies.html#terms">Terms</a></li>
+          <li><a href="policies.html">All policies</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div>&copy; <span id="year">2026</span> Foundry SMB LLC. All rights reserved. Colorado, United States.</div>
+      <div>Psygil does not diagnose. The clinician diagnoses. Always.</div>
+    </div>
+  </div>
+</footer>
+
+<script>
+document.getElementById('year').textContent = new Date().getFullYear();
+(function () {
+  var form = document.getElementById('feedback-form');
+  if (!form) return;
+  var submit = document.getElementById('ff-submit');
+  var status = document.getElementById('ff-status');
+  function show(kind, msg) {
+    status.hidden = false;
+    status.className = 'form-status ' + (kind === 'ok' ? 'is-success' : 'is-error');
+    status.textContent = msg;
+  }
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    if (!form.area.value || !form.urgency.value || !form.problem.value.trim()) {
+      show('err', 'Please complete the required fields before sending.');
+      return;
+    }
+    submit.disabled = true;
+    submit.textContent = 'Sending...';
+    var payload = {
+      area: form.area.value,
+      urgency: form.urgency.value,
+      role: form.role.value.trim(),
+      context: form.context.value.trim(),
+      problem: form.problem.value.trim(),
+      success: form.success.value.trim(),
+      feedback: form.feedback.value.trim(),
+      name: form.name.value.trim(),
+      email: form.email.value.trim(),
+      updates: form.updates.checked,
+      company: form.company.value
+    };
+    fetch('/api/feedback', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    })
+    .then(function (res) {
+      return res.json().catch(function () { return {}; }).then(function (body) {
+        return { ok: res.ok, body: body };
+      });
+    })
+    .then(function (result) {
+      if (result.ok && result.body && result.body.ok) {
+        show('ok', payload.email ? 'Thanks. Your feedback was sent and we will follow up if needed.' : 'Thanks. Your anonymous feedback was sent.');
+        form.reset();
+      } else {
+        var msg = (result.body && result.body.error) || 'Something went wrong. Email feedback@psygil.com directly and we will pick it up.';
+        show('err', msg);
+      }
+    })
+    .catch(function () {
+      show('err', 'Network error. Email feedback@psygil.com directly and we will pick it up.');
+    })
+    .finally(function () {
+      submit.disabled = false;
+      submit.textContent = 'Send feedback';
+    });
+  });
+})();
+</script>
+</body>
+</html>
