@@ -1,6 +1,6 @@
-# psygil-license
+# boreasclinical-license
 
-Fully automated subscription fulfillment for Psygil. Cloudflare Worker + D1 + R2 + Stripe + Resend. Device-bound licenses with signed JWTs.
+Fully automated subscription fulfillment for Boreas. Cloudflare Worker + D1 + R2 + Stripe + Resend. Device-bound licenses with signed JWTs.
 
 ## What it does
 
@@ -70,12 +70,12 @@ npm install
 
 In the Stripe Dashboard (or via CLI):
 
-- Product "Psygil Solo" → recurring monthly price → save the `price_xxx` id
-- Product "Psygil Practice" → recurring monthly price (5 seats) → save the `price_xxx` id
-- Product "Psygil Practice Extra Seat" → recurring monthly price (per-seat) → save the `price_xxx` id
+- Product "Boreas Solo" → recurring monthly price → save the `price_xxx` id
+- Product "Boreas Practice" → recurring monthly price (5 seats) → save the `price_xxx` id
+- Product "Boreas Practice Extra Seat" → recurring monthly price (per-seat) → save the `price_xxx` id
 - For Enterprise: create manually per-deal in the Dashboard with `subscription_data.add_invoice_items` for the one-time setup fee.
 
-Create a webhook endpoint pointed at `https://api.psygil.com/api/webhooks/stripe` subscribing to:
+Create a webhook endpoint pointed at `https://api.boreasclinical.com/api/webhooks/stripe` subscribing to:
 
 - `checkout.session.completed`
 - `customer.subscription.updated`
@@ -87,15 +87,15 @@ Save the **signing secret** (starts with `whsec_`).
 ### 3. Cloudflare: create D1 and R2
 
 ```bash
-npx wrangler d1 create psygil-license
+npx wrangler d1 create boreasclinical-license
 # copy the database_id into wrangler.toml
 
-npx wrangler r2 bucket create psygil-installers
+npx wrangler r2 bucket create boreasclinical-installers
 
 npm run db:migrate
 ```
 
-Upload installer binaries to the R2 bucket with the keys `psygil-macos.dmg`, `psygil-windows.exe`, `psygil-linux.AppImage`. Replace or version them as you ship.
+Upload installer binaries to the R2 bucket with the keys `boreasclinical-macos.dmg`, `boreasclinical-windows.exe`, `boreasclinical-linux.AppImage`. Replace or version them as you ship.
 
 ### 4. Generate the license-signing keypair
 
@@ -114,7 +114,7 @@ npx wrangler secret put STRIPE_PRICE_SOLO                    # price_...
 npx wrangler secret put STRIPE_PRICE_PRACTICE                # price_...
 npx wrangler secret put STRIPE_PRICE_PRACTICE_EXTRA_SEAT     # price_...
 npx wrangler secret put RESEND_API_KEY                       # re_...
-npx wrangler secret put RESEND_FROM_EMAIL                    # "Psygil <no-reply@psygil.com>"
+npx wrangler secret put RESEND_FROM_EMAIL                    # "Boreas <no-reply@boreasclinical.com>"
 npx wrangler secret put LICENSE_SIGNING_KEY_PRIVATE          # base64 from keys:generate
 npx wrangler secret put LICENSE_SIGNING_KEY_PUBLIC           # base64 from keys:generate
 npx wrangler secret put DOWNLOAD_SIGNING_SECRET              # random 32-byte hex; also set on Pages
@@ -128,7 +128,7 @@ npx wrangler secret put DOWNLOAD_SIGNING_SECRET              # random 32-byte he
 npm run deploy
 ```
 
-Wire DNS: `api.psygil.com` → the Worker (uncomment the `routes` block in `wrangler.toml`, then `npm run deploy` again).
+Wire DNS: `api.boreasclinical.com` → the Worker (uncomment the `routes` block in `wrangler.toml`, then `npm run deploy` again).
 
 ### 7. Wire the marketing site
 
@@ -141,7 +141,7 @@ In `pricing.html`, replace the `mailto:` Start buttons with:
 <script>
 document.querySelectorAll('[data-tier]').forEach((btn) => {
   btn.addEventListener('click', async () => {
-    const res = await fetch('https://api.psygil.com/api/checkout', {
+    const res = await fetch('https://api.boreasclinical.com/api/checkout', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ tier: btn.dataset.tier }),
@@ -153,7 +153,7 @@ document.querySelectorAll('[data-tier]').forEach((btn) => {
 </script>
 ```
 
-Add `https://api.psygil.com` to the site's CSP `connect-src` in `_headers`.
+Add `https://api.boreasclinical.com` to the site's CSP `connect-src` in `_headers`.
 
 ## API reference
 
@@ -176,9 +176,9 @@ Synchronous fulfillment for the `/thanks` page. Idempotent  -  safe to call befo
   "customer_email": "clinician@example.com",
   "tokens": ["PSG-XXXX-XXXX-XXXX"],
   "installers": {
-    "macos": "https://psygil.com/download/macos?t=...&e=...",
-    "windows": "https://psygil.com/download/windows?t=...&e=...",
-    "linux":  "https://psygil.com/download/linux?t=...&e=..."
+    "macos": "https://boreasclinical.com/download/macos?t=...&e=...",
+    "windows": "https://boreasclinical.com/download/windows?t=...&e=...",
+    "linux":  "https://boreasclinical.com/download/linux?t=...&e=..."
   },
   "portal_url": "https://billing.stripe.com/..."
 }

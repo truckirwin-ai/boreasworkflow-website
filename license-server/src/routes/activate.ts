@@ -66,7 +66,7 @@ app.post('/', async (c) => {
     return c.json(
       {
         error: 'seat_bound_to_other_device',
-        hint: 'Reassign via Stripe Customer Portal or contact support@psygil.com',
+        hint: 'Reassign via Stripe Customer Portal or contact support@boreasclinical.com',
       },
       409,
     );

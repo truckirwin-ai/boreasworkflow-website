@@ -1,11 +1,11 @@
-# psygil.com
+# boreasclinical.com
 
-Marketing site for Psygil, the forensic psychology IDE. Static HTML, CSS, and SVG. No build step. No framework. No tracker. Deploys to Cloudflare Pages via GitHub integration.
+Marketing site for Boreas, the forensic psychology IDE. Static HTML, CSS, and SVG. No build step. No framework. No tracker. Deploys to Cloudflare Pages via GitHub integration.
 
 ## Structure
 
 ```
-psygil-website/
+boreasclinical-website/
   index.html         Landing page
   features.html      Feature detail pages
   pricing.html       Three license tiers and FAQ
@@ -39,14 +39,14 @@ Then open http://localhost:8080/ in a browser.
    - Build command: leave empty
    - Build output directory: /
 4. Save and deploy. First build takes under a minute.
-5. Add a custom domain: psygil.com and www.psygil.com, both pointing at the Pages project.
+5. Add a custom domain: boreasclinical.com and www.boreasclinical.com, both pointing at the Pages project.
 6. Enable Always Use HTTPS and HSTS in the Cloudflare SSL/TLS settings.
 
 Every push to the main branch triggers a production deploy. Every push to another branch creates a preview URL.
 
 ## Design tokens
 
-All tokens live in `:root` at the top of styles.css. Change them in one place and the whole site updates. The palette matches the Psygil app shell.
+All tokens live in `:root` at the top of styles.css. Change them in one place and the whole site updates. The palette matches the Boreas app shell.
 
 ```
 --bg: #0d1117
@@ -54,7 +54,7 @@ All tokens live in `:root` at the top of styles.css. Change them in one place an
 --border: #30363d
 --text: #e6edf3
 --text-secondary: #8b949e
---accent: #E8650A
+--accent: #0969da
 --accent-hover: #ff7a1f
 --accent-muted: #f5a623
 ```
@@ -67,8 +67,8 @@ The brand voice is dry, plain, and evidentiary. A few rules that belong in the h
 
 - Never use em dashes. Use commas, periods, or parentheticals.
 - Never use curly quotes or curly apostrophes. Straight quotes only.
-- Never use the marketing vocabulary Psygil refuses to use inside the app: leverage, utilize, facilitate, empower, unlock, seamless.
-- Never drift from the core message: Psygil is an evidence ledger, not a decision engine. The clinician renders every diagnosis. The AI never diagnoses and never signs.
+- Never use the marketing vocabulary Boreas refuses to use inside the app: leverage, utilize, facilitate, empower, unlock, seamless.
+- Never drift from the core message: Boreas is an evidence ledger, not a decision engine. The clinician renders every diagnosis. The AI never diagnoses and never signs.
 - Never invent features. The content here matches the app as shipped.
 
 ## License

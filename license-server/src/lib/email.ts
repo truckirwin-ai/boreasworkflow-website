@@ -65,15 +65,15 @@ export function fulfillmentEmail(args: {
         : 'Enterprise';
 
   const subject = isTrial
-    ? 'Your 10-day Psygil trial is ready'
-    : `Your Psygil ${label} subscription is active`;
+    ? 'Your 10-day Boreas trial is ready'
+    : `Your Boreas ${label} subscription is active`;
 
   const heading = isTrial
     ? 'Your 10-day trial is ready.'
-    : 'Welcome to Psygil.';
+    : 'Welcome to Boreas.';
 
   const lead = isTrial
-    ? 'Install Psygil, paste the license key on first launch, and work through a real evaluation. The trial runs 10 days from activation, with every feature unlocked. Upgrade any time from inside the app and keep your data.'
+    ? 'Install Boreas, paste the license key on first launch, and work through a real evaluation. The trial runs 10 days from activation, with every feature unlocked. Upgrade any time from inside the app and keep your data.'
     : `Your ${label} subscription is active. Your license key${args.tokens.length > 1 ? 's are' : ' is'} below.`;
 
   const tokenRows = args.tokens
@@ -81,7 +81,7 @@ export function fulfillmentEmail(args: {
     .join('\n\n');
 
   const billingBlock = isTrial
-    ? 'Upgrade from the app or at https://psygil.com/pricing  -  the trial seat converts to your paid seat automatically.'
+    ? 'Upgrade from the app or at https://boreasclinical.com/pricing  -  the trial seat converts to your paid seat automatically.'
     : `Manage billing, update card, or cancel: ${args.portal_url}
 
 Cancellations take effect at the end of the current billing period. All sales are final.`;
@@ -92,7 +92,7 @@ ${lead}
 
 ${tokenRows}
 
-Install Psygil:
+Install Boreas:
   macOS     ${args.installers.macos}
   Windows   ${args.installers.windows}
   Linux     ${args.installers.linux}
@@ -101,21 +101,21 @@ Paste the license key on first launch. Each key binds to one workstation.
 
 ${billingBlock}
 
-Questions: support@psygil.com
+Questions: support@boreasclinical.com
 
 - Foundry SMB
 `;
 
   const billingHtml = isTrial
-    ? `<p style="margin:0 0 20px;"><a href="https://psygil.com/pricing" style="display:inline-block;background:#E8650A;color:#fff;padding:10px 16px;border-radius:4px;text-decoration:none;font-weight:600;">Upgrade to paid</a></p>`
-    : `<p style="margin:0 0 20px;"><a href="${args.portal_url}" style="display:inline-block;background:#E8650A;color:#fff;padding:10px 16px;border-radius:4px;text-decoration:none;font-weight:600;">Manage billing</a></p>
+    ? `<p style="margin:0 0 20px;"><a href="https://boreasclinical.com/pricing" style="display:inline-block;background:#0969da;color:#fff;padding:10px 16px;border-radius:4px;text-decoration:none;font-weight:600;">Upgrade to paid</a></p>`
+    : `<p style="margin:0 0 20px;"><a href="${args.portal_url}" style="display:inline-block;background:#0969da;color:#fff;padding:10px 16px;border-radius:4px;text-decoration:none;font-weight:600;">Manage billing</a></p>
 <p style="margin:0 0 8px;color:#666;font-size:13px;">Cancellations take effect at the end of the current billing period. All sales are final.</p>`;
 
   const html = `<!doctype html><html><body style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Inter,sans-serif;max-width:560px;margin:0 auto;padding:24px;color:#111;line-height:1.55;">
 <h1 style="font-size:22px;margin:0 0 8px;">${heading}</h1>
 <p style="margin:0 0 20px;color:#444;">${lead}</p>
 <div style="background:#f6f6f4;border:1px solid #e6e4de;border-radius:6px;padding:16px;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:13px;white-space:pre-wrap;margin-bottom:20px;">${escapeHtml(tokenRows)}</div>
-<h2 style="font-size:15px;margin:20px 0 8px;">Install Psygil</h2>
+<h2 style="font-size:15px;margin:20px 0 8px;">Install Boreas</h2>
 <ul style="padding-left:18px;margin:0 0 20px;">
   <li><a href="${args.installers.macos}">macOS</a></li>
   <li><a href="${args.installers.windows}">Windows</a></li>
@@ -123,7 +123,7 @@ Questions: support@psygil.com
 </ul>
 <p style="margin:0 0 20px;color:#444;">Paste the license key on first launch. Each key binds to one workstation.</p>
 ${billingHtml}
-<p style="margin:0;color:#666;font-size:13px;">Questions: <a href="mailto:support@psygil.com">support@psygil.com</a></p>
+<p style="margin:0;color:#666;font-size:13px;">Questions: <a href="mailto:support@boreasclinical.com">support@boreasclinical.com</a></p>
 </body></html>`;
 
   return { subject, html, text };

@@ -11,7 +11,7 @@ Class: `.screenshot`
 - White panel (`--panel`) on a 1px `--border`, 10px radius, `--shadow-lg`.
 - Top bar `.chrome` is `--panel-2` background, `--font-mono` 0.72rem, `--text-secondary`.
 - Three macOS-style traffic-light dots: red `#ff6b6b`, yellow `#f7c948`, green `#1a7f37`. 10x10, fully round.
-- Title format: `Psygil  -  Case #CR-2026-00412 · <stage>` with a middle-dot separator. Letter-spacing 0.04em.
+- Title format: `Boreas  -  Case #CR-2026-00412 · <stage>` with a middle-dot separator. Letter-spacing 0.04em.
 - Body padding 22px on a `display: grid; gap: 14px`. `body.two-col` adds a 220px sidebar column for the case nav.
 
 Below every mockup: an italic caption "Mockup. Will be replaced with live UI capture before launch." (`.screenshot-caption`).
@@ -24,7 +24,7 @@ Cues:
 - Two-column body. Left: `.mock-rail` "CASE NAV" with mono uppercase eyebrow `h5`. The active item ("Intake") gets `--accent-soft` background and `--accent` text in semibold.
 - Right: stack of `.mock-field` rows. Two-column grid (160px label / 1fr value), 1px bottom border between rows, no border on the last.
 - Labels are `--font-mono` 0.78rem, `--text-secondary`, letter-spacing 0.04em. Values are 0.9rem, `--text`, weight 500.
-- "Substance use" is shown empty with `.val.dim` (italic, `--text-secondary`) reading "Clinician has not entered"  -  this is the design tell that Psygil never invents facts.
+- "Substance use" is shown empty with `.val.dim` (italic, `--text-secondary`) reading "Clinician has not entered"  -  this is the design tell that Boreas never invents facts.
 
 Caption meta: `~45 SECONDS · WATCH THE FIELD-BY-FIELD TYPING` (`.step .meta`  -  mono, 0.75rem, accent, letter-spacing 0.08em).
 
@@ -91,7 +91,7 @@ Cues:
 - Always use the chrome frame with the case ID in the title.
 - Mono is the voice of "captured data"  -  labels, codes, scores, hashes, timestamps, eyebrow meta.
 - Inter is the voice of "human content"  -  diagnosis names, value text, body copy.
-- Accent (`#E8650A`) appears only on:
+- Accent (`#0969da`) appears only on:
   - active states (selected nav item, RENDER/DEFER/REJECT active pill)
   - codes and identifiers (ICD-10, attestation keys)
   - flags that demand human attention (REVIEW)

@@ -21,7 +21,7 @@ dist/
 .next/
 out/
 node_modules/
-psygil-preview.html
+boreasclinical-preview.html
 
 # Cloudflare
 .wrangler/
@@ -35,3 +35,6 @@ psygil-preview.html
 tsconfig.functions.json
 keypair.json
 keypair.*.bak
+
+# Scratch screenshots
+/.*.png

@@ -1,18 +1,18 @@
-# Psygil Website Update Report
+# Boreas Website Update Report
 
 **Date:** May 8, 2026
-**Working copy:** `/Users/truckirwin/Desktop/Foundry SMB/Products/Psygil/website-working-copy`
-**Primary site target:** `/Users/truckirwin/Desktop/Foundry SMB/Products/psygil-website`
+**Working copy:** `/Users/truckirwin/Desktop/Foundry SMB/Products/Boreas/website-working-copy`
+**Primary site target:** `/Users/truckirwin/Desktop/Foundry SMB/Products/boreasclinical-website`
 
 ## Purpose
 
-Update the Psygil marketing site from the current product and competitive analysis, then promote the working copy to the primary website folder.
+Update the Boreas marketing site from the current product and competitive analysis, then promote the working copy to the primary website folder.
 
 ## Strategic Direction
 
-The site now positions Psygil as a forensic evaluation workspace, not a generic report writer. The core message is that Psygil protects the clinical record: local-first workspace, gated and signed diagnostic workflow, source-linked reporting, report hashing, and audit proof.
+The site now positions Boreas as a forensic evaluation workspace, not a generic report writer. The core message is that Boreas protects the clinical record: local-first workspace, gated and signed diagnostic workflow, source-linked reporting, report hashing, and audit proof.
 
-PsychAssist is treated as the closest broad assessment-platform competitor. Psygil is positioned as more focused, more local-first, and more defensibility-centered for forensic, IME, disability, capacity, and high-stakes clinical evaluation work.
+PsychAssist is treated as the closest broad assessment-platform competitor. Boreas is positioned as more focused, more local-first, and more defensibility-centered for forensic, IME, disability, capacity, and high-stakes clinical evaluation work.
 
 ## Major Site Changes
 
@@ -21,7 +21,7 @@ PsychAssist is treated as the closest broad assessment-platform competitor. Psyg
 - Updated global navigation and footer links to include Compare and Forensic.
 - Added homepage differentiator section and local-control privacy callout.
 - Updated homepage hero eyebrow layout and version text treatment.
-- Added Psygil fox icon to the header and footer only.
+- Added Boreas fox icon to the header and footer only.
 - Added Features page sections for Peer Review, Psychometrician Assistant, test-score charting, and the Feature Catalog.
 - Added Download page v1.1 roadmap teaser and Practice tier card.
 - Added Zero-Retention Architecture content to Policies.
@@ -39,8 +39,8 @@ PsychAssist is treated as the closest broad assessment-platform competitor. Psyg
 
 ## Asset Changes
 
-- Copied Psygil fox icons into `assets/icons/`.
-- Header uses `assets/icons/CoolFox_circle_512x512.png` at 36px.
+- Copied Boreas fox icons into `assets/icons/`.
+- Header uses `assets/icons/boreas_mountain_square.svg` at 36px.
 - Footer uses the same fox asset at 56px.
 - Mid-page fox icons were removed so the icon appears only in global site chrome.
 
@@ -57,7 +57,7 @@ Recommended pricing direction from the business review:
 Business moat framing:
 
 - Records remain portable.
-- The active Psygil workspace, encrypted database, diagnostic workflow, audit-chain UI, and structured case state remain part of the licensed product.
+- The active Boreas workspace, encrypted database, diagnostic workflow, audit-chain UI, and structured case state remain part of the licensed product.
 - The defensible moat is workflow depth, signed clinical authority, local-first trust, audit proof, accumulated practice templates, and onboarding services.
 
 ## Verification Performed
@@ -87,4 +87,4 @@ Business moat framing:
 
 ## Notes
 
-`psygil-preview.html` remains a legacy bundled preview artifact and should not be treated as the current live site source.
+`boreasclinical-preview.html` remains a legacy bundled preview artifact and should not be treated as the current live site source.

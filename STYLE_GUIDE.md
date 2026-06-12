@@ -1,8 +1,8 @@
-# Psygil marketing style guide
+# Boreas marketing style guide
 
 Companion to CLAUDE.md. These rules govern voice and terminology on the marketing pages (`index`, `features`, `demo`, `pricing`, `enterprise`, `download`, `about`, `sales`, `contact`). The policies page (`policies.html`) and legal copy use formal third-person register and are exempt where noted.
 
-Psygil is a doctor-centric tool. The clinician is the subject of every sentence that matters. The software streamlines what the clinician already does.
+Boreas is a doctor-centric tool. The clinician is the subject of every sentence that matters. The software streamlines what the clinician already does.
 
 ---
 
@@ -43,13 +43,13 @@ Speak generically as **the assistants**, **assisting technologies**, or **the to
 
 ## 3. Streamline framing
 
-What Psygil does, said simply: **Psygil streamlines the data gathering and the records keeping so your expertise shapes every evaluation.**
+What Boreas does, said simply: **Boreas streamlines the data gathering and the records keeping so your expertise shapes every evaluation.**
 
 The software is the workbench, the ledger, the keeper of the record. It is not the decider. It stays out of the way so the clinician can stay with the patient, the test, the interview, the decision.
 
 | Do | Don't |
 |---|---|
-| "Psygil streamlines the records keeping so your expertise shapes every evaluation." | "Psygil uses AI to speed up your workflow." |
+| "Boreas streamlines the records keeping so your expertise shapes every evaluation." | "Boreas uses AI to speed up your workflow." |
 | "The ingestion assistant keeps records keeping out of your way." | "AI automates document processing." |
 | "The gate keeps you in charge." | "The gate prevents the AI from making bad decisions." |
 
@@ -76,7 +76,7 @@ Use these. They acknowledge the clinician and name the thing that matters:
 - **"AI-generated"**  -  say **assistant-drafted** or **draft requiring your review**
 - **"AI-first", "AI-only path"**  -  reframe: **no shortcut around your judgment**
 - **"automates diagnosis"**  -  never
-- **"replaces the clinician"**  -  Psygil does not replace; it streamlines
+- **"replaces the clinician"**  -  Boreas does not replace; it streamlines
 - **"prevents premature conclusions"**  -  softer: **keeps decisions in your hands**
 - **"stops the AI from..."**  -  reframe: **keeps you in charge of...**
 
@@ -125,9 +125,9 @@ Where both audiences are listed, clinical goes first. "Clinical and forensic." "
 
 ### Hero lede, before and after
 
-**Before:** *"Psygil is opinionated. It makes the right thing easy and the wrong thing impossible. AI organizes evidence. The clinician makes every decision the referral, the payer, the regulator, or the court cares about."*
+**Before:** *"Boreas is opinionated. It makes the right thing easy and the wrong thing impossible. AI organizes evidence. The clinician makes every decision the referral, the payer, the regulator, or the court cares about."*
 
-**After:** *"Psygil streamlines the data gathering and the records keeping so your expertise shapes every evaluation. The assistants organize evidence, draft language in your voice, and pressure-test the record. You make every decision the referral, the payer, the regulator, or the court cares about."*
+**After:** *"Boreas streamlines the data gathering and the records keeping so your expertise shapes every evaluation. The assistants organize evidence, draft language in your voice, and pressure-test the record. You make every decision the referral, the payer, the regulator, or the court cares about."*
 
 ### Gate heading, before and after
 
@@ -150,4 +150,4 @@ Where both audiences are listed, clinical goes first. "Clinical and forensic." "
 
 ---
 
-Questions or exceptions: write to `legal@psygil.com` for anything that touches contract terms; to `hello@psygil.com` for everything else.
+Questions or exceptions: write to `legal@boreasclinical.com` for anything that touches contract terms; to `hello@boreasclinical.com` for everything else.

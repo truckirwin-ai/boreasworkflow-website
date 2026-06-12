@@ -1,4 +1,4 @@
--- Psygil license server schema
+-- Boreas license server schema
 -- Run: npm run db:migrate (remote) or npm run db:migrate:local (local dev)
 --
 -- Design goals:

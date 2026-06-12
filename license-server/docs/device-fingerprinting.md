@@ -64,7 +64,7 @@ Concatenate the three inputs with a `|` separator, hash with SHA-256, hex-encode
 
 When a user replaces their machine and needs to reassign the seat:
 
-1. User opens Settings → Billing in the old app (if still running) or writes to `support@psygil.com`
+1. User opens Settings → Billing in the old app (if still running) or writes to `support@boreasclinical.com`
 2. Support calls `POST /api/admin/rebind` (not implemented yet  -  implement as a signed admin endpoint)
 3. The endpoint clears `device_fingerprint`, `device_label`, and `bound_at` on the seat row
 4. Next `POST /api/license/activate` on the new machine binds cleanly

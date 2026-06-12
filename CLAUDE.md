@@ -1,4 +1,4 @@
-# CLAUDE.md  -  psygil-website
+# CLAUDE.md  -  boreasclinical-website
 
 Operating context and design brief for every Claude session working on this repo.
 Treat this file as always-applied guidance. Read it before any design or copy change.
@@ -7,7 +7,7 @@ Treat this file as always-applied guidance. Read it before any design or copy ch
 
 ## Project
 
-Marketing site for **Psygil**, a forensic psychology IDE. Audience is licensed clinicians, forensic practices, and expert witnesses. The product promise is that **the clinician diagnoses, always**  -  AI agents read records, organize evidence, and draft language, but never render a diagnosis or sign a report. The site exists to make that distinction legible in 10 seconds and defensible under any review.
+Marketing site for **Boreas**, a forensic psychology IDE. Audience is licensed clinicians, forensic practices, and expert witnesses. The product promise is that **the clinician diagnoses, always**  -  AI agents read records, organize evidence, and draft language, but never render a diagnosis or sign a report. The site exists to make that distinction legible in 10 seconds and defensible under any review.
 
 Pages: `index.html`, `features.html`, `demo.html`, `pricing.html`, `enterprise.html`, `download.html`, `about.html`, `support.html`, `sales.html`, `contact.html`, `policies.html`. Static HTML/CSS, no build step. Deployed to Cloudflare Pages via GitHub push (`main` branch).
 
@@ -17,8 +17,8 @@ The `policies.html` page is tabbed: Overview, Privacy, Terms, Acceptable Use, Re
 
 Two form-backed pages use Cloudflare Pages Functions under `functions/api/`:
 
-- `support.html` posts to `/api/support` (handler at `functions/api/support.ts`). Routes to `support@psygil.com` via Resend.
-- `enterprise.html` posts to `/api/enterprise` (handler at `functions/api/enterprise.ts`). Routes to `sales@psygil.com` via Resend.
+- `support.html` posts to `/api/support` (handler at `functions/api/support.ts`). Routes to `support@boreasclinical.com` via Resend.
+- `enterprise.html` posts to `/api/enterprise` (handler at `functions/api/enterprise.ts`). Routes to `sales@boreasclinical.com` via Resend.
 
 Both Functions require the `RESEND_API_KEY` secret on the Pages project. They validate payloads, enforce a 32 KB body limit, use a hidden honeypot field, and fall back gracefully when mail is misconfigured. If an optional `RATE_LIMIT` KV namespace is bound, they also apply a five-submission-per-hour-per-IP cap.
 
@@ -30,7 +30,7 @@ HIPAA posture (reflected across the site): **local-first**. BAAs are offered on 
 
 Tokens live in `styles.css` at `:root`. Do not re-theme without explicit instruction. Current direction is **light theme, strong contrast, single-accent**.
 
-- Accent: `#E8650A` (--accent), soft fill `#fff4ec` (--accent-soft), muted `#b8540a`, hover `#c0530a`.
+- Accent: `#0969da` (--accent), soft fill `#eff6ff` (--accent-soft), muted `#054ea0`, hover `#0757b3`.
 - Surfaces: `#ffffff` (--bg / --panel), `#f6f8fa` (--bg-soft / --panel-2).
 - Text: `#1f2328` (--text), `#57606a` (--text-secondary).
 - Border: `#d0d7de`, strong `#8c959f`.
@@ -49,7 +49,7 @@ This section synthesizes the design skill sources the operator has installed at 
 ### 1. Intent over decoration (frontend-design skill, Anthropic)
 
 - Pick a clear aesthetic direction and execute with precision. Bold maximalism and refined minimalism both work; AI-generic middle-ground does not.
-- Avoid overused fonts (Arial, Roboto, generic Inter without intent) and clichéd color schemes (purple-on-white gradients, cookie-cutter gradient-mesh hero). Psygil's current direction is **restrained, editorial, instrument-like**  -  read as "surgical tool," not "SaaS template."
+- Avoid overused fonts (Arial, Roboto, generic Inter without intent) and clichéd color schemes (purple-on-white gradients, cookie-cutter gradient-mesh hero). Boreas's current direction is **restrained, editorial, instrument-like**  -  read as "surgical tool," not "SaaS template."
 - Typography pairing should be deliberate. Current pairing is Inter + JetBrains Mono; the mono face is the characterful voice and is used for eyebrow labels, numeric data, stage numbers, and anything that should read as a captured record.
 - Motion lives in high-impact moments (hover reveals on the pipeline, tooltip enters, the gate-card emphasis on Diagnostics). Do not scatter micro-animations everywhere.
 - Depth comes from shadow tiers, not decorative gradients or excess borders.
@@ -78,7 +78,7 @@ This section synthesizes the design skill sources the operator has installed at 
 
 ### 5. Industry-fit reasoning (UI UX Pro Max tradition)
 
-- Psygil's product type is **court-grade forensic software**. The design mood should read as *instrument, record, ledger*  -  never as *consumer app* or *lifestyle brand*.
+- Boreas's product type is **court-grade forensic software**. The design mood should read as *instrument, record, ledger*  -  never as *consumer app* or *lifestyle brand*.
 - Anti-patterns for this context: cartoon illustrations, stock photography, testimonial carousels with headshots (until we have real attributable clinicians), emoji in copy, gamification, progress bars celebrating AI doing the work.
 - Preferred patterns: data tables, mono-spaced numeric readouts, labeled field grids, timestamp stamps, signed-record motifs (hash strings, attestation blocks), courtroom-adjacent typography (the JetBrains Mono eyebrow labels lean this way).
 
@@ -103,7 +103,7 @@ Summary of the hardest constraints:
 
 - Write to the clinician in second person on marketing pages. "Your clinical judgment", "your expertise", "your signed diagnoses". Reserve "the clinician" for policies, About prose, and internal docs.
 - Do not use the bare term "AI" in marketing body copy. Name the assistant (writing assistant, review assistant, diagnostic assistant, ingestion assistant), or say "the assistants" / "assisting technologies" / "the tools".
-- Psygil streamlines data gathering and records keeping so the clinician's expertise shapes every evaluation. Frame features as service, not as guardrails against a dangerous machine.
+- Boreas streamlines data gathering and records keeping so the clinician's expertise shapes every evaluation. Frame features as service, not as guardrails against a dangerous machine.
 - Courtroom language (cross-examination, discovery, Daubert, Frye) belongs in forensic callouts and the Enterprise page, not in the home page hero.
 - Never use em dashes. Use commas, periods, or parentheses.
 - Never use curly quotes. Straight quotes only: `"` and `'`.
@@ -125,7 +125,7 @@ When the operator asks for a design or copy change:
 2. **Reuse tokens.** If a new surface needs a color, add a new CSS variable in `:root` rather than hardcoding.
 3. **Match the existing pattern.** If a new card style is needed, extend the `.card` family, don't introduce a parallel one.
 4. **Ship small commits.** One change, one commit, one descriptive message. Push after every batch unless told otherwise.
-5. **After every push, remember the cache dance.** Cloudflare Pages edge caches CSS with `immutable`. If the operator reports stale content on `www.psygil.com`, the fix is Cloudflare → psygil.com zone → Caching → Purge Everything. The build marker comment in `index.html` (`<!-- build: ... -->`) is the verification vector: compare `curl -s <host>/ | grep build:` across `pages.dev` and `psygil.com`.
+5. **After every push, remember the cache dance.** Cloudflare Pages edge caches CSS with `immutable`. If the operator reports stale content on `www.boreasclinical.com`, the fix is Cloudflare → boreasclinical.com zone → Caching → Purge Everything. The build marker comment in `index.html` (`<!-- build: ... -->`) is the verification vector: compare `curl -s <host>/ | grep build:` across `pages.dev` and `boreasclinical.com`.
 6. **For local preview**, the operator runs `python3 -m http.server 8080` in this folder. Edits are picked up on browser refresh.
 
 ---

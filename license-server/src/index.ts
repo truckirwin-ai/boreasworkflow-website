@@ -15,14 +15,14 @@ const app = new Hono<{ Bindings: Env }>();
 // The desktop app sends no Origin header, so it is unaffected.
 app.use('/api/*', cors({
   origin: (origin, c) => {
-    const allow = new Set([c.env.APP_URL, 'https://psygil.com', 'https://www.psygil.com']);
+    const allow = new Set([c.env.APP_URL, 'https://boreasclinical.com', 'https://www.boreasclinical.com']);
     return origin && allow.has(origin) ? origin : allow.values().next().value ?? '';
   },
   allowMethods: ['GET', 'POST', 'OPTIONS'],
   allowHeaders: ['Content-Type', 'Authorization', 'Stripe-Signature'],
 }));
 
-app.get('/', (c) => c.text('psygil-license'));
+app.get('/', (c) => c.text('boreasclinical-license'));
 app.get('/health', (c) => c.json({ ok: true, env: c.env.ENVIRONMENT }));
 
 app.route('/api/checkout', checkout);

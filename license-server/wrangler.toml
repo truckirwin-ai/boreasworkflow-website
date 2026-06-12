@@ -1,30 +1,30 @@
-name = "psygil-license"
+name = "boreasclinical-license"
 main = "src/index.ts"
 compatibility_date = "2025-01-01"
 compatibility_flags = ["nodejs_compat"]
 
-# Route the Worker on your license subdomain, e.g. api.psygil.com
+# Route the Worker on your license subdomain, e.g. api.boreasclinical.com
 # Uncomment after DNS is in place.
 # routes = [
-#   { pattern = "api.psygil.com/*", zone_name = "psygil.com" }
+#   { pattern = "api.boreasclinical.com/*", zone_name = "boreasclinical.com" }
 # ]
 
 [[d1_databases]]
 binding = "DB"
-database_name = "psygil-license"
+database_name = "boreasclinical-license"
 database_id = "REPLACE_WITH_D1_DATABASE_ID"
 
 [[r2_buckets]]
 binding = "INSTALLERS"
-bucket_name = "psygil-installers"
+bucket_name = "boreasclinical-installers"
 
 [vars]
 ENVIRONMENT = "production"
-APP_URL = "https://psygil.com"
+APP_URL = "https://boreasclinical.com"
 INSTALLER_URL_TTL_SECONDS = "86400"
 JWT_TTL_SECONDS = "604800"
 TRIAL_DAYS = "10"
-ISSUER = "psygil-license"
+ISSUER = "boreasclinical-license"
 
 # Secrets (set via `wrangler secret put NAME`):
 #   STRIPE_SECRET_KEY

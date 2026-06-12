@@ -1,14 +1,14 @@
 {
-  "name": "psygil-license",
+  "name": "boreasclinical-license",
   "version": "0.1.0",
   "private": true,
-  "description": "Psygil license server: device-bound subscriptions, signed JWTs, Stripe-backed fulfillment.",
+  "description": "Boreas license server: device-bound subscriptions, signed JWTs, Stripe-backed fulfillment.",
   "type": "module",
   "scripts": {
     "dev": "wrangler dev",
     "deploy": "wrangler deploy",
-    "db:migrate": "wrangler d1 execute psygil-license --remote --file=./schema.sql",
-    "db:migrate:local": "wrangler d1 execute psygil-license --local --file=./schema.sql",
+    "db:migrate": "wrangler d1 execute boreasclinical-license --remote --file=./schema.sql",
+    "db:migrate:local": "wrangler d1 execute boreasclinical-license --local --file=./schema.sql",
     "keys:generate": "tsx scripts/generate-keys.ts",
     "typecheck": "tsc --noEmit"
   },
