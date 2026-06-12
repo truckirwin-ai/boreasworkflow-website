@@ -28,7 +28,7 @@ Any static server works. Easiest:
 python3 -m http.server 8080
 ```
 
-Then open http://localhost:8080/ in a browser.
+Serve the public directory (cd public, then python3 -m http.server 8080) and open http://localhost:8080/ in a browser.
 
 ## Deploy to Cloudflare Pages
 
@@ -37,9 +37,9 @@ Then open http://localhost:8080/ in a browser.
 3. Build settings:
    - Framework preset: None
    - Build command: leave empty
-   - Build output directory: /
+   - Build output directory: public
 4. Save and deploy. First build takes under a minute.
-5. Add a custom domain: boreasclinical.com and www.boreasclinical.com, both pointing at the Pages project.
+5. Add a custom domain: boreasworkflow.com and www.boreasworkflow.com, both pointing at the Pages project.
 6. Enable Always Use HTTPS and HSTS in the Cloudflare SSL/TLS settings.
 
 Every push to the main branch triggers a production deploy. Every push to another branch creates a preview URL.

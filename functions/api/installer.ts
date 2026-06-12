@@ -8,7 +8,7 @@
 //
 // Bindings configured on the Pages project:
 //   - Secret: INSTALLER_TOKEN_SECRET
-//   - R2 bucket binding: INSTALLERS  (recommended bucket name: psygil-installers)
+//   - R2 bucket binding: INSTALLERS  (recommended bucket name: boreas-installers)
 //   - Optional env var: INSTALLER_VERSION (defaults to 'latest')
 
 import { verifyInstallerToken, type InstallerPlatform } from '../_lib/crypto';
@@ -27,13 +27,13 @@ interface PlatformFile {
 
 const PLATFORM_FILES: Record<InstallerPlatform, PlatformFile> = {
   mac: {
-    keySuffix: 'Psygil.dmg',
-    filename: 'Psygil.dmg',
+    keySuffix: 'Boreas Workflow.dmg',
+    filename: 'Boreas Workflow.dmg',
     mime: 'application/x-apple-diskimage',
   },
   windows: {
-    keySuffix: 'Psygil-Setup.exe',
-    filename: 'Psygil-Setup.exe',
+    keySuffix: 'Boreas-Setup.exe',
+    filename: 'Boreas-Setup.exe',
     mime: 'application/vnd.microsoft.portable-executable',
   },
 };

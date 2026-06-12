@@ -1,13 +1,13 @@
 // Cloudflare Pages Function: POST /api/enterprise
 //
 // Validates an Enterprise sales inquiry, rejects honeypot hits, rate-limits
-// by IP, and forwards to sales@psygil.com via Resend. The submitter's email
+// by IP, and forwards to sales@boreasworkflow.com via Resend. The submitter's email
 // is set as reply-to so sales can reply directly from inbox.
 //
 // Bindings configured on the Pages project:
 //   - Secret: RESEND_API_KEY
-//   - Optional env var: SALES_FROM_EMAIL (defaults to "Psygil Sales <sales@psygil.com>")
-//   - Optional env var: SALES_TO_EMAIL   (defaults to "sales@psygil.com")
+//   - Optional env var: SALES_FROM_EMAIL (defaults to "Boreas Workflow Sales <sales@boreasworkflow.com>")
+//   - Optional env var: SALES_TO_EMAIL   (defaults to "sales@boreasworkflow.com")
 //   - Optional KV namespace binding: RATE_LIMIT (for per-IP rate limiting)
 
 interface Env {
@@ -40,8 +40,8 @@ interface ResendSendArgs {
   text: string;
 }
 
-const DEFAULT_FROM = 'Psygil Sales <sales@psygil.com>';
-const DEFAULT_TO = 'sales@psygil.com';
+const DEFAULT_FROM = 'Boreas Workflow Sales <sales@boreasworkflow.com>';
+const DEFAULT_TO = 'sales@boreasworkflow.com';
 const MAX_BODY_BYTES = 32 * 1024;
 const RATE_LIMIT_WINDOW_SECONDS = 3600;
 const RATE_LIMIT_MAX = 5;

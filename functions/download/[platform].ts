@@ -5,7 +5,7 @@
 //
 // Deploy: Cloudflare Pages picks this up automatically when the `functions/`
 // directory exists in the site repo. Bindings configured in the Pages project:
-//   - R2 binding: INSTALLERS -> psygil-installers bucket
+//   - R2 binding: INSTALLERS -> boreas-installers bucket
 //   - Env var (secret): DOWNLOAD_SIGNING_SECRET (same value as the Worker's secret)
 
 interface Env {
@@ -14,9 +14,9 @@ interface Env {
 }
 
 const PLATFORM_KEYS: Record<string, { key: string; filename: string; mime: string }> = {
-  macos: { key: 'psygil-macos.dmg', filename: 'Psygil.dmg', mime: 'application/x-apple-diskimage' },
-  windows: { key: 'psygil-windows.exe', filename: 'PsygilSetup.exe', mime: 'application/vnd.microsoft.portable-executable' },
-  linux: { key: 'psygil-linux.AppImage', filename: 'Psygil.AppImage', mime: 'application/vnd.appimage' },
+  macos: { key: 'boreas-macos.dmg', filename: 'Boreas Workflow.dmg', mime: 'application/x-apple-diskimage' },
+  windows: { key: 'boreas-windows.exe', filename: 'BoreasSetup.exe', mime: 'application/vnd.microsoft.portable-executable' },
+  linux: { key: 'boreas-linux.AppImage', filename: 'Boreas Workflow.AppImage', mime: 'application/vnd.appimage' },
 };
 
 export const onRequestGet: PagesFunction<Env> = async (ctx) => {

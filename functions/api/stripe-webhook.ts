@@ -4,7 +4,7 @@
 //   1. Verify the stripe-signature header using STRIPE_WEBHOOK_SECRET.
 //   2. Call the license Worker /issue endpoint to mint a real Ed25519-signed
 //      license for the customer.
-//   3. Email the customer the license key, a psygil:// auto-activation URL,
+//   3. Email the customer the license key, a boreas:// auto-activation URL,
 //      and a signed installer download link.
 //
 // Bindings configured on the Pages project:
@@ -14,11 +14,11 @@
 //   - Secret: LICENSE_WORKER_ISSUE_SECRET (shared with the license Worker)
 //   - Secret: INSTALLER_TOKEN_SECRET
 //   - Secret: RESEND_API_KEY
-//   - env var: LICENSE_WORKER_URL (for example https://license.psygil.com)
+//   - env var: LICENSE_WORKER_URL (for example https://license.boreasworkflow.com)
 //   - env var: STRIPE_PRICE_SOLO (Stripe Price ID for Solo tier)
 //   - env var: STRIPE_PRICE_PRACTICE (Stripe Price ID for Practice tier)
 //   - env var: STRIPE_PRICE_ENTERPRISE_SETUP (Stripe Price ID for Enterprise Setup)
-//   - Optional env var: CUSTOMER_FROM_EMAIL (defaults to Psygil support)
+//   - Optional env var: CUSTOMER_FROM_EMAIL (defaults to Boreas Workflow support)
 //   - Optional env var: PUBLIC_SITE_URL (used to build installer URLs)
 //   - Optional env var: INSTALLER_TOKEN_TTL_DAYS (defaults to 14)
 
@@ -141,11 +141,11 @@ async function fulfillSession(env: Env, session: StripeCheckoutSession): Promise
     purpose: 'purchase',
   });
 
-  const base = env.PUBLIC_SITE_URL ?? 'https://psygil.com';
+  const base = env.PUBLIC_SITE_URL ?? 'https://boreasworkflow.com';
   const installerUrl = `${base}/api/installer?token=${encodeURIComponent(installerToken)}`;
 
-  // psygil:// deep link drops the signed license into the app on click.
-  const activationUrl = `psygil://activate?license=${encodeURIComponent(issued.license)}`;
+  // boreas:// deep link drops the signed license into the app on click.
+  const activationUrl = `boreas://activate?license=${encodeURIComponent(issued.license)}`;
 
   if (env.RESEND_API_KEY) {
     await sendFulfillmentEmail(env, {
@@ -257,11 +257,11 @@ interface FulfillmentEmailArgs {
 }
 
 async function sendFulfillmentEmail(env: Env, args: FulfillmentEmailArgs): Promise<void> {
-  const from = env.CUSTOMER_FROM_EMAIL ?? 'Psygil <support@psygil.com>';
-  const subject = `Your Psygil license (${args.tier})`;
+  const from = env.CUSTOMER_FROM_EMAIL ?? 'Boreas Workflow <support@boreasworkflow.com>';
+  const subject = `Your Boreas Workflow license (${args.tier})`;
   const ttlDays = env.INSTALLER_TOKEN_TTL_DAYS ?? '14';
 
-  const text = `Welcome to Psygil.
+  const text = `Welcome to Boreas Workflow.
 
 Your license key:
 ${args.licenseKey}
@@ -279,21 +279,21 @@ Colorado, United States
 `;
 
   const html = `<!doctype html><html><body style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Inter,sans-serif;max-width:640px;margin:0 auto;padding:24px;color:#111;line-height:1.55;">
-<h1 style="font-size:20px;margin:0 0 16px;">Welcome to Psygil.</h1>
+<h1 style="font-size:20px;margin:0 0 16px;">Welcome to Boreas Workflow.</h1>
 <p>Hi ${escapeHtml(args.name)}, your <strong>${escapeHtml(args.tier)}</strong> license is ready.</p>
 
 <h2 style="font-size:15px;margin:24px 0 8px;">Your license key</h2>
 <pre style="font-family:ui-monospace,Menlo,monospace;background:#f4f4f4;padding:12px;border-radius:6px;font-size:12px;overflow:auto;white-space:pre-wrap;word-break:break-all;">${escapeHtml(args.licenseKey)}</pre>
 
 <p style="margin:20px 0;">
-  <a href="${escapeHtml(args.activationUrl)}" style="display:inline-block;background:#E8650A;color:#fff;padding:12px 20px;border-radius:6px;text-decoration:none;font-weight:600;">Activate Psygil now</a>
+  <a href="${escapeHtml(args.activationUrl)}" style="display:inline-block;background:#E8650A;color:#fff;padding:12px 20px;border-radius:6px;text-decoration:none;font-weight:600;">Activate Boreas Workflow now</a>
 </p>
 
 <p style="margin:20px 0;">
   <a href="${escapeHtml(args.installerUrl)}" style="display:inline-block;background:#111;color:#fff;padding:12px 20px;border-radius:6px;text-decoration:none;font-weight:600;">Download installer</a>
 </p>
 
-<p style="color:#666;font-size:12px;">The installer link expires in ${escapeHtml(ttlDays)} days. If it expires, write to support@psygil.com and we will issue a new one.</p>
+<p style="color:#666;font-size:12px;">The installer link expires in ${escapeHtml(ttlDays)} days. If it expires, write to support@boreasworkflow.com and we will issue a new one.</p>
 
 <p style="color:#666;font-size:12px;margin-top:24px;">Foundry SMB LLC, Colorado, United States</p>
 </body></html>`;

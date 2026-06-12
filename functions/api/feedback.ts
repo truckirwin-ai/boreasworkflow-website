@@ -25,8 +25,8 @@ interface FeedbackPayload {
   company?: string;
 }
 
-const DEFAULT_FROM = 'Psygil Feedback <feedback@psygil.com>';
-const DEFAULT_TO = 'feedback@psygil.com';
+const DEFAULT_FROM = 'Boreas Workflow Feedback <feedback@boreasworkflow.com>';
+const DEFAULT_TO = 'feedback@boreasworkflow.com';
 const MAX_BODY_BYTES = 32 * 1024;
 const RATE_LIMIT_WINDOW_SECONDS = 3600;
 const RATE_LIMIT_MAX = 5;

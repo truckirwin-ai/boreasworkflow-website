@@ -1,13 +1,13 @@
 // Cloudflare Pages Function: POST /api/support
 //
 // Validates a support form submission, rejects honeypot hits, rate-limits by
-// IP, and forwards the ticket to support@psygil.com via Resend. The submitter's
+// IP, and forwards the ticket to support@boreasworkflow.com via Resend. The submitter's
 // email address is set as reply-to so support can reply directly from inbox.
 //
 // Bindings configured on the Pages project:
 //   - Secret: RESEND_API_KEY
-//   - Optional env var: SUPPORT_FROM_EMAIL (defaults to "Psygil Support <support@psygil.com>")
-//   - Optional env var: SUPPORT_TO_EMAIL   (defaults to "support@psygil.com")
+//   - Optional env var: SUPPORT_FROM_EMAIL (defaults to "Boreas Workflow Support <support@boreasworkflow.com>")
+//   - Optional env var: SUPPORT_TO_EMAIL   (defaults to "support@boreasworkflow.com")
 //   - Optional KV namespace binding: RATE_LIMIT (for per-IP rate limiting)
 
 interface Env {
@@ -36,8 +36,8 @@ interface ResendSendArgs {
   text: string;
 }
 
-const DEFAULT_FROM = 'Psygil Support <support@psygil.com>';
-const DEFAULT_TO = 'support@psygil.com';
+const DEFAULT_FROM = 'Boreas Workflow Support <support@boreasworkflow.com>';
+const DEFAULT_TO = 'support@boreasworkflow.com';
 const MAX_BODY_BYTES = 32 * 1024;
 const RATE_LIMIT_WINDOW_SECONDS = 3600;
 const RATE_LIMIT_MAX = 5;
