@@ -17,7 +17,8 @@ app.post('/', async (c) => {
   try {
     event = await stripe.webhooks.constructEventAsync(raw, sig, c.env.STRIPE_WEBHOOK_SECRET);
   } catch (err) {
-    return c.json({ error: 'bad_signature', detail: String(err) }, 400);
+    console.error('webhook_bad_signature', err);
+    return c.json({ error: 'bad_signature' }, 400);
   }
 
   try {
@@ -40,7 +41,7 @@ app.post('/', async (c) => {
     }
   } catch (err) {
     console.error('webhook_handler_failed', event.type, err);
-    return c.json({ error: 'handler_failed', detail: String(err) }, 500);
+    return c.json({ error: 'handler_failed' }, 500);
   }
 
   return c.json({ received: true });

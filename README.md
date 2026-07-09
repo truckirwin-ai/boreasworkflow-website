@@ -30,6 +30,28 @@ python3 -m http.server 8080
 
 Serve the public directory (cd public, then python3 -m http.server 8080) and open http://localhost:8080/ in a browser.
 
+## Transcript pipeline
+
+Use the media CLI for video and audio files. It extracts audio with `ffmpeg`, sends the normalized audio to the transcription API, and writes one transcript per input file.
+
+```
+OPENAI_API_KEY=... node scripts/transcribe-media.mjs reel-first-video.mp4
+```
+
+Defaults:
+
+- Audio is normalized to 16 kHz mono M4A before transcription.
+- Outputs land in `./transcripts/` as `.txt` files unless you pass `--format json`.
+- Directory inputs are expanded to supported media files and processed with bounded concurrency.
+
+Examples:
+
+```
+node scripts/transcribe-media.mjs -o transcripts ./clips
+node scripts/transcribe-media.mjs --format json reel-first-video.mp4
+TRANSCRIBE_CONCURRENCY=4 node scripts/transcribe-media.mjs clip1.mp4 clip2.mov
+```
+
 ## Deploy to Cloudflare Pages
 
 1. Push this repository to GitHub (new repo, separate from the app repo).

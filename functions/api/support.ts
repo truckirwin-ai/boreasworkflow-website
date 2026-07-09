@@ -154,7 +154,13 @@ function isEmail(value: string): boolean {
 }
 
 async function checkRateLimit(env: Env, key: string): Promise<boolean> {
-  if (!env.RATE_LIMIT) return true;
+  if (!env.RATE_LIMIT) {
+    // Fail-open by design so a missing binding cannot take the form down, but
+    // that leaves this endpoint UNTHROTTLED. Production REQUIRES the RATE_LIMIT
+    // KV binding on the Pages project; surface the misconfiguration in logs.
+    console.warn('RATE_LIMIT KV namespace not bound; support form is unthrottled');
+    return true;
+  }
   const raw = await env.RATE_LIMIT.get(key);
   const count = raw ? Number(raw) : 0;
   if (count >= RATE_LIMIT_MAX) return false;

@@ -16,7 +16,11 @@ const app = new Hono<{ Bindings: Env }>();
 app.use('/api/*', cors({
   origin: (origin, c) => {
     const allow = new Set([c.env.APP_URL, 'https://boreasclinical.com', 'https://www.boreasclinical.com']);
-    return origin && allow.has(origin) ? origin : allow.values().next().value ?? '';
+    // Reflect the Origin only when it is allow-listed. For any other origin,
+    // return '' so no Access-Control-Allow-Origin header is emitted (rather than
+    // reflecting an unrelated allowed origin). The desktop app sends no Origin
+    // and is unaffected.
+    return origin && allow.has(origin) ? origin : '';
   },
   allowMethods: ['GET', 'POST', 'OPTIONS'],
   allowHeaders: ['Content-Type', 'Authorization', 'Stripe-Signature'],

@@ -26,21 +26,26 @@ app.get('/', async (c) => {
   try {
     session = await stripe.checkout.sessions.retrieve(sessionId);
   } catch (err) {
-    return c.json({ error: 'unknown_session', detail: String(err) }, 404);
+    // Do not leak Stripe/internal error text to the caller.
+    console.error('fulfill_session_retrieve_failed', err);
+    return c.json({ error: 'unknown_session' }, 404);
   }
 
   try {
     const result = await fulfillPaidCheckout(c.env, stripe, session);
+    // Note: this endpoint is reachable by anyone holding the (high-entropy)
+    // session_id, which appears in the /thanks URL. Return only what the success
+    // page needs to render the license; omit customer_email so a leaked
+    // session_id does not also disclose the buyer's email address.
     return c.json({
       tier: result.tier,
       tokens: result.tokens,
       installers: result.installers,
       portal_url: result.portal_url,
-      customer_email: result.customer_email,
     });
   } catch (err) {
     console.error('fulfill_failed', err);
-    return c.json({ error: 'fulfillment_failed', detail: String(err) }, 500);
+    return c.json({ error: 'fulfillment_failed' }, 500);
   }
 });
 

@@ -29,7 +29,8 @@ app.post('/', async (c) => {
   try {
     claims = await verifyLicenseJwt(c.env, body.jwt);
   } catch (err) {
-    return c.json({ error: 'invalid_jwt', detail: String(err) }, 401);
+    console.error('refresh_invalid_jwt', err);
+    return c.json({ error: 'invalid_jwt' }, 401);
   }
 
   if (claims.fp !== body.device_fingerprint) {

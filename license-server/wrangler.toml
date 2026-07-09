@@ -3,16 +3,17 @@ main = "src/index.ts"
 compatibility_date = "2025-01-01"
 compatibility_flags = ["nodejs_compat"]
 
-# Route the Worker on your license subdomain, e.g. api.boreasclinical.com
-# Uncomment after DNS is in place.
-# routes = [
-#   { pattern = "api.boreasclinical.com/*", zone_name = "boreasclinical.com" }
-# ]
+# Serve the Worker on the API subdomain. custom_domain = true makes Cloudflare
+# auto-provision the DNS record and TLS cert (requires boreasclinical.com to be
+# a zone on this Cloudflare account).
+routes = [
+  { pattern = "api.boreasclinical.com", custom_domain = true }
+]
 
 [[d1_databases]]
 binding = "DB"
 database_name = "boreasclinical-license"
-database_id = "REPLACE_WITH_D1_DATABASE_ID"
+database_id = "582ca151-dc5e-4ccf-8359-966e3094b94b"
 
 [[r2_buckets]]
 binding = "INSTALLERS"
