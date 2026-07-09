@@ -48,12 +48,15 @@ export async function fulfillPaidCheckout(
     throw new Error(`session_not_paid: ${session.payment_status}`);
   }
 
-  const tier = (session.metadata?.tier ?? 'solo') as PaidTier;
   const convertSeatSubId = session.metadata?.convert_seat_sub_id ?? null;
 
   const subId = typeof session.subscription === 'string' ? session.subscription : session.subscription.id;
   const customerId = typeof session.customer === 'string' ? session.customer : session.customer.id;
   const stripeSub = await stripe.subscriptions.retrieve(subId);
+  // Sessions created by our checkout route carry metadata.tier; sessions from
+  // Stripe-hosted surfaces (pricing tables, payment links) do not, so fall
+  // back to inferring the tier from the subscription's price IDs.
+  const tier = (session.metadata?.tier as PaidTier | undefined) ?? inferTierFromItems(env, stripeSub);
   const email = session.customer_details?.email ?? session.customer_email ?? '';
   const seatLimit = computeSeatLimit(env, tier, stripeSub);
 
@@ -254,6 +257,17 @@ export function mapStripeStatus(s: Stripe.Subscription.Status): 'active' | 'past
     default:
       return 'canceled';
   }
+}
+
+export function inferTierFromItems(env: Env, sub: Stripe.Subscription): PaidTier {
+  const practicePrices = new Set([
+    env.STRIPE_PRICE_PRACTICE,
+    env.STRIPE_PRICE_PRACTICE_EXTRA_SEAT,
+    env.STRIPE_PRICE_PRACTICE_10,
+    env.STRIPE_PRICE_PRACTICE_15,
+    env.STRIPE_PRICE_PRACTICE_20,
+  ]);
+  return sub.items.data.some((i) => practicePrices.has(i.price.id)) ? 'practice' : 'solo';
 }
 
 function computeSeatLimit(env: Env, tier: PaidTier, sub: Stripe.Subscription): number {

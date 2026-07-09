@@ -3,7 +3,7 @@ import type Stripe from 'stripe';
 import type { Env, PaidTier } from '../types';
 import { stripeClient } from '../lib/stripe';
 import { defaultSeatLimit, logEvent, updateSubscription } from '../lib/db';
-import { fulfillPaidCheckout, mapStripeStatus } from '../lib/fulfillment';
+import { fulfillPaidCheckout, inferTierFromItems, mapStripeStatus } from '../lib/fulfillment';
 
 const app = new Hono<{ Bindings: Env }>();
 
@@ -48,7 +48,7 @@ app.post('/', async (c) => {
 });
 
 async function onSubscriptionChanged(env: Env, sub: Stripe.Subscription): Promise<void> {
-  const tier = (sub.metadata?.tier ?? 'solo') as PaidTier;
+  const tier = (sub.metadata?.tier as PaidTier | undefined) ?? inferTierFromItems(env, sub);
   const seatLimit = computeSeatLimit(env, tier, sub);
   const status = mapStripeStatus(sub.status);
 
