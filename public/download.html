@@ -11,7 +11,6 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css?v=202604271200">
-  <script async src="https://js.stripe.com/v3/pricing-table.js"></script>
 </head>
 <body>
 
@@ -65,16 +64,34 @@
       <a href="docs/boreasworkflow-roi-executive-memo.pdf" class="btn btn-secondary">Download ROI memo</a>
     </article>
 
-    <div class="section-title" style="margin-top: 8px;">
-      <span class="kicker">Founder's rate</span>
-      <h2>$199 / seat / month, locked for life</h2>
-      <p>Reserved for the first 100 Pro seats. The founder rate never increases for as long as your subscription remains active. Once the first 100 seats are claimed, the offer closes permanently.</p>
-    </div>
-
-    <stripe-pricing-table
-      pricing-table-id="prctbl_1TP8e8PAMoN03BadV3qwf22G"
-      publishable-key="pk_live_51TMACvPAMoN03BadkNSUuMih62R2sQiEDipTCqX3TlCCHFgezEuHivwZXkJxhUnf0pjs44E8KEfKBtX7msTQIyFb00wUK159Vg">
-    </stripe-pricing-table>
+    <article class="price-card practice-card">
+      <h3>Pro</h3>
+      <p class="tier-sub">Individual clinicians and small groups. 1 to 5 seats.</p>
+      <p class="tier-desc">The full forensic feature set: signed diagnostic gates, hash-chained audit trail, UNID local PHI redaction, report integrity hash, style-trained writer, 43 included assessments, local case workspace.</p>
+      <table style="width:100%; border-collapse:collapse; margin: 12px 0 16px;">
+        <tr>
+          <th style="text-align:left; padding:8px 10px; border-bottom:2px solid currentColor;">Plan</th>
+          <th style="text-align:left; padding:8px 10px; border-bottom:2px solid currentColor;">Price</th>
+          <th style="padding:8px 10px; border-bottom:2px solid currentColor;"></th>
+        </tr>
+        <tr>
+          <td style="padding:8px 10px;"><strong>Founder's rate</strong>, locked for life. First 100 seats only.</td>
+          <td style="padding:8px 10px; white-space:nowrap;"><strong>$199</strong> / seat / month</td>
+          <td style="padding:8px 10px; text-align:right;"><button type="button" class="btn btn-primary buy-solo" data-plan="founder">Claim founder rate</button></td>
+        </tr>
+        <tr>
+          <td style="padding:8px 10px;">Pro monthly</td>
+          <td style="padding:8px 10px; white-space:nowrap;"><strong>$299</strong> / seat / month</td>
+          <td style="padding:8px 10px; text-align:right;"><button type="button" class="btn btn-secondary buy-solo" data-plan="monthly">Buy monthly</button></td>
+        </tr>
+        <tr>
+          <td style="padding:8px 10px;">Pro annual, 2 months free</td>
+          <td style="padding:8px 10px; white-space:nowrap;"><strong>$2,990</strong> / seat / year</td>
+          <td style="padding:8px 10px; text-align:right;"><button type="button" class="btn btn-secondary buy-solo" data-plan="annual">Buy annual</button></td>
+        </tr>
+      </table>
+      <p class="tier-desc">The founder rate never increases for as long as your subscription remains active. Once the first 100 seats are claimed, the offer closes permanently.</p>
+    </article>
 
     <article class="price-card practice-card">
       <h3>Practice</h3>
@@ -202,33 +219,40 @@
 <script>
 document.getElementById('year').textContent = new Date().getFullYear();
 
-// Practice block self-serve checkout. Falls back to the sales mailto if the
-// checkout endpoint is unavailable or the block prices are not yet configured.
+// Self-serve checkout for Pro plans and Practice blocks. Falls back to the
+// sales mailto if the checkout endpoint is unavailable or unconfigured.
 (function () {
-  var SALES_FALLBACK = 'mailto:sales@boreasworkflow.com?subject=Boreas%20Workflow%20Practice%20license';
-  document.querySelectorAll('.buy-block').forEach(function (btn) {
-    btn.addEventListener('click', function () {
-      var block = parseInt(btn.getAttribute('data-block'), 10);
-      btn.disabled = true;
-      var label = btn.textContent;
-      btn.textContent = 'Redirecting…';
-      fetch('site-config.json')
-        .then(function (r) { return r.json(); })
-        .then(function (cfg) {
-          return fetch(cfg.api_base + '/api/checkout', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ tier: 'practice', block: block })
-          });
-        })
-        .then(function (r) { return r.json().then(function (j) { return { ok: r.ok, j: j }; }); })
-        .then(function (res) {
-          if (res.ok && res.j && res.j.url) { window.location.href = res.j.url; return; }
-          window.location.href = SALES_FALLBACK;
-        })
-        .catch(function () { window.location.href = SALES_FALLBACK; })
-        .finally(function () { btn.disabled = false; btn.textContent = label; });
+  var SALES_FALLBACK = 'mailto:sales@boreasworkflow.com?subject=Boreas%20Workflow%20license';
+  function wire(selector, payloadFor) {
+    document.querySelectorAll(selector).forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        btn.disabled = true;
+        var label = btn.textContent;
+        btn.textContent = 'Redirecting…';
+        fetch('site-config.json')
+          .then(function (r) { return r.json(); })
+          .then(function (cfg) {
+            return fetch(cfg.api_base + '/api/checkout', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify(payloadFor(btn))
+            });
+          })
+          .then(function (r) { return r.json().then(function (j) { return { ok: r.ok, j: j }; }); })
+          .then(function (res) {
+            if (res.ok && res.j && res.j.url) { window.location.href = res.j.url; return; }
+            window.location.href = SALES_FALLBACK;
+          })
+          .catch(function () { window.location.href = SALES_FALLBACK; })
+          .finally(function () { btn.disabled = false; btn.textContent = label; });
+      });
     });
+  }
+  wire('.buy-solo', function (btn) {
+    return { tier: 'solo', plan: btn.getAttribute('data-plan') };
+  });
+  wire('.buy-block', function (btn) {
+    return { tier: 'practice', block: parseInt(btn.getAttribute('data-block'), 10) };
   });
 })();
 </script>

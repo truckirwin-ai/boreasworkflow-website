@@ -15,6 +15,9 @@ export interface Env {
   STRIPE_SECRET_KEY: string;
   STRIPE_WEBHOOK_SECRET: string;
   STRIPE_PRICE_SOLO: string;
+  // Pricing v2 solo variants: founder lifetime rate and annual prepay.
+  STRIPE_PRICE_SOLO_FOUNDER: string;
+  STRIPE_PRICE_SOLO_ANNUAL: string;
   STRIPE_PRICE_PRACTICE: string;
   STRIPE_PRICE_PRACTICE_EXTRA_SEAT: string;
   // Practice block licensing: flat monthly blocks of up to 10/15/20 seats.

@@ -25,6 +25,7 @@ app.post('/', async (c) => {
     tier: PaidTier;
     seats?: number;
     block?: 10 | 15 | 20;
+    plan?: 'founder' | 'monthly' | 'annual';
     convert_from_sub_id?: string;
   }>().catch(() => null);
 
@@ -35,7 +36,17 @@ app.post('/', async (c) => {
 
   const line_items: { price: string; quantity: number }[] = [];
   if (body.tier === 'solo') {
-    line_items.push({ price: c.env.STRIPE_PRICE_SOLO, quantity: 1 });
+    // Solo plan variants: founder lifetime rate, standard monthly, annual prepay.
+    const soloPrices: Record<string, string | undefined> = {
+      founder: c.env.STRIPE_PRICE_SOLO_FOUNDER,
+      monthly: c.env.STRIPE_PRICE_SOLO,
+      annual: c.env.STRIPE_PRICE_SOLO_ANNUAL,
+    };
+    const plan = body.plan ?? 'monthly';
+    if (!(plan in soloPrices)) return c.json({ error: 'bad_request' }, 400);
+    const price = soloPrices[plan];
+    if (!price) return c.json({ error: 'solo_plan_not_configured' }, 503);
+    line_items.push({ price, quantity: 1 });
   } else if (body.block !== undefined) {
     // Practice block licensing: one flat-rate line item per block of up to
     // 10/15/20 seats. Self-serve alternative to the sales path.
@@ -83,7 +94,8 @@ app.post('/', async (c) => {
     cancel_url: `${c.env.APP_URL}/pricing`,
     allow_promotion_codes: true,
     billing_address_collection: 'required',
-    customer_creation: 'always',
+    // Note: customer_creation is payment-mode only; subscription mode always
+    // creates a customer.
     customer_email: prefillEmail,
     metadata,
     subscription_data: { metadata },
