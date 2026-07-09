@@ -24,6 +24,7 @@ app.post('/', async (c) => {
   const body = await c.req.json<{
     tier: PaidTier;
     seats?: number;
+    block?: 10 | 15 | 20;
     convert_from_sub_id?: string;
   }>().catch(() => null);
 
@@ -35,6 +36,22 @@ app.post('/', async (c) => {
   const line_items: { price: string; quantity: number }[] = [];
   if (body.tier === 'solo') {
     line_items.push({ price: c.env.STRIPE_PRICE_SOLO, quantity: 1 });
+  } else if (body.block !== undefined) {
+    // Practice block licensing: one flat-rate line item per block of up to
+    // 10/15/20 seats. Self-serve alternative to the sales path.
+    const blockPrices: Record<number, string | undefined> = {
+      10: c.env.STRIPE_PRICE_PRACTICE_10,
+      15: c.env.STRIPE_PRICE_PRACTICE_15,
+      20: c.env.STRIPE_PRICE_PRACTICE_20,
+    };
+    const price = blockPrices[body.block];
+    if (body.block !== 10 && body.block !== 15 && body.block !== 20) {
+      return c.json({ error: 'bad_request' }, 400);
+    }
+    if (!price) {
+      return c.json({ error: 'practice_block_not_configured' }, 503);
+    }
+    line_items.push({ price, quantity: 1 });
   } else {
     line_items.push({ price: c.env.STRIPE_PRICE_PRACTICE, quantity: 1 });
     const extra = Math.max(0, (body.seats ?? 5) - 5);

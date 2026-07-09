@@ -77,7 +77,11 @@ function computeSeatLimit(env: Env, tier: PaidTier, sub: Stripe.Subscription): n
   let extras = 0;
   for (const item of sub.items.data) {
     const q = item.quantity ?? 0;
-    if (item.price.id === env.STRIPE_PRICE_PRACTICE) base += 5 * q;
+    // Practice block licensing: a block line item sets the seat cap directly.
+    if (item.price.id === env.STRIPE_PRICE_PRACTICE_10) base += 10 * q;
+    else if (item.price.id === env.STRIPE_PRICE_PRACTICE_15) base += 15 * q;
+    else if (item.price.id === env.STRIPE_PRICE_PRACTICE_20) base += 20 * q;
+    else if (item.price.id === env.STRIPE_PRICE_PRACTICE) base += 5 * q;
     else if (item.price.id === env.STRIPE_PRICE_PRACTICE_EXTRA_SEAT) extras += q;
   }
   return (base || 5) + extras;

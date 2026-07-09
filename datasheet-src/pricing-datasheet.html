@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Boreas Workflow Pricing Datasheet</title>
+<style>
+  @page { size: letter; margin: 0; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  :root {
+    --ink: #1a2530;
+    --muted: #5b6b7a;
+    --blue-deep: #042433;
+    --blue-mid: #163e64;
+    --blue-bright: #0b76a0;
+    --paper: #ffffff;
+    --panel: #f4f7f9;
+    --line: #dde5ea;
+    --accent-soft: #e8f2f7;
+  }
+  html, body { font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; color: var(--ink); background: var(--paper); font-size: 10.5px; line-height: 1.45; }
+  .page { width: 8.5in; height: 11in; position: relative; padding: 0.55in 0.6in 0.7in; page-break-after: always; }
+  .page:last-child { page-break-after: avoid; }
+
+  .topbar { position: absolute; top: 0; left: 0; right: 0; height: 0.34in; background: var(--blue-deep); color: #fff; display: flex; align-items: center; justify-content: space-between; padding: 0 0.6in; font-size: 9px; letter-spacing: 0.08em; }
+  .topbar .brand { font-weight: 700; letter-spacing: 0.14em; }
+  .footer { position: absolute; bottom: 0.3in; left: 0.6in; right: 0.6in; border-top: 1px solid var(--line); padding-top: 6px; display: flex; justify-content: space-between; font-size: 8.5px; color: var(--muted); }
+
+  h1 { font-size: 30px; font-weight: 800; margin: 26px 0 4px; color: var(--blue-deep); }
+  .lede { color: var(--muted); font-size: 11.5px; max-width: 6.6in; margin-bottom: 16px; }
+  .kicker { font-size: 8.5px; font-weight: 700; letter-spacing: 0.14em; color: var(--blue-bright); text-transform: uppercase; margin: 14px 0 6px; }
+
+  .founder { display: flex; border: 2px solid var(--blue-bright); border-radius: 6px; overflow: hidden; margin: 10px 0 16px; }
+  .founder .tag { background: var(--blue-bright); color: #fff; font-weight: 800; font-size: 10px; letter-spacing: 0.08em; display: flex; align-items: center; padding: 10px 14px; text-transform: uppercase; text-align: center; line-height: 1.3; }
+  .founder .body { padding: 10px 14px; background: var(--accent-soft); }
+  .founder .body strong.head { font-size: 13px; display: block; margin-bottom: 2px; color: var(--blue-deep); }
+
+  .plans { display: flex; gap: 10px; }
+  .plan { flex: 1; border: 1px solid var(--line); border-radius: 6px; padding: 12px 13px; }
+  .plan.featured { border: 2px solid var(--blue-bright); background: var(--accent-soft); }
+  .plan h3 { font-size: 15px; color: var(--blue-deep); }
+  .plan .who { color: var(--muted); font-size: 9px; margin-bottom: 8px; }
+  .plan .price { font-size: 19px; font-weight: 800; color: var(--blue-bright); line-height: 1.1; }
+  .plan .per { font-size: 9px; color: var(--muted); margin-bottom: 8px; }
+  .plan .inc { font-size: 8.5px; font-weight: 700; letter-spacing: 0.1em; color: var(--muted); text-transform: uppercase; margin: 8px 0 4px; }
+  .plan ul { list-style: none; }
+  .plan li { padding-left: 11px; position: relative; margin-bottom: 3px; font-size: 9.5px; }
+  .plan li::before { content: ""; position: absolute; left: 0; top: 5px; width: 5px; height: 5px; background: var(--blue-bright); transform: rotate(45deg); }
+
+  table.blocks { width: 100%; border-collapse: collapse; margin: 6px 0 2px; font-size: 9.5px; }
+  table.blocks th { text-align: left; background: var(--blue-deep); color: #fff; padding: 5px 8px; font-size: 8.5px; letter-spacing: 0.06em; text-transform: uppercase; }
+  table.blocks td { padding: 5px 8px; border-bottom: 1px solid var(--line); }
+  table.blocks td.num { font-weight: 700; color: var(--blue-deep); white-space: nowrap; }
+
+  .duo { display: flex; gap: 10px; margin-top: 14px; }
+  .duo .box { flex: 1; background: var(--panel); border-radius: 6px; padding: 11px 13px; }
+  .duo .box h4 { font-size: 11px; margin-bottom: 4px; color: var(--blue-deep); }
+  .duo .box p { font-size: 9.5px; color: var(--muted); }
+
+  h2 { font-size: 19px; font-weight: 800; color: var(--blue-deep); margin: 4px 0 10px; }
+  table.addons { width: 100%; border-collapse: collapse; font-size: 9.5px; margin-bottom: 4px; }
+  table.addons th { text-align: left; background: var(--blue-deep); color: #fff; padding: 6px 9px; font-size: 8.5px; letter-spacing: 0.06em; text-transform: uppercase; }
+  table.addons th:last-child, table.addons td:last-child { text-align: right; white-space: nowrap; font-weight: 700; }
+  table.addons td { padding: 6px 9px; border-bottom: 1px solid var(--line); vertical-align: top; }
+  table.addons td:last-child { color: var(--blue-bright); }
+  table.addons td:first-child { font-weight: 700; width: 1.75in; }
+
+  .terms p { font-size: 9.5px; margin-bottom: 7px; }
+  .terms strong { color: var(--blue-deep); }
+  .contact { width: 100%; border-collapse: collapse; font-size: 10px; margin-top: 6px; }
+  .contact td { padding: 4px 0; }
+  .contact td:first-child { font-weight: 700; width: 2.2in; color: var(--blue-deep); }
+</style>
+</head>
+<body>
+
+<div class="page">
+  <div class="topbar"><span class="brand">BOREAS WORKFLOW</span><span>PRICING DATASHEET &middot; JULY 2026 &middot; v2.0</span></div>
+
+  <h1>Pricing</h1>
+  <p class="lede">Clinical and forensic workflow software for psychologists, by Boreas Clinical Systems. Per-seat licensing. Local install. The full forensic feature set is included on every tier.</p>
+
+  <div class="founder">
+    <div class="tag">Founder's<br>Rate</div>
+    <div class="body">
+      <strong class="head">$199 / seat / month, locked for life</strong>
+      Reserved for the first 100 Pro seats. The founder rate never increases for as long as the subscription remains active. Once the first 100 seats are claimed, the offer closes permanently.
+    </div>
+  </div>
+
+  <div class="kicker">Plans</div>
+  <div class="plans">
+    <div class="plan">
+      <h3>Pro</h3>
+      <div class="who">Individual clinicians and small groups. 1 to 5 seats.</div>
+      <div class="price">$299 / seat / month</div>
+      <div class="per">or $2,990 / seat / year, 2 months free</div>
+      <div class="inc">Included</div>
+      <ul>
+        <li>Clinician-signed diagnostic gates</li>
+        <li>Hash-chained audit trail</li>
+        <li>UNID local PHI redaction</li>
+        <li>Report integrity hash</li>
+        <li>Style-trained writer and review assistant</li>
+        <li>43 included assessments</li>
+        <li>Custom assessment imports (5/yr)</li>
+        <li>Local case workspace</li>
+        <li>Email support</li>
+        <li>10-day free trial</li>
+      </ul>
+    </div>
+    <div class="plan featured">
+      <h3>Practice</h3>
+      <div class="who">Group practices. Block licensing, buy online or with sales.</div>
+      <table class="blocks">
+        <tr><th>Block</th><th>Monthly</th><th>Effective</th></tr>
+        <tr><td>Up to 10 seats</td><td class="num">$2,500</td><td>$250 / seat</td></tr>
+        <tr><td>Up to 15 seats</td><td class="num">$3,600</td><td>$240 / seat</td></tr>
+        <tr><td>Up to 20 seats</td><td class="num">$4,500</td><td>$225 / seat</td></tr>
+      </table>
+      <div class="inc">Everything in Pro, plus</div>
+      <ul>
+        <li>Practice admin role and dashboard</li>
+        <li>Practice-wide audit views</li>
+        <li>Shared template and style library</li>
+        <li>Centralized billing and licensing</li>
+        <li>Cross-clinician peer review (v1.1)</li>
+        <li>Priority email support</li>
+        <li>Onboarding session (90 min)</li>
+        <li>BAA included on request</li>
+      </ul>
+    </div>
+    <div class="plan">
+      <h3>Enterprise</h3>
+      <div class="who">Hospitals, agencies, courts. More than 20 seats.</div>
+      <div class="price">$5,000 / month</div>
+      <div class="per">includes 20 seats &middot; $200 / seat / month beyond 20 &middot; $5,000 one-time setup</div>
+      <div class="inc">Everything in Practice, plus</div>
+      <ul>
+        <li>Custom deployment (MDM, on-prem fleet)</li>
+        <li>SSO / SAML</li>
+        <li>Custom Business Associate Agreement</li>
+        <li>Dedicated implementation manager</li>
+        <li>Unlimited custom assessment imports</li>
+        <li>SLA with response targets</li>
+        <li>Annual training programs</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="duo">
+    <div class="box">
+      <h4>Annual prepay</h4>
+      <p>Pay 12 months up front on Pro and get 2 months free, about 16.7% off the monthly rate. Annual terms for Practice blocks and Enterprise are arranged with sales.</p>
+    </div>
+    <div class="box">
+      <h4>Free trial</h4>
+      <p>10-day trial with the full feature set, no credit card. Synthetic test cases are included so evaluation never requires PHI. Trial extensions are honored for institutional procurement timelines.</p>
+    </div>
+  </div>
+
+  <div class="footer"><span>Boreas Clinical Systems &middot; Colorado, United States &middot; sales@boreasworkflow.com</span><span>Page 1</span></div>
+</div>
+
+<div class="page">
+  <div class="topbar"><span class="brand">BOREAS WORKFLOW</span><span>PRICING DATASHEET &middot; JULY 2026 &middot; v2.0</span></div>
+
+  <div class="kicker">Add-ons</div>
+  <h2>Optional services and capabilities</h2>
+  <table class="addons">
+    <tr><th>Add-on</th><th>Description</th><th>Price</th></tr>
+    <tr><td>Additional assessment imports</td><td>Beyond the included allowance (Pro: 5/yr; Practice: 15/yr).</td><td>$99 per instrument</td></tr>
+    <tr><td>Extended case retention</td><td>Forensic case archive retention beyond the standard 7 years.</td><td>$19 / month per case-year</td></tr>
+    <tr><td>White-glove migration</td><td>Structured migration from an existing report tool, including style profile training on prior reports.</td><td>$1,500 one-time per practice</td></tr>
+    <tr><td>Expert witness prep package</td><td>Training plus templates for testimony defense and Daubert response.</td><td>$499 one-time per clinician</td></tr>
+    <tr><td>Custom forensic template</td><td>Custom report template development for a jurisdiction or case type.</td><td>$1,200 per template</td></tr>
+  </table>
+
+  <div class="kicker">Terms &amp; Assumptions</div>
+  <h2>How this pricing works</h2>
+  <div class="terms">
+    <p><strong>Founder's rate.</strong> The $199 / seat / month founder rate is reserved for the first 100 Pro seats. The rate is locked for the life of the subscription and never increases while the subscription remains active. The founder rate is per individual subscriber and is not transferable. Once the first 100 seats are claimed, the offer closes.</p>
+    <p><strong>Practice block licensing.</strong> Practice is sold in blocks of up to 10, 15, or 20 seats at a flat monthly rate. Blocks can be purchased self-serve at boreasworkflow.com/download or arranged through sales. A growing practice buys the block it is growing into; unused seats in a block carry no penalty and activate at no additional charge. Moving between blocks takes effect at the next billing cycle.</p>
+    <p><strong>Enterprise.</strong> $5,000 one-time setup, then $5,000 per month covering the first 20 seats, plus $200 per seat per month beyond 20. Annual or multi-year contract with volume terms negotiated for large fleets.</p>
+    <p><strong>Pricing currency.</strong> All prices in US dollars. International pricing available on request.</p>
+    <p><strong>Effective period.</strong> Pricing effective from issue date and subject to change with sixty days written notice. Existing customers are grandfathered for the term of their current contract.</p>
+    <p><strong>Forensic capability.</strong> Every tier includes the full forensic workflow: signed diagnostic gates, hash-chained audit, report integrity hash, exportable testimony folder. There is no separate forensic-only SKU.</p>
+    <p><strong>Deployment.</strong> Local install across all tiers. The case workspace lives on the clinician's machine. Cloud-managed SaaS variants are not available. Enterprise customers can request MDM-friendly deployment or on-premise fleet management.</p>
+    <p><strong>Model access.</strong> Boreas Workflow uses your own Anthropic, OpenAI, or Azure OpenAI key. Your key, your data path: case content is never proxied through a Boreas-operated server and inference is never marked up.</p>
+    <p><strong>Compliance.</strong> A Business Associate Agreement is available on Practice and Enterprise tiers. Pro customers operate under standard terms with local PHI custody.</p>
+    <p><strong>Trial conversion.</strong> Trial accounts convert to a paid tier at any point in the 10-day window. Trial extension requests are honored for institutional procurement timelines.</p>
+  </div>
+
+  <div class="kicker">Contact</div>
+  <h2>How to engage</h2>
+  <table class="contact">
+    <tr><td>Pro or Practice purchase</td><td>boreasworkflow.com/download &middot; self-serve</td></tr>
+    <tr><td>Practice or Enterprise sales</td><td>sales@boreasworkflow.com</td></tr>
+    <tr><td>Support</td><td>support@boreasworkflow.com</td></tr>
+    <tr><td>General enquiry</td><td>contact@boreasworkflow.com</td></tr>
+  </table>
+
+  <div class="footer"><span>Boreas Clinical Systems &middot; Colorado, United States &middot; sales@boreasworkflow.com</span><span>Page 2</span></div>
+</div>
+
+</body>
+</html>

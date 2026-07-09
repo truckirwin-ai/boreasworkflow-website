@@ -17,6 +17,10 @@ export interface Env {
   STRIPE_PRICE_SOLO: string;
   STRIPE_PRICE_PRACTICE: string;
   STRIPE_PRICE_PRACTICE_EXTRA_SEAT: string;
+  // Practice block licensing: flat monthly blocks of up to 10/15/20 seats.
+  STRIPE_PRICE_PRACTICE_10: string;
+  STRIPE_PRICE_PRACTICE_15: string;
+  STRIPE_PRICE_PRACTICE_20: string;
   RESEND_API_KEY: string;
   RESEND_FROM_EMAIL: string;
   LICENSE_SIGNING_KEY_PRIVATE: string;
