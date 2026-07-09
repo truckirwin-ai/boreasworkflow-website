@@ -11,6 +11,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css?v=202604271200">
+  <script async src="https://js.stripe.com/v3/pricing-table.js"></script>
 </head>
 <body>
 
@@ -64,60 +65,16 @@
       <a href="docs/boreasworkflow-roi-executive-memo.pdf" class="btn btn-secondary">Download ROI memo</a>
     </article>
 
-    <article class="price-card practice-card">
-      <h3>Pro</h3>
-      <p class="tier-sub">Individual clinicians and small groups. 1 to 5 seats.</p>
-      <p class="tier-desc">The full forensic feature set: signed diagnostic gates, hash-chained audit trail, UNID local PHI redaction, report integrity hash, style-trained writer, 43 included assessments, local case workspace.</p>
-      <table style="width:100%; border-collapse:collapse; margin: 12px 0 16px;">
-        <tr>
-          <th style="text-align:left; padding:8px 10px; border-bottom:2px solid currentColor;">Plan</th>
-          <th style="text-align:left; padding:8px 10px; border-bottom:2px solid currentColor;">Price</th>
-          <th style="padding:8px 10px; border-bottom:2px solid currentColor;"></th>
-        </tr>
-        <tr>
-          <td style="padding:8px 10px;"><strong>Founder's rate</strong>, locked for life. First 100 seats only.</td>
-          <td style="padding:8px 10px; white-space:nowrap;"><strong>$199</strong> / seat / month</td>
-          <td style="padding:8px 10px; text-align:right;"><button type="button" class="btn btn-primary buy-solo" data-plan="founder">Claim founder rate</button></td>
-        </tr>
-        <tr>
-          <td style="padding:8px 10px;">Pro monthly</td>
-          <td style="padding:8px 10px; white-space:nowrap;"><strong>$299</strong> / seat / month</td>
-          <td style="padding:8px 10px; text-align:right;"><button type="button" class="btn btn-secondary buy-solo" data-plan="monthly">Buy monthly</button></td>
-        </tr>
-        <tr>
-          <td style="padding:8px 10px;">Pro annual, 2 months free</td>
-          <td style="padding:8px 10px; white-space:nowrap;"><strong>$2,990</strong> / seat / year</td>
-          <td style="padding:8px 10px; text-align:right;"><button type="button" class="btn btn-secondary buy-solo" data-plan="annual">Buy annual</button></td>
-        </tr>
-      </table>
-      <p class="tier-desc">The founder rate never increases for as long as your subscription remains active. Once the first 100 seats are claimed, the offer closes permanently.</p>
-    </article>
+    <div class="section-title" style="margin-top: 8px;">
+      <span class="kicker">Founder's rate</span>
+      <h2>$199 / seat / month, locked for life</h2>
+      <p>Reserved for the first 100 Pro seats. The founder rate never increases for as long as your subscription remains active. Once the first 100 seats are claimed, the offer closes permanently. Pro annual saves 2 months. Practice blocks cover up to 10, 15, or 20 seats at a flat rate: buy online below or <a href="mailto:sales@boreasworkflow.com?subject=Boreas%20Workflow%20Practice%20license">talk to sales</a> for invoicing and annual terms.</p>
+    </div>
 
-    <article class="price-card practice-card">
-      <h3>Practice</h3>
-      <p class="tier-sub">Block licensing for group practices. Buy online or talk to sales.</p>
-      <p class="tier-desc">Flat monthly blocks with room to grow. Buy the block you are growing into; unused seats activate at no additional charge.</p>
-      <table style="width:100%; border-collapse:collapse; margin: 12px 0 16px;">
-        <tr>
-          <th style="text-align:left; padding:8px 10px; border-bottom:2px solid currentColor;">Block</th>
-          <th style="text-align:left; padding:8px 10px; border-bottom:2px solid currentColor;">Monthly</th>
-          <th style="text-align:left; padding:8px 10px; border-bottom:2px solid currentColor;">Effective per seat</th>
-          <th style="padding:8px 10px; border-bottom:2px solid currentColor;"></th>
-        </tr>
-        <tr><td style="padding:8px 10px;">Up to 10 seats</td><td style="padding:8px 10px;"><strong>$2,500</strong></td><td style="padding:8px 10px;">$250</td><td style="padding:8px 10px; text-align:right;"><button type="button" class="btn btn-secondary buy-block" data-block="10">Buy online</button></td></tr>
-        <tr><td style="padding:8px 10px;">Up to 15 seats</td><td style="padding:8px 10px;"><strong>$3,600</strong></td><td style="padding:8px 10px;">$240</td><td style="padding:8px 10px; text-align:right;"><button type="button" class="btn btn-secondary buy-block" data-block="15">Buy online</button></td></tr>
-        <tr><td style="padding:8px 10px;">Up to 20 seats</td><td style="padding:8px 10px;"><strong>$4,500</strong></td><td style="padding:8px 10px;">$225</td><td style="padding:8px 10px; text-align:right;"><button type="button" class="btn btn-secondary buy-block" data-block="20">Buy online</button></td></tr>
-      </table>
-      <ul>
-        <li>Everything in Pro on every seat.</li>
-        <li>Practice admin role, dashboard, and practice-wide audit views.</li>
-        <li>Shared templates and style profiles.</li>
-        <li>Centralized billing and licensing.</li>
-        <li>Onboarding session and priority support.</li>
-        <li>BAA included on request.</li>
-      </ul>
-      <a href="mailto:sales@boreasworkflow.com?subject=Boreas%20Workflow%20Practice%20license" class="btn btn-primary">Talk to sales about a Practice block</a>
-    </article>
+    <stripe-pricing-table
+      pricing-table-id="prctbl_1TrRfWPAMoN03BadYoikxUBa"
+      publishable-key="pk_live_51TMACvPAMoN03BadkNSUuMih62R2sQiEDipTCqX3TlCCHFgezEuHivwZXkJxhUnf0pjs44E8KEfKBtX7msTQIyFb00wUK159Vg">
+    </stripe-pricing-table>
 
     <article class="price-card practice-card">
       <h3>Enterprise</h3>
@@ -219,42 +176,7 @@
 <script>
 document.getElementById('year').textContent = new Date().getFullYear();
 
-// Self-serve checkout for Pro plans and Practice blocks. Falls back to the
-// sales mailto if the checkout endpoint is unavailable or unconfigured.
-(function () {
-  var SALES_FALLBACK = 'mailto:sales@boreasworkflow.com?subject=Boreas%20Workflow%20license';
-  function wire(selector, payloadFor) {
-    document.querySelectorAll(selector).forEach(function (btn) {
-      btn.addEventListener('click', function () {
-        btn.disabled = true;
-        var label = btn.textContent;
-        btn.textContent = 'Redirecting…';
-        fetch('site-config.json')
-          .then(function (r) { return r.json(); })
-          .then(function (cfg) {
-            return fetch(cfg.api_base + '/api/checkout', {
-              method: 'POST',
-              headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify(payloadFor(btn))
-            });
-          })
-          .then(function (r) { return r.json().then(function (j) { return { ok: r.ok, j: j }; }); })
-          .then(function (res) {
-            if (res.ok && res.j && res.j.url) { window.location.href = res.j.url; return; }
-            window.location.href = SALES_FALLBACK;
-          })
-          .catch(function () { window.location.href = SALES_FALLBACK; })
-          .finally(function () { btn.disabled = false; btn.textContent = label; });
-      });
-    });
-  }
-  wire('.buy-solo', function (btn) {
-    return { tier: 'solo', plan: btn.getAttribute('data-plan') };
-  });
-  wire('.buy-block', function (btn) {
-    return { tier: 'practice', block: parseInt(btn.getAttribute('data-block'), 10) };
-  });
-})();
+
 </script>
 
 </body>
