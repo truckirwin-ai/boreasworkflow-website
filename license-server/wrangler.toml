@@ -21,7 +21,7 @@ bucket_name = "boreasclinical-installers"
 
 [vars]
 ENVIRONMENT = "production"
-APP_URL = "https://boreasclinical.com"
+APP_URL = "https://www.boreasworkflow.com"
 INSTALLER_URL_TTL_SECONDS = "86400"
 JWT_TTL_SECONDS = "604800"
 TRIAL_DAYS = "10"
