@@ -43,7 +43,7 @@ export async function buildInstallerUrls(env: Env, email: string): Promise<Recor
   const out: Record<string, string> = {};
   for (const platform of platforms) {
     const token = await signDownloadToken(env, { platform, email, expires });
-    out[platform] = `${env.APP_URL}/download/${platform}?t=${token}&e=${expires}`;
+    out[platform] = `${env.APP_URL}/download/${platform}?t=${token}&e=${expires}&email=${encodeURIComponent(email)}`;
   }
   return out;
 }

@@ -101,7 +101,7 @@ export async function fulfillPaidCheckout(
     tokens = seats.map((s) => s.seat_token);
     // If the new tier has more seats than the trial had, add more tokens to reach seat_limit.
     while (tokens.length < seatLimit) {
-      const t = generateSeatToken();
+      const t = generateSeatToken(tier);
       await createSeats(env, subId, [t]);
       tokens.push(t);
     }
@@ -109,7 +109,7 @@ export async function fulfillPaidCheckout(
       detail: `trial=${convertSeatSubId} paid=${subId} tier=${tier}`,
     });
   } else {
-    tokens = Array.from({ length: seatLimit }, () => generateSeatToken());
+    tokens = Array.from({ length: seatLimit }, () => generateSeatToken(tier));
     await createSeats(env, subId, tokens);
   }
 
@@ -118,13 +118,19 @@ export async function fulfillPaidCheckout(
     createPortalUrl(stripe, env, customerId),
   ]);
 
-  await maybeSendFulfillmentEmail(env, subId, {
-    tier,
-    customer_email: email,
-    tokens,
-    installers,
-    portal_url: portal ?? `${env.APP_URL}/account`,
-  });
+  try {
+    await maybeSendFulfillmentEmail(env, subId, {
+      tier,
+      customer_email: email,
+      tokens,
+      installers,
+      portal_url: portal ?? `${env.APP_URL}/account`,
+    });
+  } catch (err) {
+    // Email is best-effort: the key and download links are returned in the
+    // response and shown in the UI. Log and continue so fulfillment succeeds.
+    await logEvent(env, 'email_failed', { detail: `sub=${subId} err=${String(err).slice(0, 300)}` });
+  }
 
   await logEvent(env, 'fulfilled', {
     detail: `sub=${subId} tier=${tier} seats=${seatLimit} email=${email}${convertSeatSubId ? ` converted_from=${convertSeatSubId}` : ''}`,
@@ -168,18 +174,22 @@ export async function startTrial(
 
   if (!claim.created) throw new Error('trial_claim_race');
 
-  const tokens = [generateSeatToken()];
+  const tokens = [generateSeatToken('trial')];
   await createSeats(env, trialId, tokens);
 
   const installers = await buildInstallerUrls(env, args.email);
 
-  await maybeSendFulfillmentEmail(env, trialId, {
-    tier: 'trial',
-    customer_email: args.email,
-    tokens,
-    installers,
-    portal_url: `${env.APP_URL}/account`,
-  });
+  try {
+    await maybeSendFulfillmentEmail(env, trialId, {
+      tier: 'trial',
+      customer_email: args.email,
+      tokens,
+      installers,
+      portal_url: `${env.APP_URL}/account`,
+    });
+  } catch (err) {
+    await logEvent(env, 'email_failed', { detail: `sub=${trialId} err=${String(err).slice(0, 300)}` });
+  }
 
   await logEvent(env, 'trial_started', {
     detail: `trial=${trialId} email=${args.email} ends=${trialEndsAt}`,

@@ -15,7 +15,7 @@ const app = new Hono<{ Bindings: Env }>();
 // The desktop app sends no Origin header, so it is unaffected.
 app.use('/api/*', cors({
   origin: (origin, c) => {
-    const allow = new Set([c.env.APP_URL, 'https://boreasclinical.com', 'https://www.boreasclinical.com']);
+    const allow = new Set([c.env.APP_URL, 'https://boreasworkflow.com', 'https://www.boreasworkflow.com', 'https://boreasclinical.com', 'https://www.boreasclinical.com']);
     // Reflect the Origin only when it is allow-listed. For any other origin,
     // return '' so no Access-Control-Allow-Origin header is emitted (rather than
     // reflecting an unrelated allowed origin). The desktop app sends no Origin
@@ -36,6 +36,7 @@ app.route('/api/trial/start', trial);
 app.route('/api/license/activate', activate);
 app.route('/api/license/refresh', refresh);
 app.route('/api/portal', portal);
+
 
 app.onError((err, c) => {
   console.error('unhandled', err);

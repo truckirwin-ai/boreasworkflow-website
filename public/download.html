@@ -42,6 +42,21 @@
   </div>
 </section>
 
+<section class="section" id="trial" style="padding-top: 0;">
+  <div class="container">
+    <div style="border: 1px solid var(--border, #dbe4e8); border-radius: 12px; padding: 28px 32px; max-width: 720px;">
+      <h2 style="font-size: 22px; margin: 0 0 6px;">Start your free 10-day trial</h2>
+      <p style="margin: 0 0 18px; color: var(--text-secondary);">No credit card. Enter your email and your trial key and installer download appear right here. The trial runs 10 days from first launch and never locks you out of your case files.</p>
+      <form id="trial-form" style="display: flex; gap: 10px; flex-wrap: wrap;">
+        <input id="trial-email" type="email" required placeholder="you@yourpractice.com" autocomplete="email"
+          style="flex: 1; min-width: 240px; padding: 12px 14px; font-size: 15px; border: 1px solid var(--border, #cbd7dd); border-radius: 8px; background: transparent; color: inherit;">
+        <button type="submit" class="btn btn-primary" id="trial-submit">Email my trial key</button>
+      </form>
+      <div id="trial-result" style="display: none; margin-top: 18px;"></div>
+    </div>
+  </div>
+</section>
+
 <section class="section" style="padding-top: 0;">
   <div class="container">
     <stripe-pricing-table
@@ -164,7 +179,62 @@
 <script>
 document.getElementById('year').textContent = new Date().getFullYear();
 
+(function () {
+  var form = document.getElementById('trial-form');
+  var emailInput = document.getElementById('trial-email');
+  var submitBtn = document.getElementById('trial-submit');
+  var result = document.getElementById('trial-result');
 
+  function show(html) {
+    result.innerHTML = html;
+    result.style.display = 'block';
+  }
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var email = emailInput.value.trim();
+    if (!email) return;
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Setting up your trial...';
+
+    fetch('https://api.boreasclinical.com/api/trial/start', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email: email })
+    })
+      .then(function (res) { return res.json().then(function (data) { return { status: res.status, data: data }; }); })
+      .then(function (r) {
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Email my trial key';
+        if (r.status === 200 && r.data.tokens && r.data.tokens.length) {
+          var key = r.data.tokens[0];
+          var mac = r.data.installers && r.data.installers.macos;
+          show(
+            '<div style="border-top: 1px solid var(--border, #dbe4e8); padding-top: 16px;">' +
+            '<p style="margin: 0 0 10px;"><strong>' + (r.data.reused ? 'Welcome back. Here is your existing trial key:' : 'Your trial is ready.') + '</strong> Copy your key and keep it safe.</p>' +
+            '<p style="margin: 0 0 6px; font-size: 13px; color: var(--text-secondary);">License key</p>' +
+            '<code style="display: inline-block; font-size: 16px; padding: 8px 14px; border: 1px solid var(--border, #cbd7dd); border-radius: 8px; user-select: all;">' + key + '</code>' +
+            '<p style="margin: 16px 0 10px;">' + (mac ? '<a class="btn btn-primary" href="' + mac + '">Download for macOS (Apple Silicon)</a>' : '') + '</p>' +
+            '<p style="margin: 0; font-size: 13px; color: var(--text-secondary);">Download link is valid for 24 hours; re-enter your email here any time for a fresh one. Windows and Linux installers are coming soon and your key will work on them. Paste the key into the app on first launch.</p>' +
+            '</div>'
+          );
+        } else if (r.data && r.data.error === 'already_paid') {
+          show('<p style="margin: 0; color: var(--text-secondary);">This email already has an active paid subscription. Use your existing license key, or write to <a href="mailto:support@boreasworkflow.com">support@boreasworkflow.com</a> if you need it resent.</p>');
+        } else if (r.data && r.data.error === 'trial_already_used') {
+          show('<p style="margin: 0; color: var(--text-secondary);">This email has already used its free trial. Pick a plan above to continue, or contact <a href="mailto:support@boreasworkflow.com">support@boreasworkflow.com</a>.</p>');
+        } else if (r.data && r.data.error === 'invalid_email') {
+          show('<p style="margin: 0; color: var(--text-secondary);">That email address does not look valid. Check it and try again.</p>');
+        } else {
+          show('<p style="margin: 0; color: var(--text-secondary);">Something went wrong on our side. Try again in a minute, or email <a href="mailto:support@boreasworkflow.com">support@boreasworkflow.com</a> and we will set you up by hand.</p>');
+        }
+      })
+      .catch(function () {
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Email my trial key';
+        show('<p style="margin: 0; color: var(--text-secondary);">Could not reach the license server. Check your connection and try again, or email <a href="mailto:support@boreasworkflow.com">support@boreasworkflow.com</a>.</p>');
+      });
+  });
+})();
 </script>
 
 </body>

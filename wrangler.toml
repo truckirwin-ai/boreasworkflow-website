@@ -1,0 +1,10 @@
+name = "boreasworkflow"
+compatibility_date = "2026-01-01"
+pages_build_output_dir = "public"
+
+# R2 binding for /download/:platform Pages Function (functions/download/[platform].ts).
+# DOWNLOAD_SIGNING_SECRET is a Pages secret, set via:
+#   wrangler pages secret put DOWNLOAD_SIGNING_SECRET --project-name=boreasworkflow
+[[r2_buckets]]
+binding = "INSTALLERS"
+bucket_name = "boreasclinical-installers"
