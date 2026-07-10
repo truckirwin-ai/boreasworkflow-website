@@ -1,0 +1,8 @@
+{
+  "name": "boreasclinical-media-tools",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "transcribe": "node scripts/transcribe-media.mjs"
+  }
+}
