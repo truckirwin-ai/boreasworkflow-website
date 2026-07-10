@@ -8,6 +8,7 @@ import trial from './routes/trial';
 import activate from './routes/activate';
 import refresh from './routes/refresh';
 import portal from './routes/portal';
+import validate from './routes/validate';
 
 const app = new Hono<{ Bindings: Env }>();
 
@@ -36,6 +37,8 @@ app.route('/api/trial/start', trial);
 app.route('/api/license/activate', activate);
 app.route('/api/license/refresh', refresh);
 app.route('/api/portal', portal);
+// Desktop app license validation (contract in app's src/main/setup/license.ts).
+app.route('/v1/licenses/validate', validate);
 
 
 app.onError((err, c) => {

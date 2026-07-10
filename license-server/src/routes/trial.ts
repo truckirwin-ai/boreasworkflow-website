@@ -47,7 +47,7 @@ app.post('/', async (c) => {
     }
     if (existing.tier === 'trial' && existing.trial_ends_at && existing.trial_ends_at <= now()) {
       return c.json(
-        { error: 'trial_already_used', hint: 'This email has already used its free trial. Start a paid subscription at /pricing.' },
+        { error: 'trial_already_used', hint: 'This email has already used its free trial. Purchase a license at boreasworkflow.com/download to continue.' },
         409,
       );
     }
