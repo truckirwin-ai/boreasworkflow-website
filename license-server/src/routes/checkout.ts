@@ -48,21 +48,26 @@ app.post('/', async (c) => {
     if (!price) return c.json({ error: 'solo_plan_not_configured' }, 503);
     line_items.push({ price, quantity: 1 });
   } else if (body.block !== undefined) {
-    // Practice block licensing: one flat-rate line item per block of up to
-    // 10/15/20 seats. Self-serve alternative to the sales path.
-    const blockPrices: Record<number, string | undefined> = {
-      10: c.env.STRIPE_PRICE_PRACTICE_10,
-      15: c.env.STRIPE_PRICE_PRACTICE_15,
-      20: c.env.STRIPE_PRICE_PRACTICE_20,
-    };
-    const price = blockPrices[body.block];
+    // Practice seat-band licensing: one volume-tiered price with flat amounts
+    // per band; quantity is the seat count. Falls back to the legacy per-block
+    // prices if the tiered price is not configured.
     if (body.block !== 10 && body.block !== 15 && body.block !== 20) {
       return c.json({ error: 'bad_request' }, 400);
     }
-    if (!price) {
-      return c.json({ error: 'practice_block_not_configured' }, 503);
+    if (c.env.STRIPE_PRICE_PRACTICE_TIERED) {
+      line_items.push({ price: c.env.STRIPE_PRICE_PRACTICE_TIERED, quantity: body.block });
+    } else {
+      const blockPrices: Record<number, string | undefined> = {
+        10: c.env.STRIPE_PRICE_PRACTICE_10,
+        15: c.env.STRIPE_PRICE_PRACTICE_15,
+        20: c.env.STRIPE_PRICE_PRACTICE_20,
+      };
+      const price = blockPrices[body.block];
+      if (!price) {
+        return c.json({ error: 'practice_block_not_configured' }, 503);
+      }
+      line_items.push({ price, quantity: 1 });
     }
-    line_items.push({ price, quantity: 1 });
   } else {
     line_items.push({ price: c.env.STRIPE_PRICE_PRACTICE, quantity: 1 });
     const extra = Math.max(0, (body.seats ?? 5) - 5);

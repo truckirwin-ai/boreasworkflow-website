@@ -261,6 +261,7 @@ export function mapStripeStatus(s: Stripe.Subscription.Status): 'active' | 'past
 
 export function inferTierFromItems(env: Env, sub: Stripe.Subscription): PaidTier {
   const practicePrices = new Set([
+    env.STRIPE_PRICE_PRACTICE_TIERED,
     env.STRIPE_PRICE_PRACTICE,
     env.STRIPE_PRICE_PRACTICE_EXTRA_SEAT,
     env.STRIPE_PRICE_PRACTICE_10,
@@ -277,8 +278,10 @@ function computeSeatLimit(env: Env, tier: PaidTier, sub: Stripe.Subscription): n
   let extras = 0;
   for (const item of sub.items.data) {
     const q = item.quantity ?? 0;
-    // Practice block licensing: a block line item sets the seat cap directly.
-    if (item.price.id === env.STRIPE_PRICE_PRACTICE_10) base += 10 * q;
+    // Practice seat-band licensing: the tiered price's quantity is the seat cap.
+    if (item.price.id === env.STRIPE_PRICE_PRACTICE_TIERED) base += q;
+    // Legacy per-block prices: a block line item sets the seat cap directly.
+    else if (item.price.id === env.STRIPE_PRICE_PRACTICE_10) base += 10 * q;
     else if (item.price.id === env.STRIPE_PRICE_PRACTICE_15) base += 15 * q;
     else if (item.price.id === env.STRIPE_PRICE_PRACTICE_20) base += 20 * q;
     else if (item.price.id === env.STRIPE_PRICE_PRACTICE) base += 5 * q;
