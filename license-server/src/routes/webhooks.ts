@@ -79,6 +79,7 @@ function computeSeatLimit(env: Env, tier: PaidTier, sub: Stripe.Subscription): n
     const q = item.quantity ?? 0;
     // Practice seat-band licensing: the tiered price's quantity is the seat cap.
     if (item.price.id === env.STRIPE_PRICE_PRACTICE_TIERED) base += q;
+    else if (item.price.id === env.STRIPE_PRICE_PRACTICE_TIERED_ANNUAL) base += q;
     // Legacy per-block prices: a block line item sets the seat cap directly.
     else if (item.price.id === env.STRIPE_PRICE_PRACTICE_10) base += 10 * q;
     else if (item.price.id === env.STRIPE_PRICE_PRACTICE_15) base += 15 * q;
