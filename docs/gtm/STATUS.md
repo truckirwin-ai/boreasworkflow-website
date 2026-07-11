@@ -10,8 +10,7 @@ Running log. Newest entries on top. Claude updates every GTM work session. Metri
 
 **UNBLOCKED: apex live.** CNAME @ -> boreasworkflow.pages.dev added (proxied), Pages custom domain validated, https://boreasworkflow.com serves 200.
 
-**Still blocked:**
-1. macOS app unsigned (Apple Developer account needed, $99/yr, Robert).
+**UNBLOCKED: signed + notarized installer live.** Robert already had an active Apple Developer membership (Individual, Team AZ24C8B8U9, paid through April 2027). Developer ID Application cert created, app + dmg signed with hardened runtime, notarized by Apple (2 rounds: app, then signed dmg), stapled, Gatekeeper verdict "accepted, source=Notarized Developer ID". Uploaded to R2. Trial downloads now install without any security warnings. Phase 0 = COMPLETE.
 
 **Next Claude actions:** trial nurture email sequence (now unblocked), site analytics, founder counter, template page 1, whitepaper outline, Sharp pitch draft, CE sponsor shortlist.
 
