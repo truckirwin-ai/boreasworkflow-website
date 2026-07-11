@@ -209,13 +209,14 @@ document.getElementById('year').textContent = new Date().getFullYear();
         if (r.status === 200 && r.data.tokens && r.data.tokens.length) {
           var key = r.data.tokens[0];
           var mac = r.data.installers && r.data.installers.macos;
+          var win = r.data.installers && r.data.installers.windows;
           show(
             '<div style="border-top: 1px solid var(--border, #dbe4e8); padding-top: 16px;">' +
             '<p style="margin: 0 0 10px;"><strong>' + (r.data.reused ? 'Welcome back. Here is your existing trial key:' : 'Your trial is ready.') + '</strong> Copy your key and keep it safe.</p>' +
             '<p style="margin: 0 0 6px; font-size: 13px; color: var(--text-secondary);">License key</p>' +
             '<code style="display: inline-block; font-size: 16px; padding: 8px 14px; border: 1px solid var(--border, #cbd7dd); border-radius: 8px; user-select: all;">' + key + '</code>' +
-            '<p style="margin: 16px 0 10px;">' + (mac ? '<a class="btn btn-primary" href="' + mac + '">Download for macOS (Apple Silicon)</a>' : '') + '</p>' +
-            '<p style="margin: 0; font-size: 13px; color: var(--text-secondary);">Download link is valid for 24 hours; re-enter your email here any time for a fresh one. Windows and Linux installers are coming soon and your key will work on them. Paste the key into the app on first launch.</p>' +
+            '<p style="margin: 16px 0 10px; display: flex; gap: 10px; flex-wrap: wrap;">' + (mac ? '<a class="btn btn-primary" href="' + mac + '">Download for macOS (Apple Silicon)</a>' : '') + (win ? '<a class="btn btn-secondary" href="' + win + '">Download for Windows (x64)</a>' : '') + '</p>' +
+            '<p style="margin: 0; font-size: 13px; color: var(--text-secondary);">Download links are valid for 24 hours; re-enter your email here any time for fresh ones. Paste the key into the app on first launch.</p>' +
             '</div>'
           );
         } else if (r.data && r.data.error === 'already_paid') {

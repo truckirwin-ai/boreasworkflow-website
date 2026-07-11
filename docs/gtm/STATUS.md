@@ -5,6 +5,8 @@ Running log. Newest entries on top. Claude updates every GTM work session. Metri
 ---
 
 ## 2026-07-11
+**Windows installer LIVE.** boreas-workflow app now version-controlled (private repo truckirwin-ai/boreas-workflow). CI (app-release.yml) builds win32 PyInstaller sidecar + NSIS installer on windows-2022 runner; artifact uploaded to R2 boreas-windows.exe (189MB), E2E verified through the signed download link. Trial form now offers macOS + Windows buttons. Exe is UNSIGNED (SmartScreen warning; Authenticode/Azure Trusted Signing = later decision, ~$10/mo). CI fixes: windows-2022 pin (node-gyp vs new VS image), exe/dmg filename canonicalize globs.
+
 
 **UNBLOCKED: email delivery works.** Resend domain boreasworkflow.com verified (DNS records confirmed correct), new domain-scoped API key created and set on the worker, live test email delivered (email_sent_at set in D1). Trial key emails now send. FROM = Boreas Workflow <no-reply@boreasworkflow.com>.
 
