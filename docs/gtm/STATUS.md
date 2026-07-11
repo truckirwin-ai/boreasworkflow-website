@@ -8,9 +8,10 @@ Running log. Newest entries on top. Claude updates every GTM work session. Metri
 
 **UNBLOCKED: email delivery works.** Resend domain boreasworkflow.com verified (DNS records confirmed correct), new domain-scoped API key created and set on the worker, live test email delivered (email_sent_at set in D1). Trial key emails now send. FROM = Boreas Workflow <no-reply@boreasworkflow.com>.
 
+**UNBLOCKED: apex live.** CNAME @ -> boreasworkflow.pages.dev added (proxied), Pages custom domain validated, https://boreasworkflow.com serves 200.
+
 **Still blocked:**
-1. Apex boreasworkflow.com dead (CNAME @ -> boreasworkflow.pages.dev, Cloudflare dashboard).
-2. macOS app unsigned (Apple Developer account needed).
+1. macOS app unsigned (Apple Developer account needed, $99/yr, Robert).
 
 **Next Claude actions:** trial nurture email sequence (now unblocked), site analytics, founder counter, template page 1, whitepaper outline, Sharp pitch draft, CE sponsor shortlist.
 
