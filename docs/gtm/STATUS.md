@@ -4,6 +4,24 @@ Running log. Newest entries on top. Claude updates every GTM work session. Metri
 
 ---
 
+## 2026-07-12 (session 5, AudienceForge ingest)
+
+**Shipped:**
+- **AudienceForge exports ingested for real this time.** Session 2's note referenced a worktree that never merged; nothing was on disk. All 8 artifacts now copied (read-only, originals untouched) into data/audienceforge-imports/ with hard separation: individuals/ (first_500 + all_contacts, person-level, license-anchored), practice-accounts/ (accounts + members join + leadership candidates), psychology-today/ (CO Springs profile scrape), public-search/ (CO practice candidates + combined xlsx).
+- **README** (data/audienceforge-imports/README.md): file inventory, trust levels, handling rules, provenance preservation rule.
+- **GTM import plan** (docs/gtm/AUDIENCEFORGE_IMPORT_PLAN.md): 5-class segmentation (individuals, practice accounts, PT profiles, leadership candidates, priority outbound), first-outbound recommendation, 9 measured data quality risks, sequencing.
+- **Headline numbers:** 7,788 individuals (CO 4,950/KS 1,574/NE 1,264; 81.7% phone, 0.2% email, 40.7% blank license status). First 500: 100% phone, 499 active-licensed, strict subset, 0 emails. Practice accounts 5,654 but 97.7% low confidence; actionable slice = 55 high-confidence multi-practitioner accounts (practice-pilot pool). PT scrape: only 22 of 498 are Psychologists, 19 rows have credential parsing artifacts. Leadership candidates: all 26 scrape-inferred, some visibly wrong roles, hand-verify before any use. Dup phones: 718 shared numbers across full list (2,692 rows, worst 45 on one number), 14 in the first 500.
+- **First outbound rec:** first_500 filtered to active license (499 rows), call-first (email coverage is zero, phone coverage is total). 55-account practice-pilot motion runs parallel, Robert-led.
+- **PRIVACY GUARD:** website repo is PUBLIC on GitHub. Contact CSVs (names, phones, license numbers) are gitignored and stay local-only; only the README (aggregate stats) and the import plan are committed. If the data needs backup, it needs a private location, not this repo.
+
+**ROBERT ACTIONS QUEUED:**
+1. Decide backup location for the contact data (private repo, encrypted drive, or leave local). It is NOT in git by design.
+2. Unchanged from session 4: Sharp email, LinkedIn batch 1, advisor names, CE target approval, webinar date window.
+
+**Next Claude actions:** resolve the 14 shared numbers in the first 500 and produce the call-list view + call script, build the 55-account practice-pilot target sheet, queue email enrichment spec back to AudienceForge (separate project, spec only).
+
+---
+
 ## 2026-07-12 (session 4, Phase 1 continuation, SHIPPED AND DEPLOYED)
 
 Agent sandbox had Cloudflare auth this session, so everything below is LIVE, including the session 2 and 3 backlog that was waiting on Robert.

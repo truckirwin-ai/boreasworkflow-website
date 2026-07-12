@@ -38,3 +38,8 @@ keypair.*.bak
 
 # Scratch screenshots
 /.*.png
+
+# AudienceForge contact exports: personal data (names, phones, license numbers).
+# Repo is public; these files stay local-only. README carries aggregate stats only.
+data/audienceforge-imports/**
+!data/audienceforge-imports/README.md
