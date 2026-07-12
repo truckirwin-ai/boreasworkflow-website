@@ -4,6 +4,27 @@ Running log. Newest entries on top. Claude updates every GTM work session. Metri
 
 ---
 
+## 2026-07-11 (session 3, morning brief, Phase 1 content)
+
+**Shipped (code complete, DEPLOY PENDING, see Robert actions):**
+- **Template page 2, Violence Risk Assessment (forensic track).** /templates/violence-risk-assessment.html, email-gated via the existing POST /api/templates/request flow. Sanitized structured-professional-judgment .docx built and shipped at /templates/boreas-violence-risk-report-template.docx (11 sections: identifying, notification, sources, history, history of violence, MSE, testing/structured risk, risk formulation with static/dynamic/protective + scenario planning, communication of risk, risk management, attestation; instrument-agnostic). Worker TEMPLATES map gained the violence-risk entry. Templates hub card flipped from coming-soon to live. Sitemap updated. Built with python-docx; verified zero em/en dashes.
+- **Podcast attribution live: /testing/ dedicated landing (clinical track).** Purpose-built page for The Testing Psychologist audience (throughput/backlog message, local-first, founder counter, trial + demo CTAs). noindex,follow so it does not compete in search. Carries meta boreas-campaign=testing-psychologist. This is the dedicated URL Robert reads on air; podcast-attributed trials now traceable.
+- **Analytics: session-persisted campaign attribution.** analytics.js now captures a campaign from meta[name=boreas-campaign] or ?ref= query param, persists it in sessionStorage (no cookies, dies with the tab), and stamps it into meta.campaign on every event for the whole session. So a visitor landing on /testing then converting on /download stays attributed. No D1 migration needed (rides existing meta JSON column). Cache-busted analytics.js?v=20260711b across all 19 pages.
+- **Trial nurture email sequence drafted (both tracks).** docs/gtm/TRIAL_NURTURE_SEQUENCE.md: day 0/3/7/10 copy, track-aware subject lines, plus wiring notes for the cron sender (idempotency, suppression, merge fields). Ready to implement now that Resend sends.
+- **LinkedIn post batch 1 drafted (Robert-fronted).** docs/gtm/LINKEDIN_BATCH_1.md: 7 posts (~3 weeks at 2/wk), mixed build-in-public / forensic / clinical, founder voice, never claims clinical authority. Robert posts under his name.
+
+**ROBERT ACTIONS QUEUED:**
+1. Deploy (agent sandbox has no Cloudflare auth):
+   - `cd "/Users/truckirwin/Desktop/Foundry SMB/Products/boreas-website/license-server" && npm run deploy` (worker: adds violence-risk template endpoint; no migration this time)
+   - `cd "/Users/truckirwin/Desktop/Foundry SMB/Products/boreas-website" && npx wrangler pages deploy public --project-name=boreasworkflow --branch=main --commit-dirty=true`
+   - Purge Cloudflare cache, then verify: /templates/violence-risk-assessment.html loads, its email-gate returns the .docx (worker must be deployed first or it 400s unknown_template), and /testing/ loads with the founder counter.
+2. Read the LinkedIn batch (docs/gtm/LINKEDIN_BATCH_1.md); post 1 to start the cadence, or edit to taste.
+3. Still open from session 2: send the Sharp email, advisor names/credentials, approve CONCEPT/PAU + CO Psychological Association as first CE targets.
+
+**Next Claude actions:** wire the trial nurture cron sender (copy is ready), template page 3 (child custody, forensic) + docx, whitepaper Sections 1 to 3 once an advisor is named, CE outreach drafts on Robert's approval, first non-CE webinar registration page.
+
+---
+
 ## 2026-07-11 (session 2, Phase 1 kickoff)
 
 **Shipped (code complete, DEPLOY PENDING, see Robert actions):**

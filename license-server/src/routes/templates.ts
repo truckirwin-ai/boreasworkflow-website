@@ -13,6 +13,11 @@ const TEMPLATES: Record<string, { name: string; file: string; track: 'forensic' 
     file: 'boreas-cst-report-template.docx',
     track: 'forensic',
   },
+  'violence-risk': {
+    name: 'Violence Risk Assessment Report Template',
+    file: 'boreas-violence-risk-report-template.docx',
+    track: 'forensic',
+  },
 };
 
 /**

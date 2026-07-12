@@ -43,15 +43,44 @@
     }
   }
 
+  // Campaign attribution. First seen wins and persists for the tab session, so a
+  // visitor who lands on a dedicated URL (podcast, listserv, direct mail) stays
+  // attributed through the trial conversion on a later page. Sourced from a
+  // meta[name="boreas-campaign"] tag or a ?ref= query param. sessionStorage only,
+  // no cookies, dies with the tab.
+  function campaign() {
+    try {
+      var c = sessionStorage.getItem('b_campaign');
+      if (c) return c;
+      var meta = document.querySelector('meta[name="boreas-campaign"]');
+      var val = meta && meta.content ? meta.content : null;
+      if (!val) {
+        var q = new URLSearchParams(location.search).get('ref');
+        if (q) val = q;
+      }
+      if (val) {
+        val = String(val).slice(0, 48);
+        sessionStorage.setItem('b_campaign', val);
+        return val;
+      }
+      return null;
+    } catch (e) {
+      return null;
+    }
+  }
+
   function send(event, meta) {
     try {
+      var camp = campaign();
+      var m = meta || undefined;
+      if (camp) { m = meta ? JSON.parse(JSON.stringify(meta)) : {}; m.campaign = camp; }
       var payload = JSON.stringify({
         event: event,
         page: location.pathname,
         track: track(),
         ref: refHost(),
         sid: sid(),
-        meta: meta || undefined
+        meta: m
       });
       if (navigator.sendBeacon) {
         navigator.sendBeacon(API, new Blob([payload], { type: 'text/plain' }));
