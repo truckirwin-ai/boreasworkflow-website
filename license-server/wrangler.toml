@@ -41,3 +41,7 @@ ISSUER = "boreasclinical-license"
 
 [observability]
 enabled = true
+
+# Daily trial nurture run (src/lib/nurture.ts). 16:00 UTC = 10:00 AM MDT.
+[triggers]
+crons = ["0 16 * * *"]

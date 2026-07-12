@@ -4,6 +4,26 @@ Running log. Newest entries on top. Claude updates every GTM work session. Metri
 
 ---
 
+## 2026-07-12 (session 4, Phase 1 continuation, SHIPPED AND DEPLOYED)
+
+Agent sandbox had Cloudflare auth this session, so everything below is LIVE, including the session 2 and 3 backlog that was waiting on Robert.
+
+**Deployed and verified live:**
+- **Sessions 2-3 backlog cleared.** D1 migration applied, worker deployed. Founder counter API live (100 of 100 remaining), violence-risk template email gate live. Pages for /templates/violence-risk-assessment and /testing/ were already deployed and confirmed 200.
+- **Trial nurture sequence LIVE (both tracks, neutral copy).** Worker cron daily 16:00 UTC (10am MDT): day 3 activation nudge, day 7 founder-rate close, day 10 expiry email. New tables nurture_sends (per-step idempotency) and email_suppressions. Signed one-click unsubscribe at GET/POST /api/email/unsubscribe (HMAC, List-Unsubscribe headers, RFC 8058). Guards: stops on conversion, suppression, non-active status; stale steps (3+ days past due) are recorded, not sent, so pre-existing test trials get nothing. Day 0 still rides the key-delivery email. Copy from docs/gtm/TRIAL_NURTURE_SEQUENCE.md; track column does not exist on subscriptions so neutral variants ship (track-aware subjects can come later via funnel join).
+- **Template page 3 LIVE: Child Custody Evaluation (forensic track).** /templates/child-custody-evaluation + boreas-child-custody-report-template.docx (15 sections: referral, statutory standard, notification, numbered sources, background, parallel Parent A/B sections with response style before testing, per-child sections, observations, collateral, allegations assessed separately, best-interests factor walk, recommendations, basis and limitations, attestation; jurisdiction-neutral). Worker TEMPLATES map + hub card flipped + sitemap. Email gate verified live.
+- **Webinar registration page LIVE (both tracks): /webinar/.** "Defensible Use of AI in Psychological Assessment", date TBA interest capture (blocked on advisor availability, so the page collects registrations now and the invite goes out when scheduling lands). Practice-area selector feeds track tagging. New endpoint POST /api/webinar/register + webinar_leads table + confirmation email. Page uses the allowlisted webinar_register funnel event. Honest CE disclosure (non-CE session, CE version in the works) and demo-after-session separation per the CE engine rules.
+- Zero em/en dashes verified across every artifact. All endpoints smoke-tested in production.
+
+**ROBERT ACTIONS QUEUED:**
+1. Still open from sessions 2-3: send the Sharp email (docs/gtm/OUTREACH_JEREMY_SHARP.md), post LinkedIn batch 1 (docs/gtm/LINKEDIN_BATCH_1.md), advisor names/credentials, approve CONCEPT/PAU + CO Psychological Association as first CE targets.
+2. New: pick a webinar date window (needs your and an advisor's availability); registrations are already accruing at /webinar/.
+3. FYI, no action: worker cron sends nurture emails daily at 10am MDT. To suppress an address manually: INSERT INTO email_suppressions (email, reason, created_at) VALUES ('addr', 'manual', unixepoch());
+
+**Next Claude actions:** template page 4 (ADHD evaluation, clinical track, first clinical template), instrument pages batch 1, whitepaper Sections 1 to 3 once advisor named, CE outreach drafts on approval, webinar invite email once date set.
+
+---
+
 ## 2026-07-11 (session 3, morning brief, Phase 1 content)
 
 **Shipped (code complete, DEPLOY PENDING, see Robert actions):**

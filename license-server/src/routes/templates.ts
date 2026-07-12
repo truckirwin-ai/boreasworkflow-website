@@ -18,6 +18,11 @@ const TEMPLATES: Record<string, { name: string; file: string; track: 'forensic' 
     file: 'boreas-violence-risk-report-template.docx',
     track: 'forensic',
   },
+  'child-custody': {
+    name: 'Child Custody Evaluation Report Template',
+    file: 'boreas-child-custody-report-template.docx',
+    track: 'forensic',
+  },
 };
 
 /**

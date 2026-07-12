@@ -6,6 +6,8 @@ interface SendArgs {
   subject: string;
   html: string;
   text: string;
+  replyTo?: string;
+  headers?: Record<string, string>;
 }
 
 export async function sendEmail(env: Env, args: SendArgs): Promise<void> {
@@ -21,6 +23,8 @@ export async function sendEmail(env: Env, args: SendArgs): Promise<void> {
       subject: args.subject,
       html: args.html,
       text: args.text,
+      ...(args.replyTo ? { reply_to: args.replyTo } : {}),
+      ...(args.headers ? { headers: args.headers } : {}),
     }),
   });
   if (!res.ok) {

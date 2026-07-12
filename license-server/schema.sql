@@ -87,3 +87,32 @@ CREATE TABLE IF NOT EXISTS template_leads (
 
 CREATE INDEX IF NOT EXISTS idx_template_leads_email ON template_leads(email);
 CREATE INDEX IF NOT EXISTS idx_template_leads_template ON template_leads(template);
+
+-- Trial nurture sequence (cron in src/lib/nurture.ts). One row per step sent
+-- (or deliberately skipped as stale); the primary key is the idempotency gate.
+CREATE TABLE IF NOT EXISTS nurture_sends (
+  subscription_id  TEXT NOT NULL,
+  step             INTEGER NOT NULL,   -- 3 | 7 | 10 (day offset from trial start)
+  sent_at          INTEGER NOT NULL,
+  PRIMARY KEY (subscription_id, step)
+);
+
+-- Marketing email suppression list. Checked before every nurture send.
+-- Written by GET/POST /api/email/unsubscribe (signed one-click links).
+CREATE TABLE IF NOT EXISTS email_suppressions (
+  email       TEXT PRIMARY KEY,
+  reason      TEXT,                    -- 'unsubscribe' | 'manual' | 'bounce'
+  created_at  INTEGER NOT NULL
+);
+
+-- Webinar registrations (POST /api/webinar/register).
+CREATE TABLE IF NOT EXISTS webinar_leads (
+  id          INTEGER PRIMARY KEY AUTOINCREMENT,
+  email       TEXT NOT NULL,
+  webinar     TEXT NOT NULL,           -- webinar slug, e.g. 'defensible-ai'
+  track       TEXT NOT NULL,           -- forensic | clinical | general
+  created_at  INTEGER NOT NULL
+);
+
+CREATE INDEX IF NOT EXISTS idx_webinar_leads_email ON webinar_leads(email);
+CREATE INDEX IF NOT EXISTS idx_webinar_leads_webinar ON webinar_leads(webinar);

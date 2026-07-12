@@ -12,6 +12,9 @@ import validate from './routes/validate';
 import events from './routes/events';
 import founder from './routes/founder';
 import templates from './routes/templates';
+import unsubscribe from './routes/unsubscribe';
+import webinar from './routes/webinar';
+import { runNurture } from './lib/nurture';
 
 const app = new Hono<{ Bindings: Env }>();
 
@@ -43,6 +46,8 @@ app.route('/api/portal', portal);
 app.route('/api/events', events);
 app.route('/api/founder', founder);
 app.route('/api/templates', templates);
+app.route('/api/email/unsubscribe', unsubscribe);
+app.route('/api/webinar', webinar);
 // Desktop app license validation (contract in app's src/main/setup/license.ts).
 app.route('/v1/licenses/validate', validate);
 
@@ -54,4 +59,10 @@ app.onError((err, c) => {
 
 app.notFound((c) => c.json({ error: 'not_found' }, 404));
 
-export default app;
+export default {
+  fetch: app.fetch,
+  // Daily trial nurture (cron in wrangler.toml). See src/lib/nurture.ts.
+  scheduled(_controller: ScheduledController, env: Env, ctx: ExecutionContext) {
+    ctx.waitUntil(runNurture(env));
+  },
+};
