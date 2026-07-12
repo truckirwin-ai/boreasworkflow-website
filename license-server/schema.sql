@@ -56,3 +56,34 @@ CREATE TABLE IF NOT EXISTS activation_log (
 CREATE INDEX IF NOT EXISTS idx_log_seat ON activation_log(seat_id);
 CREATE INDEX IF NOT EXISTS idx_log_event ON activation_log(event);
 CREATE INDEX IF NOT EXISTS idx_log_created ON activation_log(created_at);
+
+-- First-party marketing funnel events (POST /api/events).
+-- No cookies, no IP addresses, no cross-session identifiers. sid is a random
+-- per-visit id from sessionStorage; it dies with the tab session.
+CREATE TABLE IF NOT EXISTS funnel_events (
+  id          INTEGER PRIMARY KEY AUTOINCREMENT,
+  event       TEXT NOT NULL,             -- allowlisted in routes/events.ts
+  page        TEXT,                      -- pathname
+  track       TEXT,                      -- forensic | clinical | general
+  ref         TEXT,                      -- referrer host only
+  sid         TEXT,                      -- per-visit random id (not a user id)
+  meta        TEXT,                      -- small JSON blob
+  country     TEXT,                      -- from cf-ipcountry
+  created_at  INTEGER NOT NULL
+);
+
+CREATE INDEX IF NOT EXISTS idx_funnel_event ON funnel_events(event);
+CREATE INDEX IF NOT EXISTS idx_funnel_created ON funnel_events(created_at);
+CREATE INDEX IF NOT EXISTS idx_funnel_track ON funnel_events(track);
+
+-- Email-gated template download leads (POST /api/templates/request).
+CREATE TABLE IF NOT EXISTS template_leads (
+  id          INTEGER PRIMARY KEY AUTOINCREMENT,
+  email       TEXT NOT NULL,
+  template    TEXT NOT NULL,             -- template slug, e.g. 'cst'
+  track       TEXT NOT NULL,             -- forensic | clinical
+  created_at  INTEGER NOT NULL
+);
+
+CREATE INDEX IF NOT EXISTS idx_template_leads_email ON template_leads(email);
+CREATE INDEX IF NOT EXISTS idx_template_leads_template ON template_leads(template);

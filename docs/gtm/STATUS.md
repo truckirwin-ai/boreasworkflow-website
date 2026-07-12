@@ -4,6 +4,30 @@ Running log. Newest entries on top. Claude updates every GTM work session. Metri
 
 ---
 
+## 2026-07-11 (session 2, Phase 1 kickoff)
+
+**Shipped (code complete, DEPLOY PENDING, see Robert actions):**
+- **Site analytics + funnel events (first-party).** New worker endpoints POST /api/events and D1 table funnel_events. No cookies, no IPs, no third-party trackers, DNT/GPC respected; consistent with local-first positioning and $0/mo. Site beacon public/assets/analytics.js on all 16 pages: page_view, trial_submit, download_click, pricing_view, template_submit/download, demo_play, datasheet_download, with forensic/clinical track tagging per page.
+- **Founder counter.** GET /api/founder/remaining (counts active solo subs against 100). Live "X of 100" on index hero and download page above pricing. Currently 100 of 100.
+- **Template page 1 (forensic track).** /templates/competency-to-stand-trial.html, email-gated via new POST /api/templates/request + template_leads D1 table; sends the file by email (Resend) and shows the link inline. Sanitized Dusky-organized CST .docx built and shipped at /templates/boreas-cst-report-template.docx. /templates/ hub page lists CST live + 5 coming-soon cards. Nav "Templates" link added sitewide; sitemap updated. NOTE: template drafted fresh; align with the in-product CST template when the app repo is available in a session.
+- **Whitepaper outline (both tracks).** docs/gtm/WHITEPAPER_OUTLINE.md: "Defensible AI in Psychological Assessment", 7 sections + appendices, advisor review slots marked. Blocked on advisor byline (Open Item 1).
+- **Jeremy Sharp pitch draft (clinical track).** docs/gtm/OUTREACH_JEREMY_SHARP.md: interview-first ask, sponsorship held back, 3 subject lines, follow-up plan. Robert to personalize and send.
+- **CE sponsor shortlist (both tracks).** docs/gtm/CE_SPONSOR_SHORTLIST.md: 10 candidates with verified APA sponsor status, contacts, pitch angles. Recommended order: CONCEPT/PAU, CO Psychological Association, TZK, At Health, AAFP.
+- **AudienceForge exports ingested into boreas GTM project** (data/audienceforge-imports/ + README + docs/AUDIENCEFORGE_IMPORT_PLAN.md). Headline: 7,788 contacts (81.7% phone, 0.2% email), first_500 is a strict subset with 100% phone coverage; PT scrape is 22/498 psychologists (source universe only); practice accounts 97.7% low confidence; all 26 leadership candidates are scrape-inferred. First outbound rec: first_500 filtered to active license + phone (499 rows), call-first, email enrichment needed before sequences.
+
+**ROBERT ACTIONS QUEUED:**
+1. Deploy (wrangler is authenticated on your machine, agent sandbox has no Cloudflare auth):
+   - `cd "/Users/truckirwin/Desktop/Foundry SMB/Products/boreas-website/license-server" && npm run db:migrate && npm run deploy`
+   - `cd "/Users/truckirwin/Desktop/Foundry SMB/Products/boreas-website" && npx wrangler pages deploy public --project-name=boreasworkflow --branch=main --commit-dirty=true`
+   - Then purge Cloudflare cache (boreasclinical.com AND boreasworkflow.com zones) and verify: https://boreasworkflow.com/templates/, api.boreasclinical.com/api/founder/remaining, founder counter on homepage.
+2. Send the Sharp email (docs/gtm/OUTREACH_JEREMY_SHARP.md) after personalizing.
+3. Advisor names/credentials (blocks whitepaper draft and webinar planning).
+4. Decision: approve CONCEPT/PAU + CO Psychological Association as first two CE outreach targets (drafts ready next session on approval).
+
+**Next Claude actions:** trial nurture email sequence (Resend now works), template page 2 (violence risk, forensic), whitepaper Sections 1 to 3 draft once advisor named, CE outreach drafts on Robert's approval, /testing redirect for Sharp attribution, LinkedIn post batch 1.
+
+---
+
 ## 2026-07-11
 **Windows installer LIVE.** boreas-workflow app now version-controlled (private repo truckirwin-ai/boreas-workflow). CI (app-release.yml) builds win32 PyInstaller sidecar + NSIS installer on windows-2022 runner; artifact uploaded to R2 boreas-windows.exe (189MB), E2E verified through the signed download link. Trial form now offers macOS + Windows buttons. Exe is UNSIGNED (SmartScreen warning; Authenticode/Azure Trusted Signing = later decision, ~$10/mo). CI fixes: windows-2022 pin (node-gyp vs new VS image), exe/dmg filename canonicalize globs.
 
