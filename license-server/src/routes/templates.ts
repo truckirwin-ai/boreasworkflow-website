@@ -23,6 +23,11 @@ const TEMPLATES: Record<string, { name: string; file: string; track: 'forensic' 
     file: 'boreas-child-custody-report-template.docx',
     track: 'forensic',
   },
+  adhd: {
+    name: 'ADHD Evaluation Report Template',
+    file: 'boreas-adhd-report-template.docx',
+    track: 'clinical',
+  },
 };
 
 /**
