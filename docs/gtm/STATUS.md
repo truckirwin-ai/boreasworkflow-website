@@ -4,6 +4,37 @@ Running log. Newest entries on top. Claude updates every GTM work session. Metri
 
 ---
 
+## 2026-07-13 (session 6, morning brief, Monday, SHIPPED AND DEPLOYED)
+
+Wrangler auth present this session, so everything below is LIVE and production-verified.
+
+**METRIC SNAPSHOT (Monday):**
+- Founder seats sold: 0 of 100 (api/founder/remaining returns 100 remaining)
+- Real trials: 0 (unchanged; no paid channels live yet, outbound not started)
+- Live template pages: 4 (CST, violence risk, child custody, ADHD)
+- Template downloads / leads: not yet reported here; pull `SELECT template, count(*) FROM template_leads GROUP BY template` when reviewing
+- Webinar registrations: accruing at /webinar/, date still TBA (blocked on advisor availability)
+- Deployed funnel: analytics + founder counter + trial nurture cron (daily 10am MDT) all live from prior sessions
+- Honest read: infrastructure and content are ahead of demand. Nothing converts until Robert opens the Robert-only gates (Sharp, LinkedIn, advisor names, CE approval) and the outbound motion starts. Content SEO is compounding quietly in the background.
+
+**Shipped and verified live:**
+- **Template page 4 LIVE: ADHD Evaluation (clinical track, FIRST clinical template).** /templates/adhd-evaluation.html + boreas-adhd-report-template.docx (82 paragraphs: identifying info, referral as a medical question, numbered sources across informants, developmental and age-of-onset history, cross-setting documentation, medical/psychiatric differential, behavioral observations, instrument-agnostic rating scale table, response style and validity before interpretation, DSM-5-TR Criteria A to E walked one at a time, diagnostic impression with code, functional impact and medical necessity section, recommendations tied to findings, basis and limitations, attestation). Adult and child variants in one file. Worker TEMPLATES map gained the `adhd` clinical entry, templates hub card flipped from coming-soon to live, sitemap updated. Production smoke test: page 200, docx 200 (40406 bytes), POST /api/templates/request with template=adhd returns ok + correct docx URL, hub card link live. Worker redeployed first so the email gate resolves.
+- **Outbound call script drafted: docs/gtm/CALL_SCRIPT_FIRST500.md.** Call-first script for the 499 active-licensed first_500 tranche (phone-only segment, 0% email). Opening, track branch (clinical default / forensic switch), discovery, differentiator, tiered ask (demo > email capture > callback), voicemail, objection handling, compliance posture (identify first, honor do-not-call on the spot, 9-5 local, one voicemail/week), and per-call logging that feeds do-not-call and captured-email flags back to the list.
+- **Email enrichment spec drafted: docs/gtm/EMAIL_ENRICHMENT_SPEC.md.** Request spec for the AudienceForge project (separate repo) to enrich the phone-rich/email-poor list: input keys, output schema, match priority (board > practice site > PT > NPI > aggregator), confidence and deliverability definitions, compliance constraints, run priority (first_500, then CO, then KS/NE), acceptance criteria. Enrichment runs in AudienceForge; only the enriched output returns to boreas; no contact data enters this public repo.
+- Zero em/en dashes verified across every artifact. No PII committed (contact CSVs remain gitignored, verified before commit). Commit 7bfca43 pushed to main.
+
+**ROBERT ACTIONS QUEUED (unchanged, all Robert-only, all gating demand):**
+1. Send the Sharp email (docs/gtm/OUTREACH_JEREMY_SHARP.md), personalized.
+2. Post LinkedIn batch 1 (docs/gtm/LINKEDIN_BATCH_1.md), starts the cadence.
+3. Advisor names + credentials + permission scope (gates whitepaper draft and webinar scheduling).
+4. Approve CONCEPT/PAU + CO Psychological Association as first two CE targets (drafts follow on approval).
+5. Pick a webinar date window (needs your + an advisor availability); registrations already accruing.
+6. Decide backup location for the contact data (private repo, encrypted drive, or leave local); it is NOT in git by design.
+
+**Next Claude actions:** template page 5 (PTSD/trauma, clinical) + docx, instrument pages batch 1 (start the programmatic cluster), whitepaper Sections 1 to 3 once an advisor is named, CE outreach drafts on approval, webinar invite email once a date lands. Local-only (not committed): call-list view resolving the 14 shared numbers in the first_500, and the 55-account practice-pilot target sheet.
+
+---
+
 ## 2026-07-12 (session 5, AudienceForge ingest)
 
 **Shipped:**
