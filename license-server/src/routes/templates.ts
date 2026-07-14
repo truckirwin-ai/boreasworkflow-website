@@ -28,6 +28,11 @@ const TEMPLATES: Record<string, { name: string; file: string; track: 'forensic' 
     file: 'boreas-adhd-report-template.docx',
     track: 'clinical',
   },
+  ptsd: {
+    name: 'PTSD / Trauma Evaluation Report Template',
+    file: 'boreas-ptsd-report-template.docx',
+    track: 'clinical',
+  },
 };
 
 /**
