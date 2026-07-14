@@ -4,6 +4,30 @@ Running log. Newest entries on top. Claude updates every GTM work session. Metri
 
 ---
 
+## 2026-07-14 (session 7, morning brief, Tuesday, SHIPPED AND DEPLOYED)
+
+Wrangler auth present this session. Everything below is LIVE and production-verified.
+
+**Shipped and verified live:**
+- **Template page 5 LIVE: PTSD / Trauma Evaluation (clinical track, second clinical template).** /templates/ptsd-trauma-evaluation.html + boreas-ptsd-report-template.docx (104 paragraphs: identifying info with IME add-ons, referral as posed, numbered sources separating self-report/collateral/records/instruments, trauma history and index event documented apart from symptoms, pre-event and post-event functional baseline, instrument-agnostic measures table, a Response Style / Symptom Validity / Performance Validity section placed BEFORE interpretation, DSM-5-TR Criteria A through H walked one at a time with required symptom counts, dissociative and delayed-expression specifiers, a separate child path mapping to the PTSD for Children 6 and Younger criteria set, diagnostic impression with code, a functional impact and causation section for IME use, recommendations tied to findings, basis and limitations, attestation). Adult and child paths in one file. Worker TEMPLATES map gained the `ptsd` clinical entry, templates hub card flipped from coming-soon to live (one coming-soon card remaining: the forensic Response Style / Malingering Addendum), sitemap updated. Production smoke test: page 200, docx 200 (41861 bytes) on both apex and www, POST /api/templates/request with template=ptsd returns ok + correct docx URL, hub card link live, sitemap entry live. Worker redeployed first so the email gate resolves. Note: the www docx briefly served a stale edge-cache object during propagation, then revalidated to the correct 41861-byte file; both hosts confirmed correct on recheck.
+- Template inventory now 5 live: CST, violence risk, child custody (forensic); ADHD, PTSD/trauma (clinical). Both tracks now have real clinical-track depth, not just forensic.
+- Zero em/en dashes verified across every artifact. No PII committed. A few smoke-test lead rows (qa+ptsd@, smoketest+ptsd@, smoketest+adhd@boreasworkflow.com) are in the prod template_leads table from endpoint verification; harmless, filter them out of any lead pull. Commit 8cb54d1 pushed to main.
+
+**NEW THIS SESSION, needs Robert (competitive intel changes a queued action):**
+- **Jeremy Sharp owns a direct competitor.** The July 13 competitive read (docs/gtm/COMPETITIVE_TESTINGPSYCH_RESOURCES.md) found that Sharp founded ReverbReports, a cloud AI report generator for testing psychologists, the closest product to our clinical track. Queued Robert Action #1 (send Sharp the interview + sponsorship email) is now HELD pending Robert's call. Sending the current draft hands a competitor a product briefing on the exact axis where Reverb is weak (cloud PHI). Recommendation: treat Sharp/Reverb as a competitor to study, redirect the $800/mo podcast-sponsorship budget and the borrowed-trust play toward non-competing voices (assessment CE instructors, practice consultants, the Testing Psychologist Facebook community via soft participation). If Robert still wants Sharp contact, make it founder-to-founder and honest, not a disguised sponsorship pitch. Reverb is also a clean foil for our local-first story; compare.html already handles the category without naming it.
+
+**ROBERT ACTIONS QUEUED (updated):**
+1. **CHANGED, decision needed:** the Sharp email is HELD. Decide the reframe: (a) drop Sharp as a channel and redirect podcast budget to non-competing voices, or (b) send a founder-to-founder honest note (not the sponsorship draft). Everything else in the checklist stands.
+2. Post LinkedIn batch 1 (docs/gtm/LINKEDIN_BATCH_1.md), starts the cadence.
+3. Advisor names + credentials + permission scope (gates whitepaper draft and webinar scheduling).
+4. Approve CONCEPT/PAU + CO Psychological Association as first two CE targets (drafts follow on approval).
+5. Pick a webinar date window (needs your + an advisor availability); registrations already accruing at /webinar/.
+6. Decide backup location for the contact data (private repo, encrypted drive, or leave local); it is NOT in git by design.
+
+**Next Claude actions:** template page 6 (Response Style / Malingering Addendum, forensic, clears the last coming-soon card) + docx, instrument pages batch 1 (start the programmatic cluster), whitepaper Sections 1 to 3 once an advisor is named, non-competing borrowed-trust outreach list (assessment CE instructors + practice consultants) to replace the Sharp play, CE outreach drafts on approval, webinar invite email once a date lands.
+
+---
+
 ## 2026-07-13 (session 6, morning brief, Monday, SHIPPED AND DEPLOYED)
 
 Wrangler auth present this session, so everything below is LIVE and production-verified.
