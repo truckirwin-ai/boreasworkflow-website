@@ -1,5 +1,7 @@
 # Outreach Draft: Jeremy Sharp / The Testing Psychologist
 
+> **CONFLICT FLAG (added July 13, 2026):** Sharp founded ReverbReports, a cloud AI report-generation platform for testing psychologists. He is a DIRECT competitor on our clinical track, not a neutral channel. Do not send this draft as written; it briefs a competitor on our differentiation. See docs/gtm/COMPETITIVE_TESTINGPSYCH_RESOURCES.md. This outreach is on hold pending Robert's decision to reframe (founder-to-founder, honest) or drop it for non-competing voices.
+
 **Track:** clinical
 **Status:** DRAFT for Robert to review, personalize, and send from his own email. Do not send as-is without Robert's edits; he should verify the podcast's current sponsorship process (thetestingpsychologist.com) before sending, and confirm nothing about the show has changed recently.
 **Goal:** two asks, sequenced. Primary: a genuine interview conversation. Secondary (raised only after rapport or in his reply): sponsorship. Do not lead with sponsorship; the interview is worth more and the show sells sponsor slots anyway.
