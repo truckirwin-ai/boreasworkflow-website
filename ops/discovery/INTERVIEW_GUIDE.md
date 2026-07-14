@@ -6,7 +6,7 @@ Operating guide for the 10 interviews dispatched per decision D-0002 on 2026-05-
 
 Two outputs from the 10-interview block:
 
-1. **Three named themes** about what forensic and assessment-heavy psychologists actually want from a tool like Boreas. Themes are surfaced from the interview transcripts, not from the marketing plan's hypotheses.
+1. **Three named themes** about what forensic and assessment-heavy psychologists actually want from a tool like Psygil. Themes are surfaced from the interview transcripts, not from the marketing plan's hypotheses.
 
 2. **Three letters of intent** (or strong verbal commitments) from interviewees who would buy at the current price points if the product shipped on the current roadmap. LOIs are not contracts; they are a high-quality signal of fit.
 
@@ -81,7 +81,7 @@ When you reread an old report of yours, what do you change? What is repetitive a
 **6. AI tools (2 min):**
 Have you tried any AI or assistant tools for your work? What worked, what did not, what scared you? What would have to be true for you to trust a tool to draft language?
 
-*(Listening for: existing exposure, trust thresholds, what makes them recoil. Do not pitch Boreas in response.)*
+*(Listening for: existing exposure, trust thresholds, what makes them recoil. Do not pitch Psygil in response.)*
 
 **7. Daubert and Rule 702 in practice (2 min):**
 When was the last time methodology was challenged on a report of yours? What did the challenge look like? What did you wish you had ready?
@@ -184,7 +184,7 @@ Every Friday afternoon during the discovery block (so May 16 and May 23), the fo
 - **The pricing signal** (any anchoring around $599 / $1,499 / other).
 - **The three recurring objections** (what tools fail at, what they would not trust).
 - **The two or three named candidates** for the first Wave 1 contact list and possibly the first case study.
-- **One revised hypothesis** about the Boreas thesis (did the discovery package idea land? Did the records-review idea land harder? Did neither?).
+- **One revised hypothesis** about the Psygil thesis (did the discovery package idea land? Did the records-review idea land harder? Did neither?).
 - **Any kill signals** (a specific reason this audience would not buy at all).
 
 After the synthesis, the founder revises:
@@ -195,7 +195,7 @@ After the synthesis, the founder revises:
 
 ## Anti-patterns to avoid
 
-- **Pitching.** Do not describe Boreas's features in the discovery interview. The frame is listening. If asked "what are you building," answer in one sentence and move back to listening.
+- **Pitching.** Do not describe Psygil's features in the discovery interview. The frame is listening. If asked "what are you building," answer in one sentence and move back to listening.
 - **Leading questions.** "Don't you wish you had a tool that produced a discovery package automatically?" is a leading question. "When was the last time you assembled records for a Daubert challenge?" is not.
 - **Selling the BAA decision.** Do not ask "would you pay $799 for Solo with a BAA?" Ask "what does software have to do to be worth $599 to you?" and listen for whether they bring up BAAs unprompted.
 - **Quick reads.** Do not synthesize after one interview. Patterns emerge at 5-10 interviews, not at 2.

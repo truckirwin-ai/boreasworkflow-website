@@ -1,9 +1,6 @@
 # TODOs
 
-Current TODO list. Rolled forward by the orchestrator each morning. Items are removed only when:
-1. Completed (move to `/ops/orchestrator/decision_log/[DATE].md` as a "done" entry), or
-2. Explicitly killed by the founder, or
-3. Superseded by a different item.
+Current TODO list. Rolled forward by the orchestrator each morning. Re-baselined 2026-07-14 on the D-0012 ruling: Psygil retired, Boreas Workflow is the product, this file now serves the Boreas GTM. Pre-ruling aging history is preserved in git and in the archived psygil-website repo.
 
 Format:
 
@@ -18,108 +15,64 @@ Format:
 
 ---
 
-## T-0002: Send legal counsel intake email
+## T-0008: Non-PHI positioning pass on the live checkout surfaces
 
 **Priority:** today-blocking
+**Added:** 2026-05-14 (re-baselined 2026-07-14)
+**Estimated time:** M (45 min; pass staged, runs on founder go)
+**Blocked by:** founder go
+**Acceptance:** (1) `download.html` founder-rate/pricing-table context carries a "non-PHI workflow only" line plus the checkout checkbox requirement; (2) `policies.html#hipaa` reflects the locked stance; (3) any Solo references implying BAA scope corrected; build marker updated to confirm deploy. Highest-exposure open item: a Solo buyer can pay today without seeing the boundary.
+
+## T-0009: Wire Stripe MCP into the finance pulse
+
+**Priority:** this-week-blocking (raised from strategic 2026-07-14: checkout is live, revenue is invisible)
 **Added:** 2026-05-14
-**Estimated time:** S (15 min: copy draft to Gmail, attach brief plus supporting docs, paste intake address, send)
-**Status:** in-flight-awaiting-send 11 business days (per D-0006 on 2026-05-19; counsel selected, cover email drafted). D-0008 surfaced 2026-05-22 to diagnose the stall. D-0011 surfaced 2026-06-01 to decide whether to close this as superseded and re-initiate with a fresh draft, since the cover draft is now 12 business days old.
-**Blocked by:** D-0008 answer (A/B/C/D); reset path in D-0011
-**Acceptance:** Cover email from `/ops/orchestrator/drafts/legal-counsel-cover-2026-05-19.md` sent to Hall Render Killian Heath & Lyman PC (Denver) with `LEGAL_REVIEW_REQUEST.md` attached. Closes when founder confirms send.
+**Estimated time:** M (30 min, founder auth required)
+**Blocked by:** founder session to authorize the connection
+**Acceptance:** The next briefing shows a real Yesterday's income value from Stripe, not the manual-ledger fallback.
 
-## T-0003: Install council skill at user level
-
-**Priority:** today-blocking
-**Added:** 2026-05-14
-**Estimated time:** S (3 min in terminal)
-**Blocked by:** none (D-0004 closed: Option A confirmed)
-**Acceptance:** `~/.claude/skills/council/SKILL.md` exists. Verified by running `ls ~/.claude/skills/council/`. Command:
-
-```bash
-mkdir -p ~/.claude/skills
-mv "/Users/truckirwin/Desktop/Foundry SMB/Products/boreasclinical-website/council-skill" ~/.claude/skills/council
-```
-
-## T-0004: Apply Phase 0 launch checklist (Appendix F)
-
-**Priority:** this-week-blocking
-**Added:** 2026-05-14
-**Estimated time:** L (~10 working days per revised plan)
-**Blocked by:** T-0002 (legal review of templates before Wave 1 send)
-**Acceptance:** All items in `MARKETING_PLAN.md` Appendix F checked off.
-
-## T-0005: Customer discovery interviews
-
-**Priority:** this-week-blocking
-**Added:** 2026-05-14
-**Estimated time:** L (~9 hours founder time over 2 weeks per `/ops/discovery/INTERVIEW_GUIDE.md`)
-**Blocked by:** none (D-0002 closed: Option C confirmed)
-**Acceptance:** 10 interviews completed (6 forensic, 4 assessment), notes captured at `/ops/discovery/notes/`, two weekly synthesis docs at `/ops/discovery/synthesis/`, three named themes surfaced, three follow-up permissions secured.
-
-## T-0008: Update website Solo tier copy to non-PHI positioning
-
-**Priority:** this-week-blocking
-**Added:** 2026-05-14
-**Estimated time:** M (45 min)
-**Blocked by:** none (D-0001 closed: Option B confirmed)
-**Acceptance:** Copy updates to (1) `download.html` Solo card with a "non-PHI workflow only" line and the checkout checkbox requirement; (2) `policies.html#hipaa` to reflect the locked stance; (3) any Solo references on `about.html` or `forensic.html` that imply BAA scope. Build marker (`<!-- build: ... -->` in `index.html`) updated to confirm deploy.
-
-## T-0009: Wire up Stripe MCP to orchestrator finance pulse
+## T-0010: Confirm Practice tier seat structure
 
 **Priority:** strategic
 **Added:** 2026-05-14
-**Estimated time:** M (30 min: connect Stripe, test that yesterday's payments show up in briefing)
+**Estimated time:** S (one word)
 **Blocked by:** none
-**Acceptance:** Tomorrow's briefing shows a real Yesterday's income value from Stripe, not a "manual ledger" fallback.
+**Acceptance:** Founder confirms the shipped seat bands (up to 10 $2,500 / 11-15 $3,600 / 16-20 $4,500 per month) as the decision. Shipped Jul 9; one word closes it.
 
-## T-0010: Decide on Practice tier seat structure
-
-**Priority:** strategic
-**Added:** 2026-05-14
-**Estimated time:** M (45 min, with Clinician seat input)
-**Blocked by:** none; better with customer discovery signal
-**Acceptance:** A documented decision on whether Practice tier is "3 clinician seats" or "1 lead + 2 support seats (psychometrician/admin/second evaluator)" per Clinician seat finding. Best resolved after the first 5 customer discovery interviews land.
-
-## T-0011: Book 10 customer discovery interviews this week
-
-**Priority:** today-blocking
-**Added:** 2026-05-14 (from D-0002 dispatch)
-**Estimated time:** M (60 min sourcing + outreach)
-**Status:** original window May 15 to May 28 closed 2026-05-28 with 0 of 10 booked. Now blocked by D-0010 (extend, re-scope, or pause).
-**Blocked by:** D-0010
-**Acceptance:** Pending D-0010 outcome. Original acceptance was 10 confirmed slots on the discovery Calendly between May 15 and May 28 per `/ops/discovery/INTERVIEW_GUIDE.md` mix (6 forensic, 4 assessment, mostly Colorado, at least one ABFP diplomate and one working CFI or PRE evaluator); to be restated when D-0010 closes.
-
-## T-0012: Shrink first Wave 1 batch from 60-100 to 20
+## T-0005: Customer discovery — re-scoped to Boreas funnel
 
 **Priority:** this-week-blocking
-**Added:** 2026-05-14 (from D-0002 dispatch)
-**Estimated time:** S (5 min: update Wave Builder Agent 3 daily_batches config from 5 to 4 per week, set first-week batch to 20 total)
-**Blocked by:** Phase 0 completion
-**Acceptance:** `/ops/config/agents.yaml` updated so the first Wave 1 send is 20 contacts spread across May 26-30, not 60-100.
-
-## T-0007: Run a council pass on Marketing Plan v2.1
-
-**Priority:** strategic
-**Added:** 2026-05-14
-**Estimated time:** L (~20 min to convene, 10 min to dispatch, 90 min for seats to return)
+**Added:** 2026-05-14 (re-scoped 2026-07-14; absorbs retired T-0011)
+**Estimated time:** L (founder time, rolling)
 **Blocked by:** none
-**Acceptance:** Second council review confirms v2.1 fixes landed cleanly. Optional — recommended after Phase 0 launch checklist is mostly complete but before Wave 1 first send.
+**Acceptance:** Re-scoped from cold-list discovery to the live funnel: structured conversations with template-page leads, trial users, and webinar registrants (target 10; mix of forensic + clinical). Notes at `/ops/discovery/notes/`; first synthesis after 5.
 
 ## T-0013: Update outbound identity to Robert Irwin
 
 **Priority:** strategic
 **Added:** 2026-05-15
-**Estimated time:** M (cumulative across sub-steps; each is small)
+**Estimated time:** M (cumulative; Gmail display name = 2 min)
 **Blocked by:** none
-**Acceptance:** Outbound mail and customer-facing surfaces show "Robert Irwin" rather than "Truck Irwin." Three sub-steps:
+**Acceptance:** Outbound mail and customer-facing surfaces show "Robert Irwin". Sub-steps: (a) Gmail display name; (b) primary user on the boreasworkflow.com/boreasclinical.com mail domain per EMAIL_SETUP.md; (c) LinkedIn, CO SoS, Stripe display name, other public surfaces. Founder pace.
 
-  (a) Gmail display name updated to "Robert Irwin" in Gmail settings. 2 min. Mail from `truckirwin@gmail.com` will then show "Robert Irwin" in the From field.
-  (b) Workspace primary user set up as `robert@boreasclinical.com` once Workspace is provisioned per `EMAIL_SETUP.md` Phase B. Mail forwarding from `truckirwin@gmail.com` configured if desired.
-  (c) LinkedIn profile, Foundry SMB Colorado Secretary of State filings, Stripe customer-facing display name, and any other public-facing identities updated to "Robert Irwin." Founder pace.
+## T-0007: Council pass on the live marketing motion
+
+**Priority:** background (re-pointed 2026-07-14)
+**Added:** 2026-05-14
+**Estimated time:** L
+**Blocked by:** none
+**Acceptance:** Re-pointed from Marketing Plan v2.1 to the live Boreas GTM (docs/gtm): a council review of the template-page + call-first + webinar motion once first conversion data exists. Optional.
 
 ---
 
 ## Done log (rolled here when items complete; archived to decision log)
 
-- **T-0001:** Decide on Solo BAA stance — DONE 2026-05-14, Option B selected. See `/ops/orchestrator/decision_log/2026-05-14.md` D-0001.
-- **T-0006:** Confirm scheduled orchestrator task is running — DONE 2026-05-14, task `boreasclinical-morning-orchestrator` created and verified, next run Friday May 15 at 08:03 MT.
+- **T-0002:** Counsel intake email — CLOSED 2026-07-14 as superseded by the D-0012 ruling (37 business days in-flight; the unit of work belonged to the retired Psygil launch). Live legal piece = vault gate 0.5, prepped in the vault Outbox. See decision_log/2026-07-14.md.
+- **T-0004:** Phase 0 launch checklist — CLOSED 2026-07-14, superseded by the Boreas GTM.
+- **T-0011:** Book 10 cold discovery interviews — CLOSED 2026-07-14 as originally scoped; intent folded into re-scoped T-0005.
+- **T-0012:** Shrink Wave 1 batch to 20 — CLOSED 2026-07-14; Wave 1 cold email retired with the Psygil plan.
+- **T-0001:** Solo BAA stance — DONE 2026-05-14 (D-0001 Option B).
+- **T-0006:** Scheduled orchestrator task verified — DONE 2026-05-14.
+- **T-0003:** Council skill installed — DONE 2026-06-16.
+- **T-0015:** Scheduler health verified — DONE 2026-06-16.
+- **T-0014:** Cash events confirmed and logged — DONE 2026-06-16.

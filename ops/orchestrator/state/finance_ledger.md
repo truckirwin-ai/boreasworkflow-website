@@ -19,6 +19,14 @@ The orchestrator reads this file daily. The founder logs entries here (or anothe
 | 2026-05-14 | spend | software | 20.00 | Mailwarm |
 | 2026-05-14 | spend | infrastructure | 0.00 | Cloudflare Pages + Email Routing (free tier) |
 | 2026-05-14 | spend | infrastructure | 0.00 | Attio Free tier |
+| 2026-06-05 | income | service-fee | 309.84 | Consulting (Pulse) via Stripe, Mercury savings 1279 |
+| 2026-06-09 | spend | software | 8.47 | Microsoft via PayPal, Mastercard 7405 |
+| 2026-06-11 | spend | software | 103.07 | Anthropic Claude/SDK, Mercury debit 0521 |
+| 2026-06-11 | spend | software | 99.99 | Microsoft via PayPal, Mastercard 7405 |
+| 2026-06-13 | spend | software | 102.04 | HeyGen video via Stripe; confirm business |
+| 2026-06-15 | spend | software | 47.64 | GoDaddy foundrysmb.net via Klarna, 1 of 4 |
+
+> Canonical tax record is now `/ops/finance/TAX_LEDGER_2026.xlsx` (categorized, with summary totals). This markdown log stays as the orchestrator's daily-read mirror. Two observed items remain unclassified (see the "To confirm" sheet): a $0.66 Stripe payout (May 29) and a $69.58 PayPal-to-AUS-Merchant charge (June 6, appears personal).
 
 ---
 
