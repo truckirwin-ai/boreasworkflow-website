@@ -15,6 +15,14 @@ Format:
 
 ---
 
+## T-0016: Verify support@boreasworkflow.com email routing
+
+**Priority:** today-blocking
+**Added:** 2026-07-15
+**Estimated time:** S (5 min, Cloudflare Email Routing dashboard)
+**Blocked by:** founder (dashboard access)
+**Acceptance:** The founder's 2026-07-14 12:11 MT test ("Support request #1") or a fresh test arrives at the routed destination inbox. Observed 2026-07-15: no forwarded copy, no reply, anywhere in Gmail 19+ hours after send. Send side of the domain is healthy (nurture day-3 delivered 5/5 Tuesday); the inbound route for support@ is the suspect.
+
 ## T-0008: Non-PHI positioning pass on the live checkout surfaces
 
 **Priority:** today-blocking
