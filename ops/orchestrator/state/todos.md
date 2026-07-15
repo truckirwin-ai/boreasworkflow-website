@@ -15,13 +15,12 @@ Format:
 
 ---
 
-## T-0016: Verify support@boreasworkflow.com email routing
+## T-0016: Verify support@boreasworkflow.com email routing — CLOSED 2026-07-15 (not a bug)
 
-**Priority:** today-blocking
+**Priority:** ~~today-blocking~~ CLOSED
 **Added:** 2026-07-15
-**Estimated time:** S (5 min, Cloudflare Email Routing dashboard)
-**Blocked by:** founder (dashboard access)
-**Acceptance:** The founder's 2026-07-14 12:11 MT test ("Support request #1") or a fresh test arrives at the routed destination inbox. Observed 2026-07-15: no forwarded copy, no reply, anywhere in Gmail 19+ hours after send. Send side of the domain is healthy (nurture day-3 delivered 5/5 Tuesday); the inbound route for support@ is the suspect.
+**Closed:** 2026-07-15 — **false alarm, no routing defect.** Founder opened the Cloudflare Email Routing dashboard: an explicit rule `support@boreasworkflow.com → truckirwin@gmail.com` exists and is Active (alongside accounts@, sales@, truckirwin@, all Active to the same verified destination). Root cause of the "missing" test: the 2026-07-14 test was sent FROM truckirwin@gmail.com TO support@, which forwards back TO truckirwin@gmail.com — Gmail dedupes the inbound copy against the identical Message-ID already in Sent and hides it. Mail was delivered; Gmail suppressed the self-send duplicate. Route is correct.
+**Follow-ups (non-blocking):** (1) validate inbound with a test from a NON-truckirwin@gmail.com address (external account/phone; a +alias won't work — same account dedup). (2) Catch-all is currently set to **Drop** — recommend flipping to forward-to-Gmail so guessed addresses (info@, hello@, typos) aren't silently dropped. Founder's call; noted, not blocking.
 
 ## T-0008: Non-PHI positioning pass on the live checkout surfaces
 
