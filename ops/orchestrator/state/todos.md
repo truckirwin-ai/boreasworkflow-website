@@ -22,12 +22,14 @@ Format:
 **Closed:** 2026-07-15 — **false alarm, no routing defect.** Founder opened the Cloudflare Email Routing dashboard: an explicit rule `support@boreasworkflow.com → truckirwin@gmail.com` exists and is Active (alongside accounts@, sales@, truckirwin@, all Active to the same verified destination). Root cause of the "missing" test: the 2026-07-14 test was sent FROM truckirwin@gmail.com TO support@, which forwards back TO truckirwin@gmail.com — Gmail dedupes the inbound copy against the identical Message-ID already in Sent and hides it. Mail was delivered; Gmail suppressed the self-send duplicate. Route is correct.
 **Follow-ups (non-blocking):** (1) validate inbound with a test from a NON-truckirwin@gmail.com address (external account/phone; a +alias won't work — same account dedup). (2) Catch-all is currently set to **Drop** — recommend flipping to forward-to-Gmail so guessed addresses (info@, hello@, typos) aren't silently dropped. Founder's call; noted, not blocking.
 
-## T-0008: Non-PHI positioning pass on the live checkout surfaces
+## T-0008: Non-PHI positioning pass on the live checkout surfaces — GO 2026-07-21 (founder), STAGED for founder apply
 
-**Priority:** today-blocking
+**Priority:** ~~today-blocking~~ APPROVED — awaiting founder apply + deploy
 **Added:** 2026-05-14 (re-baselined 2026-07-14)
-**Estimated time:** M (45 min; pass staged, runs on founder go)
-**Blocked by:** founder go
+**GO:** 2026-07-21 (founder answer on the CoS brief).
+**Estimated time:** M (~30 min to apply + deploy)
+**Blocked by:** ~~founder go~~ → now only the founder-owned code apply + deploy (per the 2026-07-18 recommendations-only directive, the agent stages the exact copy, does not edit the boreas repo).
+**Staged pass:** exact copy + placement for all three surfaces at `ops/orchestrator/drafts/T-0008-nonphi-checkout-pass-2026-07-21.md`. Apply as written, bump the build marker, deploy.
 **Acceptance:** (1) `download.html` founder-rate/pricing-table context carries a "non-PHI workflow only" line plus the checkout checkbox requirement; (2) `policies.html#hipaa` reflects the locked stance; (3) any Solo references implying BAA scope corrected; build marker updated to confirm deploy. Highest-exposure open item: a Solo buyer can pay today without seeing the boundary.
 
 ## T-0009: Wire Stripe MCP into the finance pulse
@@ -38,13 +40,12 @@ Format:
 **Blocked by:** founder session to authorize the connection
 **Acceptance:** The next briefing shows a real Yesterday's income value from Stripe, not the manual-ledger fallback.
 
-## T-0010: Confirm Practice tier seat structure
+## T-0010: Confirm Practice tier seat structure — DONE 2026-07-21 (founder confirm)
 
-**Priority:** strategic
+**Priority:** ~~strategic~~ CLOSED
 **Added:** 2026-05-14
-**Estimated time:** S (one word)
-**Blocked by:** none
-**Acceptance:** Founder confirms the shipped seat bands (up to 10 $2,500 / 11-15 $3,600 / 16-20 $4,500 per month) as the decision. Shipped Jul 9; one word closes it.
+**Closed:** 2026-07-21 — founder confirmed the shipped seat bands as the decision: **up to 10 = $2,500/mo · 11–15 = $3,600/mo · 16–20 = $4,500/mo.** Locked as the pricing decision-default; no further pricing changes without an explicit founder call. Shipped Jul 9, confirmed Jul 21.
+**Acceptance:** met.
 
 ## T-0005: Customer discovery — re-scoped to Boreas funnel
 
