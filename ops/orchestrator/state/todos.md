@@ -77,7 +77,7 @@ Format:
 **Added:** 2026-08-03
 **Estimated time:** S (< 30 min)
 **Blocked by:** none (founder-owned repo action; agent stays recommendations-only)
-**Source:** GitHub emailed two failed Security Audit runs 2026-08-03 — boreas-workflow main (3d2c7e5, npm-audit job, 11:15 UTC) and psygil main (6c6346c, 11:13 UTC). npm-audit fails on a dependency advisory.
+**Source:** GitHub emailed two failed Security Audit runs 2026-08-03 — boreas-workflow main (3d2c7e5, npm-audit job, 11:15 UTC) and psygil main (6c6346c, 11:13 UTC). npm-audit fails on a dependency advisory. Still failing: same two runs fired again 2026-08-10 (boreas-workflow 09:10 UTC, psygil 09:08 UTC), unchanged advisory. Recurs on every scheduled run until the package is patched.
 **Acceptance:** Run `npm audit` locally on boreas-workflow, patch or pin the flagged package, push, and confirm the Security Audit workflow goes green. Not customer-facing, not revenue-gating; clear it in the next dev session.
 
 ---
